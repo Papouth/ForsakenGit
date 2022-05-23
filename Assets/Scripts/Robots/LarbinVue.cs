@@ -140,7 +140,6 @@ public class LarbinVue : MonoBehaviour
         }
     }
 
-
     public void LarbinGoToPlayer()
     {
         if (canSeePlayer)
