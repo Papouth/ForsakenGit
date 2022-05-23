@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Room Management
+    // pouvoir se tp dans une salle
     private IEnumerator CheatAnim()
     {
         yield return new WaitForSeconds(1f);
