@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public CamChanger surveillance;
     public Slider slider;
     private Injection inject;
+    private Rbts robotSounded;
 
 
     public LayerMask interactableLayer; // -- GameObjet pouvant interargir
@@ -291,6 +292,8 @@ public class Player : MonoBehaviour
                 if (Physics.Raycast(transform.position, colliderHit.transform.position - transform.position, out hitRobot, 12f, Wall))
                 {
                     // -- Si il y a un mur alors robot n'entend pas et continue sa ronde
+                    robotSounded = colliderHit.GetComponent<Rbts>();
+                    robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.safe);
                     return;
                 }
                 else if (Physics.Raycast(transform.position, colliderHit.transform.position - transform.position, out hitRobot, 12f))
@@ -299,6 +302,8 @@ public class Player : MonoBehaviour
                     if (interact)
                     {
                         //Debug.Log("j'ai entendu un bruit");
+                        robotSounded = colliderHit.GetComponent<Rbts>();
+                        robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.danger);
                         interact.Interact(transform);
                     }
                 }
