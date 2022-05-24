@@ -24,6 +24,7 @@ public class LarbinVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             canSeePlayer = true;
+            robots.dangerIndice = robots.danger;
 
 
             RaycastHit hitJoueur;
@@ -61,6 +62,8 @@ public class LarbinVue : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            robots.dangerIndice = robots.danger;
+
             // -- Debug.Log("Je vois toujours");
             if (!robots.isFreeze)
             {
@@ -84,6 +87,7 @@ public class LarbinVue : MonoBehaviour
         // -- Je ne touche plus le joueur
         if (other.CompareTag("Player"))
         {
+            robots.dangerIndice = robots.safe;
             // -- Debug.Log("je ne touche plus le joueur");
             canSeePlayer = false;
         }

@@ -14,6 +14,10 @@ public class Rbts : Interactable
     [Tooltip("Mes WayPoints enfants du ParentSecteur")]
     public Transform[] wayPoints;
     public GameObject sparks;
+    public Material emissifMat;
+    public Color32 dangerIndice;
+    public Color32 safe;
+    public Color32 danger;
 
 
     private bool isWaitingAtObject = false;
@@ -31,6 +35,16 @@ public class Rbts : Interactable
         wayPoints = monParentSecteur.GetComponentsInChildren<Transform>();
 
         FindIndex();
+
+        // je prend la couleur sur mon material en question
+        dangerIndice = emissifMat.color;
+
+        // j'attribue mes couleurs en fonction de la menace
+        safe = new Color32(0, 190, 255, 255);
+        danger = new Color32(255, 0, 0, 255);
+
+        // le robot commence avec un niveau de menace en safe
+        dangerIndice = safe;
     }
 
     public override void Interact(bool value)
@@ -101,8 +115,9 @@ public class Rbts : Interactable
                 navP++;
                 // -- Debug.Log("mon nav point actuel est le " + (navP -1) + "ème");
                 if (navP == wayPoints.Length)
+                {
                     navP = 0;
-
+                }
                 monRobot.SetDestination(wayPoints[navP].transform.position);
             }
         }
