@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
     public GameObject uiTazer;
     public GameObject cuve;
     public GameObject loadingScreen;
+    public GameObject hidingText;
 
 
     public float speedPivot = 100f;
@@ -116,6 +117,7 @@ public class Player : MonoBehaviour
         loadingScreen.SetActive(true);
         panelMort.SetActive(false);
         panelCheat.SetActive(false);
+        hidingText.SetActive(false);
 
         keysAssign = GetComponent<KeysAssignation>();
         statesPlayer = GetComponent<StatesPlayer>();

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Inventaire : MonoBehaviour
 {
     public static Inventaire inventaire;
-
     public int nbrPiles = 0; // -- Nombre de Piles
     public int currentPilesCapacity = 0; // -- Capacité de mes piles ( 3 charges par piles ? )
 
