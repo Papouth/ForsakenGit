@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 public class Boule : Rbts
@@ -36,7 +37,15 @@ public class Boule : Rbts
     {
         bouleVue = GetComponentInChildren<BouleVue>();
         animBoule = GetComponent<Animator>();
-        base.Start();
+
+        //base.Start();
+
+        monRobot = GetComponent<NavMeshAgent>();
+
+        // -- Prend mes wayPoints à partir de mon Parent De Secteur
+        wayPoints = monParentSecteur.GetComponentsInChildren<Transform>();
+
+        FindIndex();
     }
 
     public override void Interact(bool value)

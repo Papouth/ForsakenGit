@@ -10,7 +10,15 @@ public class Boss : Rbts
 
     public override void Start()
     {
-        base.Start();
+        monRobot = GetComponent<NavMeshAgent>();
+
+        // -- Prend mes wayPoints à partir de mon Parent De Secteur
+        wayPoints = monParentSecteur.GetComponentsInChildren<Transform>();
+
+        FindIndex();
+
+        //base.Start();
+
         robots = gameObject.GetComponent<Rbts>();
         bossAgent = robots.monRobot;
     }
