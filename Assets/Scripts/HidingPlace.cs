@@ -74,6 +74,9 @@ public class HidingPlace : Interactable
         // -- Step3: On patiente 2 secondes, via une coroutine ( temps de l'animation )
         yield return new WaitForSeconds(2f);
 
+        // On affiche le texte pour sortir
+        player.hidingText.SetActive(true);
+
         player.anim.enabled = false;
 
 
@@ -108,6 +111,8 @@ public class HidingPlace : Interactable
             collcomp.enabled = true;
         }
 
+        // On cache le texte pour sortir
+        player.hidingText.SetActive(false);
 
         // -- Step2: Le joueur se re tp à sa dernière position enregistré
         player.transform.position = lastPos;

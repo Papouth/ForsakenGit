@@ -19,12 +19,12 @@ public class RangeTazer : MonoBehaviour
         // -- Si j'appuie sur clic gauche +  que j'ai assez de charges + que j'ai le tazer en main
         if (other.gameObject.CompareTag("RobotLarbin") && Input.GetMouseButtonDown(0) && Inventaire.inventaire.currentPilesCapacity > 0 && StatesPlayer.statesPlayer.isHoldingTazer)
         {
+            // -- Lancer l'animation d'attaque du taser
             player.anim.SetTrigger("attack");
 
-            // -- Lancer l'animation d'attaque du taser
-            //player.anim.SetBool("Attack", true);
+            // PASSE 5 FOIS DEDANS !!!!!!!!!!!!!!!!
 
-            // -- On tir le robot
+            // -- On tir sur le robot
             Inventaire.inventaire.currentPilesCapacity -= 1;
             //Debug.Log("il me reste : " + Inventaire.inventaire.currentPilesCapacity + " munitions");
 
@@ -33,6 +33,7 @@ public class RangeTazer : MonoBehaviour
             leRobot = other.GetComponent<Rbts>();
 
             StartCoroutine(Freeze());
+
         }
         else if (other.gameObject.CompareTag("RobotLarbin") && Input.GetMouseButtonDown(0) && Inventaire.inventaire.currentPilesCapacity <= 0 && StatesPlayer.statesPlayer.isHoldingTazer)
         {
@@ -57,10 +58,7 @@ public class RangeTazer : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Inventaire.inventaire.currentPilesCapacity > 0 && StatesPlayer.statesPlayer.isHoldingTazer)
         {
             player.anim.SetTrigger("attack");
-            // -- Lancer l'animation d'attaque du taser
-            //player.anim.SetBool("Attack", true);
 
-            //Debug.Log("Missed !");
             Inventaire.inventaire.currentPilesCapacity -= 1;
             //Debug.Log("il me reste : " + Inventaire.inventaire.currentPilesCapacity + " charges");
         }
@@ -75,17 +73,17 @@ public class RangeTazer : MonoBehaviour
 
     private IEnumerator Freeze()
     {
-        // on active le spark 
-
         // -> Arrêter l'anim de marche du robot
         leRobot.GetComponent<Animator>().enabled = false;
+
+        // on active le spark 
         leRobot.sparks.SetActive(true);
 
         leRobot.isFreeze = true;
         leRobot.GetComponent<NavMeshAgent>().enabled = false;
         yield return new WaitForSeconds(3f);
         // inverser
-        
+
         // -> Remettre l'anim de marche du robot
         leRobot.GetComponent<Animator>().enabled = true;
 
