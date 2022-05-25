@@ -495,7 +495,7 @@ public class Player : MonoBehaviour
             }
             if (Input.GetMouseButtonUp(0) && !statesPlayer.isHoldingTazer && !statesPlayer.isInteractTerminal)
             {
-                // -- Action
+                // -- Player throw object -> anim
                 ActionManager.OnLaunchObject(visionJoueur.transform.forward * tir);
                 currentInteractable.Interact(false);
                 currentInteractable = null;
