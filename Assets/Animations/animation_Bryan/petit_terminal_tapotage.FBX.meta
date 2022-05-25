@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 96fac0d003f5c0743b6892c36684eaed
+guid: bc8a5cdadd0359b4ba0ce5f6cf9057b9
 ModelImporter:
   serializedVersion: 21202
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -484363947123288624
+    second: perso_animation_clavier
   externalObjects: {}
   materials:
     materialImportMode: 2
