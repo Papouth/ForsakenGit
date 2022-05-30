@@ -20,11 +20,14 @@ public class Ramassable : Interactable
     public Boss boss;
     public Boule boule;
 
+    public Collider colObjet;
+
 
     public void Start()
     {
         // -- Les objets ne doivent absolument pas avoir la variable en vrai, jusqu'à temps qu'on les prennent
         isGrounded = false;
+        colObjet = GetComponent<Collider>();
     }
 
     public void OnCollisionEnter(Collision other)
@@ -152,6 +155,8 @@ public class Ramassable : Interactable
         {
             gameObject.AddComponent<Rigidbody>();
             rb = gameObject.GetComponent<Rigidbody>();
+            rb.drag = 1f; // ne pas faire rouler l'objet
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; // éviter que les objets passent au travers du sol
         }
 
 
@@ -160,6 +165,9 @@ public class Ramassable : Interactable
         transform.localPosition = Vector3.zero;
         transform.rotation = Quaternion.identity; // reset la rotation de l'objet
         rb.isKinematic = true; // -- Le rigidbody de mon objet passe en kinematic pour qu'il ne bouge pas
+
+        // -- Je désactive le collider de mon objet quand je l'ai en main
+        colObjet.enabled = false;
 
 
         if (StatesPlayer.statesPlayer.rightHand)
@@ -181,6 +189,10 @@ public class Ramassable : Interactable
         transform.parent = null;
         rb.isKinematic = false;
         haveBeenDrop = true;
+
+        // -- Remettre le collider de mon objet lançable
+        colObjet.enabled = true;
+
 
         // -- Coroutine tt les 2 secs
         StartCoroutine(RigidbodySleep());
