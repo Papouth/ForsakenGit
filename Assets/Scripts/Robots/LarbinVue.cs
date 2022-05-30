@@ -49,7 +49,7 @@ public class LarbinVue : MonoBehaviour
                 // -- RALENTISSEMENT
                 float distance = Vector3.Distance(other.transform.position, robots.transform.position);
 
-                if (distance < 3.5f)
+                if (distance < 4.5f) // old = 3.5f
                 {
                     // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
                     StartCoroutine(RalentissementJoueur());
@@ -74,7 +74,7 @@ public class LarbinVue : MonoBehaviour
                 // -- RALENTISSEMENT
                 float distance = Vector3.Distance(other.transform.position, robots.transform.position);
 
-                if (distance < 3.5f)
+                if (distance < 4.5f) // old = 3.5f
                 {
                     // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
                     StartCoroutine(RalentissementJoueur());

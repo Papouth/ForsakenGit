@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     private Vector2 vector2;
     [Tooltip("Les armes du joueur")]
     public Transform[] weapons;
-
+    public Transform raylauncher;
 
     public GameObject panelMort;
     public GameObject returnToCam;
@@ -288,8 +288,8 @@ public class Player : MonoBehaviour
                 // -- J'envoi un raycast de mon joueur vers mes ennemis touché pour calculer la distance qui les séparent
                 RaycastHit hitRobot;
 
-                Debug.DrawRay(transform.position, colliderHit.transform.position - transform.position, Color.blue);
-                if (Physics.Raycast(transform.position, colliderHit.transform.position - transform.position, out hitRobot, 12f, Wall))
+                Debug.DrawRay(raylauncher.transform.position, colliderHit.transform.position - raylauncher.transform.position, Color.blue); // transform.position à mettre sur un game Objet sur le torse du player
+                if (Physics.Raycast(raylauncher.transform.position, colliderHit.transform.position - raylauncher.transform.position, out hitRobot, 12f, Wall))
                 {
                     // -- Si il y a un mur alors robot n'entend pas et continue sa ronde
                     if (colliderHit.CompareTag("RobotLarbin"))
@@ -299,7 +299,7 @@ public class Player : MonoBehaviour
                     }
                     return;
                 }
-                else if (Physics.Raycast(transform.position, colliderHit.transform.position - transform.position, out hitRobot, 12f))
+                else if (Physics.Raycast(raylauncher.transform.position, colliderHit.transform.position - raylauncher.transform.position, out hitRobot, 12f))
                 {
                     Interactable interact = hitRobot.transform.GetComponent<Interactable>();
                     if (interact)
