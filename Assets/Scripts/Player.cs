@@ -126,6 +126,9 @@ public class Player : MonoBehaviour
         statesPlayer.canMoove = true; // -- Etat du joueur, peut bouger
         statesPlayer.canLookAround = true; // --Etat du joueur, peut regarder autour de lui
 
+        // -- Retirer les caméras
+        surveillance.cameraMedic.enabled = false;
+        surveillance.cameraHub.enabled = false;
 
         visionJoueur = GetComponentInChildren<Camera>();
         caps = GetComponent<CapsuleCollider>();
@@ -358,6 +361,11 @@ public class Player : MonoBehaviour
         // -- Si on a un panel d'ouvert alors on affiche la souris, et si le panel est fermé alors on recache la souris
         if (statesPlayer.isInteractTerminal)
         {
+            // -- Mettre les caméras
+            surveillance.cameraMedic.enabled = true;
+            surveillance.cameraHub.enabled = true;
+
+
             anim.SetTrigger("terminal");
 
             statesPlayer.canMoove = false;
@@ -373,6 +381,11 @@ public class Player : MonoBehaviour
         }
         else
         {
+            // -- Retirer les caméras
+            surveillance.cameraMedic.enabled = false;
+            surveillance.cameraHub.enabled = false;
+
+
             anim.ResetTrigger("terminal");
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
