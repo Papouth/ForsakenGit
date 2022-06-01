@@ -25,7 +25,9 @@ public class LarbinVue : MonoBehaviour
         {
             canSeePlayer = true;
             robots.emissifMat.SetColor("_BaseColor", robots.danger);
-            //ShakeEffect();
+            // -- Shake Camera
+            player.imageContour.SetActive(true);
+
 
 
             RaycastHit hitJoueur;
@@ -64,7 +66,8 @@ public class LarbinVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             robots.emissifMat.SetColor("_BaseColor", robots.danger);
-            //ShakeEffect();
+            player.imageContour.SetActive(true);
+
 
             // -- Debug.Log("Je vois toujours");
             if (!robots.isFreeze)
@@ -90,7 +93,8 @@ public class LarbinVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             robots.emissifMat.SetColor("_BaseColor", robots.safe);
-
+            // -- Shake Camera
+            player.imageContour.SetActive(false);
 
             // -- Debug.Log("je ne touche plus le joueur");
             canSeePlayer = false;

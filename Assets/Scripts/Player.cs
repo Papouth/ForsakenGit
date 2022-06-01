@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     public GameObject cuve;
     public GameObject loadingScreen;
     public GameObject hidingText;
+    public GameObject imageContour;
 
 
     public float speedPivot = 100f;
@@ -143,6 +144,7 @@ public class Player : MonoBehaviour
     {
         // récupérer l'animation
         anim = GetComponent<Animator>();
+        imageContour.SetActive(false);
 
         // -- Pour Simuler mort joueur pour le moment
         Time.timeScale = 1;
