@@ -25,6 +25,7 @@ public class LarbinVue : MonoBehaviour
         {
             canSeePlayer = true;
             robots.emissifMat.SetColor("_BaseColor", robots.danger);
+            //ShakeEffect();
 
 
             RaycastHit hitJoueur;
@@ -63,7 +64,7 @@ public class LarbinVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             robots.emissifMat.SetColor("_BaseColor", robots.danger);
-
+            //ShakeEffect();
 
             // -- Debug.Log("Je vois toujours");
             if (!robots.isFreeze)
