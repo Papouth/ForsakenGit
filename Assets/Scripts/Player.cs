@@ -409,12 +409,11 @@ public class Player : MonoBehaviour
             {
                 anim.SetTrigger("terminal");
                 // -- valeur si on sort le jeu : slider.value += Time.time * 0.04f;
-                slider.value += Time.time * 0.32f; // vitesse pour le jury
+                slider.value += Time.time * 0.2f; // vitesse pour le jury = 0.32f
             }
             else if (slider.value >= slider.maxValue)
             {
                 anim.ResetTrigger("terminal");
-                // bool stopper Injection
                 // Si temps écouler et que joueur n'a pas stopper l'injection -> anim de la cuve qui se vide du liquide
                 Destroy(inject);
                 Destroy(slider.gameObject);

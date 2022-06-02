@@ -19,6 +19,24 @@ public class LarbinVue : MonoBehaviour
         playerSlowedDown = false;
     }
 
+    public void Update()
+    {
+        ColorCheck();
+    }
+
+    public void ColorCheck()
+    {
+        if (!player.imageContour)
+        {
+            Debug.Log("pas de contour alors safe");
+            robots.emissifMat.SetColor("_BaseColor", robots.safe);
+        }
+        else if (player.imageContour)
+        {
+            Debug.Log("contour donc danger");
+        }
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
