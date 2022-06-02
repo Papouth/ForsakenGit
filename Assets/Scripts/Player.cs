@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     public GameObject cuve;
     public GameObject loadingScreen;
     public GameObject hidingText;
+    public GameObject imageContour;
 
 
     public float speedPivot = 100f;
@@ -70,6 +71,10 @@ public class Player : MonoBehaviour
     public float rotationSpeedY = 90f; // -- Gère ma vitesse de rotation H/B
     [Range(0f, 0.1f)]
     public float vitesse = 0.1f; // -- Au dessus de 0.1f, le joueur peut traverser le mur
+    public float shake = 0f;
+    public float shakeAmount = 0.7f;
+    public float decreaseFactor = 1f;
+
 
     public Animator anim;
     #endregion
@@ -126,6 +131,9 @@ public class Player : MonoBehaviour
         statesPlayer.canMoove = true; // -- Etat du joueur, peut bouger
         statesPlayer.canLookAround = true; // --Etat du joueur, peut regarder autour de lui
 
+        // -- Retirer les caméras
+        surveillance.cameraMedic.enabled = false;
+        surveillance.cameraHub.enabled = false;
 
         visionJoueur = GetComponentInChildren<Camera>();
         caps = GetComponent<CapsuleCollider>();
@@ -136,6 +144,7 @@ public class Player : MonoBehaviour
     {
         // récupérer l'animation
         anim = GetComponent<Animator>();
+        imageContour.SetActive(false);
 
         // -- Pour Simuler mort joueur pour le moment
         Time.timeScale = 1;
@@ -358,6 +367,11 @@ public class Player : MonoBehaviour
         // -- Si on a un panel d'ouvert alors on affiche la souris, et si le panel est fermé alors on recache la souris
         if (statesPlayer.isInteractTerminal)
         {
+            // -- Mettre les caméras
+            surveillance.cameraMedic.enabled = true;
+            surveillance.cameraHub.enabled = true;
+
+
             anim.SetTrigger("terminal");
 
             statesPlayer.canMoove = false;
@@ -373,6 +387,11 @@ public class Player : MonoBehaviour
         }
         else
         {
+            // -- Retirer les caméras
+            surveillance.cameraMedic.enabled = false;
+            surveillance.cameraHub.enabled = false;
+
+
             anim.ResetTrigger("terminal");
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -390,12 +409,11 @@ public class Player : MonoBehaviour
             {
                 anim.SetTrigger("terminal");
                 // -- valeur si on sort le jeu : slider.value += Time.time * 0.04f;
-                slider.value += Time.time * 0.32f; // vitesse pour le jury
+                slider.value += Time.time * 0.2f; // vitesse pour le jury = 0.32f
             }
             else if (slider.value >= slider.maxValue)
             {
                 anim.ResetTrigger("terminal");
-                // bool stopper Injection
                 // Si temps écouler et que joueur n'a pas stopper l'injection -> anim de la cuve qui se vide du liquide
                 Destroy(inject);
                 Destroy(slider.gameObject);

@@ -7,9 +7,9 @@ public class CamChanger : MonoBehaviour
     [Tooltip("Caméra Principal / celle du joueur")]
     public Camera cam;
     [Tooltip("Medicale")]
-    public Camera cameraPorte;
-    [Tooltip("Hall")]
-    public Camera cameraBoss;
+    public Camera cameraMedic;
+    [Tooltip("Hub")]
+    public Camera cameraHub;
 
     public GameObject doorBttn;
     public GameObject dataBttn;
@@ -60,9 +60,9 @@ public class CamChanger : MonoBehaviour
 
         #region reset des caméras
         // reset cam boss a -2
-        cameraBoss.depth = -2;
+        cameraHub.depth = -2;
         // reset cam porte a -3
-        cameraPorte.depth = -3;
+        cameraMedic.depth = -3;
 
         // reset cam principale
         cam.depth = 1;
@@ -77,10 +77,10 @@ public class CamChanger : MonoBehaviour
 
 
         // reset cam boss a -2
-        cameraBoss.depth = -2;
+        cameraHub.depth = -2;
 
         // switch sur vue cam porte 
-        cameraPorte.depth = 0;
+        cameraMedic.depth = 0;
 
 
 
@@ -98,10 +98,10 @@ public class CamChanger : MonoBehaviour
 
 
         // reset cam porte a -3
-        cameraPorte.depth = -3;
+        cameraMedic.depth = -3;
 
         // switch sur vue cam boss
-        cameraBoss.depth = 0;
+        cameraHub.depth = 0;
 
 
 
@@ -118,9 +118,9 @@ public class CamChanger : MonoBehaviour
     {
         #region reset des caméras
         // reset cam boss a -2
-        cameraBoss.depth = -2;
+        cameraHub.depth = -2;
         // reset cam porte a -3
-        cameraPorte.depth = -3;
+        cameraMedic.depth = -3;
 
         // reset cam principale
         cam.depth = 1;

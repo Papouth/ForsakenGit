@@ -2432,8 +2432,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8624967430394557991}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.00279, z: 0.00187}
+  m_LocalRotation: {x: -0.000000029802322, y: 1.9895197e-13, z: 2.842171e-14, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0027899803, z: 0.00187}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2866,6 +2866,7 @@ MonoBehaviour:
   cuve: {fileID: 0}
   loadingScreen: {fileID: 0}
   hidingText: {fileID: 0}
+  imageContour: {fileID: 0}
   speedPivot: 100
   maxAnglePivot: 20
   radius: 12
@@ -2875,6 +2876,9 @@ MonoBehaviour:
   rotationSpeedX: 50
   rotationSpeedY: -50
   vitesse: 0.1
+  shake: 0
+  shakeAmount: 0.7
+  decreaseFactor: 1
   anim: {fileID: 0}
 --- !u!95 &5151121926799441622
 Animator:

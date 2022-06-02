@@ -19,12 +19,33 @@ public class LarbinVue : MonoBehaviour
         playerSlowedDown = false;
     }
 
+    public void Update()
+    {
+        ColorCheck();
+    }
+
+    public void ColorCheck()
+    {
+        if (!player.imageContour)
+        {
+            Debug.Log("pas de contour alors safe");
+            robots.emissifMat.SetColor("_BaseColor", robots.safe);
+        }
+        else if (player.imageContour)
+        {
+            Debug.Log("contour donc danger");
+        }
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             canSeePlayer = true;
             robots.emissifMat.SetColor("_BaseColor", robots.danger);
+            // -- Shake Camera
+            player.imageContour.SetActive(true);
+
 
 
             RaycastHit hitJoueur;
@@ -63,6 +84,7 @@ public class LarbinVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             robots.emissifMat.SetColor("_BaseColor", robots.danger);
+            player.imageContour.SetActive(true);
 
 
             // -- Debug.Log("Je vois toujours");
@@ -89,7 +111,8 @@ public class LarbinVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             robots.emissifMat.SetColor("_BaseColor", robots.safe);
-
+            // -- Shake Camera
+            player.imageContour.SetActive(false);
 
             // -- Debug.Log("je ne touche plus le joueur");
             canSeePlayer = false;
