@@ -542,6 +542,7 @@ public class Player : MonoBehaviour
                     // -- Instance = objet avec lequel je peux interargir
                     Interactable instance = interactableChecker.transform.GetComponent<Interactable>();
 
+
                     if (instance)
                     {
                         if (tryInteract)

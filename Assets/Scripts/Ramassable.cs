@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class Ramassable : Interactable
 {
-    public bool launchable = true; // -- Pour mes objets qui peuvent être lancé
-    public Rigidbody rb;
-
-    bool haveBeenDrop = false; // -- A été laché
-    public bool isGrounded = false; // -- Si l'objet touche le sol, un mur ou un objet
-
     [Tooltip("Distance Propagation du Son de l'objet")]
     public float radius = 14f; // -- Zone de propagation du son
 
@@ -21,6 +15,12 @@ public class Ramassable : Interactable
     public Boule boule;
 
     public Collider colObjet;
+    public Rigidbody rb;
+
+    public bool isGrounded = false; // -- Si l'objet touche le sol, un mur ou un objet
+    public bool haveBeenDrop = false; // -- A été laché
+    public bool launchable = true; // -- Pour mes objets qui peuvent être lancé
+
 
 
     public void Start()
@@ -88,7 +88,7 @@ public class Ramassable : Interactable
                     // -- Si il y a un mur alors robot n'entend pas et continue sa ronde
                     return;
                 }
-                else if (Physics.Raycast(transform.position, colliderHit.transform.position - transform.position, out hitRobot, 12f)) 
+                else if (Physics.Raycast(transform.position, colliderHit.transform.position - transform.position, out hitRobot, 12f))
                 {
                     #region Robots
 
@@ -107,7 +107,7 @@ public class Ramassable : Interactable
 
                     #region Boule
 
-                    if ( colliderHit.transform.GetComponent<Boule>() != null)
+                    if (colliderHit.transform.GetComponent<Boule>() != null)
                     {
                         boule = colliderHit.GetComponent<Boule>();
 
@@ -150,7 +150,7 @@ public class Ramassable : Interactable
 
     void Ramasser()
     {
-        // -- On active le Rigidbody ICI | permet d'optimiser les rigidbodys dans la scène -> les supprimer de moin gameObject si pas utilisé
+        // -- On active le Rigidbody ICI | permet d'optimiser les rigidbodys dans la scène
         if (!gameObject.GetComponent<Rigidbody>())
         {
             gameObject.AddComponent<Rigidbody>();
@@ -159,27 +159,29 @@ public class Ramassable : Interactable
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; // éviter que les objets passent au travers du sol
         }
 
-
-        // -- Je place mon objet dans ma main droite
-        transform.parent = StatesPlayer.statesPlayer.rightHand;
-        transform.localPosition = Vector3.zero;
-        transform.rotation = Quaternion.identity; // reset la rotation de l'objet
-        rb.isKinematic = true; // -- Le rigidbody de mon objet passe en kinematic pour qu'il ne bouge pas
-
-        // -- Je désactive le collider de mon objet quand je l'ai en main
-        colObjet.enabled = false;
-
-
-        if (StatesPlayer.statesPlayer.rightHand)
+        if (!StatesPlayer.statesPlayer.isHoldingThrowableItem)
         {
-            isGrounded = false;
-        }
+            // -- Je place mon objet dans ma main droite
+            transform.parent = StatesPlayer.statesPlayer.rightHand;
+            transform.localPosition = Vector3.zero;
+            transform.rotation = Quaternion.identity; // reset la rotation de l'objet
+            rb.isKinematic = true; // -- Le rigidbody de mon objet passe en kinematic pour qu'il ne bouge pas
 
-        if (launchable)
-        {
-            // -- Si mon objet est lançable, on lui rajoute la possibilité de le lancé
-            ActionManager.OnLaunchObject += Launch;
-            StatesPlayer.statesPlayer.isHoldingThrowableItem = true;
+            // -- Je désactive le collider de mon objet quand je l'ai en main
+            colObjet.enabled = false;
+
+
+            if (StatesPlayer.statesPlayer.rightHand)
+            {
+                isGrounded = false;
+            }
+
+            if (launchable)
+            {
+                // -- Si mon objet est lançable, on lui rajoute la possibilité de le lancé
+                ActionManager.OnLaunchObject += Launch;
+                StatesPlayer.statesPlayer.isHoldingThrowableItem = true;
+            }
         }
     }
 
@@ -192,7 +194,6 @@ public class Ramassable : Interactable
 
         // -- Remettre le collider de mon objet lançable
         colObjet.enabled = true;
-
 
         // -- Coroutine tt les 2 secs
         StartCoroutine(RigidbodySleep());
