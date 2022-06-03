@@ -26,16 +26,19 @@ public class RangeTazer : MonoBehaviour
         // -- Si j'appuie sur clic gauche +  que j'ai assez de charges + que j'ai le tazer en main
         if (other.gameObject.CompareTag("RobotLarbin") && Input.GetMouseButtonDown(0) && Inventaire.inventaire.currentPilesCapacity > 0 && StatesPlayer.statesPlayer.isHoldingTazer)
         {
+            leRobot = other.GetComponent<Rbts>();
+
+
             if (!tazing)
             {
                 tazing = true;
                 // -- Lancer l'animation d'attaque du taser
                 player.anim.SetTrigger("attack");
 
-                // -- perte d'une charge automatiquement pour chaque tir de tazer
+                // -- Perte d'une charge automatiquement pour chaque tir de tazer
 
                 // -- On immobilise le robot en question
-                leRobot = other.GetComponent<Rbts>();
+                //leRobot = other.GetComponent<Rbts>();
 
                 StartCoroutine(Freeze());
             }
@@ -49,6 +52,15 @@ public class RangeTazer : MonoBehaviour
         else
         {
             player.anim.ResetTrigger("attack");
+        }
+    }
+
+    
+    public void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("RobotLarbin"))
+        {
+            leRobot = null;
         }
     }
 
@@ -80,8 +92,13 @@ public class RangeTazer : MonoBehaviour
         leRobot.sparks.SetActive(true);
 
         leRobot.isFreeze = true;
+
         leRobot.GetComponent<NavMeshAgent>().enabled = false;
+
         yield return new WaitForSeconds(3f);
+
+        leRobot.GetComponent<NavMeshAgent>().enabled = true;
+
 
         tazing = false;
 
@@ -92,6 +109,6 @@ public class RangeTazer : MonoBehaviour
         leRobot.sparks.SetActive(false);
 
         leRobot.isFreeze = false;
-        leRobot.GetComponent<NavMeshAgent>().enabled = true;
+        //leRobot.GetComponent<NavMeshAgent>().enabled = true;
     }
 }

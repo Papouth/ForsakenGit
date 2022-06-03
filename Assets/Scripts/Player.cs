@@ -318,6 +318,7 @@ public class Player : MonoBehaviour
                         {
                             robotSounded = colliderHit.GetComponent<Rbts>();
                             robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.danger);
+                            imageContour.SetActive(true);
                         }
                         interact.Interact(transform);
                     }
@@ -428,18 +429,14 @@ public class Player : MonoBehaviour
         {
             // Mains
             statesPlayer.isHoldingTazer = false;
-            //anim des mains
 
-            // IF ICI
+
+            // -- Anim des mains
             if (statesPlayer.canMoove)
             {
                 anim.SetBool("Taser", false);
                 anim.SetTrigger("hand");
             }
-            
-            //anim.ResetTrigger("taser");
-            //anim.SetBool("Hand", true);
-            //anim.Play("idlemain");
 
             // Peut ramasser des objets
             statesPlayer.canPickItem = true;
@@ -449,17 +446,14 @@ public class Player : MonoBehaviour
         {
             // Tazer
             statesPlayer.isHoldingTazer = true;
-            //anim du taser
+            
 
-            // IF ICI
+            // -- Anim du taser
             if (statesPlayer.canMoove)
             {
                 anim.ResetTrigger("hand");
                 anim.SetBool("Taser", true);
             }
-            //anim.SetTrigger("taser");
-            //anim.Play("idletaser");
-
 
             // Ne peut pas ramasser d'objets
             statesPlayer.canPickItem = false;
