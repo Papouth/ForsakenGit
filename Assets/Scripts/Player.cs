@@ -246,7 +246,7 @@ public class Player : MonoBehaviour
             currentAnglePivot += speedPivot * Time.deltaTime;
             currentAnglePivot = Mathf.Clamp(currentAnglePivot, -maxAnglePivot, maxAnglePivot);
             transform.rotation = Quaternion.Euler(0, transform.localRotation.eulerAngles.y, currentAnglePivot);
-            
+
             // (ma valeur de rotation actuel sur X, ma valeur de rotation actuel sur Y, currentAnglePivot)
         }
         else if (Input.GetKey(keysAssign.leanRightKey))
@@ -297,8 +297,8 @@ public class Player : MonoBehaviour
                 // -- J'envoi un raycast de mon joueur vers mes ennemis touché pour calculer la distance qui les séparent
                 RaycastHit hitRobot;
 
-                Debug.DrawRay(raylauncher.transform.position, colliderHit.transform.position - raylauncher.transform.position, Color.blue); // transform.position à mettre sur un game Objet sur le torse du player
-                if (Physics.Raycast(raylauncher.transform.position, colliderHit.transform.position - raylauncher.transform.position, out hitRobot, 12f, Wall))
+                Debug.DrawRay(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, Color.blue);
+                if (Physics.Raycast(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, out hitRobot, 12f, Wall))
                 {
                     // -- Si il y a un mur alors robot n'entend pas et continue sa ronde
                     if (colliderHit.CompareTag("RobotLarbin"))
@@ -308,7 +308,7 @@ public class Player : MonoBehaviour
                     }
                     return;
                 }
-                else if (Physics.Raycast(raylauncher.transform.position, colliderHit.transform.position - raylauncher.transform.position, out hitRobot, 12f))
+                else if (Physics.Raycast(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, out hitRobot, 12f))
                 {
                     Interactable interact = hitRobot.transform.GetComponent<Interactable>();
                     if (interact)
@@ -318,7 +318,6 @@ public class Player : MonoBehaviour
                         {
                             robotSounded = colliderHit.GetComponent<Rbts>();
                             robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.danger);
-                            imageContour.SetActive(true);
                         }
                         interact.Interact(transform);
                     }
@@ -355,7 +354,7 @@ public class Player : MonoBehaviour
                 // bouton return en false
                 returnToCam.SetActive(false);
             }
-            else 
+            else
             {
                 // -- Essaye d'interargir
                 tryInteract = true;
@@ -384,7 +383,7 @@ public class Player : MonoBehaviour
             {
                 anim.enabled = true;
                 surveillance.ReturnToCamButton();
-            }        
+            }
         }
         else
         {
@@ -446,7 +445,7 @@ public class Player : MonoBehaviour
         {
             // Tazer
             statesPlayer.isHoldingTazer = true;
-            
+
 
             // -- Anim du taser
             if (statesPlayer.canMoove)
@@ -554,7 +553,7 @@ public class Player : MonoBehaviour
                             // -- On met le texte d'interaction 
                             instance.ShowText(true);
                         }
-                        
+
                         lastInteractable = instance;
 
                         haveSeeInteractable = true;
@@ -600,6 +599,29 @@ public class Player : MonoBehaviour
         if (!isCrouched && isWalking == true)
         {
             PlayerSendSound();
+        }
+    }
+
+    public void OnCollisionExit(Collision other)
+    {
+        if (Time.timeSinceLevelLoad < 3f)
+        {
+            return;
+        }
+        if (!isCrouched && isWalking == true)
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius, Ennemi);
+
+
+            foreach (var colliderHit in hitColliders)
+            {
+                if (colliderHit.CompareTag("RobotLarbin"))
+                {
+                    robotSounded = colliderHit.GetComponent<Rbts>();
+                    robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.safe);
+                    imageContour.SetActive(false);
+                }
+            }
         }
     }
     #endregion
