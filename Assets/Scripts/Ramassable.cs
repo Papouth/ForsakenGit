@@ -11,7 +11,7 @@ public class Ramassable : Interactable
     public bool isGrounded = false; // -- Si l'objet touche le sol, un mur ou un objet
 
     [Tooltip("Distance Propagation du Son de l'objet")]
-    public float radius = 12f; // -- Zone de propagation du son
+    public float radius = 14f; // -- Zone de propagation du son
 
     public LayerMask Ennemi;
     public LayerMask Wall;

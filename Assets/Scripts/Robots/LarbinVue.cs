@@ -9,7 +9,8 @@ public class LarbinVue : MonoBehaviour
 
     public LayerMask Wall;
     public Player player;
-    public bool playerSlowedDown = false;
+    private bool contourState;
+    public bool playerSlowedDown;
 
 
     private void Start()
@@ -17,6 +18,7 @@ public class LarbinVue : MonoBehaviour
         robots = gameObject.GetComponentInParent<Rbts>();
         canSeePlayer = false;
         playerSlowedDown = false;
+        contourState = false;
     }
 
     public void Update()
@@ -26,14 +28,9 @@ public class LarbinVue : MonoBehaviour
 
     public void ColorCheck()
     {
-        if (!player.imageContour)
+        if (!contourState)
         {
-            Debug.Log("pas de contour alors safe");
             robots.emissifMat.SetColor("_BaseColor", robots.safe);
-        }
-        else if (player.imageContour)
-        {
-            Debug.Log("contour donc danger");
         }
     }
 
@@ -45,6 +42,7 @@ public class LarbinVue : MonoBehaviour
             robots.emissifMat.SetColor("_BaseColor", robots.danger);
             // -- Shake Camera
             player.imageContour.SetActive(true);
+            contourState = true;
 
 
 
@@ -85,6 +83,7 @@ public class LarbinVue : MonoBehaviour
         {
             robots.emissifMat.SetColor("_BaseColor", robots.danger);
             player.imageContour.SetActive(true);
+            contourState = true;
 
 
             // -- Debug.Log("Je vois toujours");
@@ -113,6 +112,7 @@ public class LarbinVue : MonoBehaviour
             robots.emissifMat.SetColor("_BaseColor", robots.safe);
             // -- Shake Camera
             player.imageContour.SetActive(false);
+            contourState = false;
 
             // -- Debug.Log("je ne touche plus le joueur");
             canSeePlayer = false;
