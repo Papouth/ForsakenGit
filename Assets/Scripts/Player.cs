@@ -319,9 +319,16 @@ public class Player : MonoBehaviour
                             robotSounded = colliderHit.GetComponent<Rbts>();
                             robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.danger);
                         }
+
                         interact.Interact(transform);
                     }
                 }
+            }
+
+            if (hitColliders.Length == 0)
+            {
+                //robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.safe); // -> pas valable car "robotSounded" n'existe pas / n'est pas renseigné ici
+                imageContour.SetActive(false);
             }
         }
     }

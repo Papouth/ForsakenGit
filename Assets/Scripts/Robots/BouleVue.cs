@@ -24,6 +24,8 @@ public class BouleVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             canSeePlayer = true;
+            player.imageContour.SetActive(true);
+
 
 
             RaycastHit hitJoueur;
@@ -53,6 +55,8 @@ public class BouleVue : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            player.imageContour.SetActive(true);
+
             // -- Debug.Log("Je vois toujours");
             boule.monRobot.SetDestination(other.transform.position);
         }
@@ -63,6 +67,8 @@ public class BouleVue : MonoBehaviour
         // -- Je ne touche plus le joueur
         if (other.CompareTag("Player"))
         {
+            player.imageContour.SetActive(false);
+
             // -- Debug.Log("je ne touche plus le joueur");
             canSeePlayer = false;
         }
