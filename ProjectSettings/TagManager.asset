@@ -6,6 +6,7 @@ TagManager:
   tags:
   - RobotLarbin
   - Tazer
+  - Boss
   layers:
   - Default
   - TransparentFX
