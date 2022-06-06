@@ -13,17 +13,11 @@ public class AutoDoor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
-        {
-            animDoor.SetBool("Open", true);
-        }
+        animDoor.SetBool("Open", true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Player"))
-        {
-            animDoor.SetBool("Open", false);
-        }
+        animDoor.SetBool("Open", false);
     }
 }
