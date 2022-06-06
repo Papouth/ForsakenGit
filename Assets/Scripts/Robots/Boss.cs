@@ -8,6 +8,8 @@ public class Boss : Rbts
     public static Rbts robots;
     public static NavMeshAgent bossAgent;
 
+
+
     public override void Start()
     {
         monRobot = GetComponent<NavMeshAgent>();
@@ -15,12 +17,11 @@ public class Boss : Rbts
         // -- Prend mes wayPoints à partir de mon Parent De Secteur
         wayPoints = monParentSecteur.GetComponentsInChildren<Transform>();
 
-        FindIndex();
-
-        //base.Start();
-
         robots = gameObject.GetComponent<Rbts>();
         bossAgent = robots.monRobot;
+
+        BetterIndex();
+        RobotsMoove();
     }
 
     public override void Interact(Transform player)
@@ -31,6 +32,7 @@ public class Boss : Rbts
     public static void CallMe(Transform player)
     {
         bossAgent.SetDestination(player.position);
+
         // -- Quand on reçoit alertes on se dirige dessus
     }
 }

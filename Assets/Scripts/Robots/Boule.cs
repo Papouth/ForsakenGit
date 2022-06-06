@@ -27,7 +27,7 @@ public class Boule : Rbts
     #endregion
 
 
-    private void Awake()
+    public void Awake()
     {
         scaleBase = new Vector3(18f, 8.4f, 15f);
         scaleChange = new Vector3(36f, 8.4f, 15f);
@@ -38,14 +38,14 @@ public class Boule : Rbts
         bouleVue = GetComponentInChildren<BouleVue>();
         animBoule = GetComponent<Animator>();
 
-        //base.Start();
 
         monRobot = GetComponent<NavMeshAgent>();
 
         // -- Prend mes wayPoints à partir de mon Parent De Secteur
         wayPoints = monParentSecteur.GetComponentsInChildren<Transform>();
 
-        FindIndex();
+        BetterIndex();
+        RobotsMoove();
     }
 
     public override void Interact(bool value)
