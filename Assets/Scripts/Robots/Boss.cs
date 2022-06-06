@@ -9,7 +9,6 @@ public class Boss : Rbts
     public static NavMeshAgent bossAgent;
 
 
-
     public override void Start()
     {
         monRobot = GetComponent<NavMeshAgent>();
