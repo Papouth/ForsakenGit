@@ -18,7 +18,6 @@ public class BouleVue : MonoBehaviour
         canSeePlayer = false;
     }
 
-
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -27,10 +26,8 @@ public class BouleVue : MonoBehaviour
             player.imageContour.SetActive(true);
 
 
-
             RaycastHit hitJoueur;
             // -- Debug.DrawRay(robotBoule.transform.position, other.transform.position - robotBoule.transform.position, Color.green);
-
 
             if (Physics.Raycast(boule.transform.position, other.transform.position - boule.transform.position, out hitJoueur, 15f, Wall))
             {
@@ -59,6 +56,7 @@ public class BouleVue : MonoBehaviour
 
             // -- Debug.Log("Je vois toujours");
             boule.monRobot.SetDestination(other.transform.position);
+            Boss.CallMe(other.transform);
         }
     }
 

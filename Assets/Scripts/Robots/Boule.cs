@@ -67,10 +67,6 @@ public class Boule : Rbts
             // -- On lance la coroutine en la stockant dans une variable
             scanCoroutine = StartCoroutine(ScanCoroutine());
         }
-        else
-        {
-            //do nothing
-        }
     }
 
     IEnumerator ScanCoroutine()

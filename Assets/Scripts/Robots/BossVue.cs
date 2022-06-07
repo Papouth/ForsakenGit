@@ -33,12 +33,12 @@ public class BossVue : MonoBehaviour
             // -- Debug.DrawRay(robotBoss.transform.position, other.transform.position - robotBoss.transform.position, Color.green);
 
 
-            if (Physics.Raycast(boss.transform.position, other.transform.position - boss.transform.position, out hitJoueur, 50f, Wall))
+            if (Physics.Raycast(boss.transform.GetChild(0).position, player.raylauncher.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f, Wall))
             {
                 // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
                 return;
             }
-            else if (Physics.Raycast(boss.transform.position, other.transform.position - boss.transform.position, out hitJoueur, 50f))
+            else if (Physics.Raycast(boss.transform.GetChild(0).position, player.raylauncher.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f))
             {
                 // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
 
@@ -56,26 +56,26 @@ public class BossVue : MonoBehaviour
             // -- Debug.DrawRay(robotBoss.transform.position, other.transform.position - robotBoss.transform.position, Color.green);
 
 
-            if (Physics.Raycast(boss.transform.position, other.transform.position - boss.transform.position, out hitJoueur, 50f, Wall))
+            if (Physics.Raycast(boss.transform.GetChild(0).position, player.raylauncher.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f, Wall))
             {
                 // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
                 return;
             }
-            else if (Physics.Raycast(boss.transform.position, other.transform.position - boss.transform.position, out hitJoueur, 50f))
+            else if (Physics.Raycast(boss.transform.GetChild(0).position, player.raylauncher.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f))
             {
                 // -- Debug.Log("Je vois toujours");
                 Boss.CallMe(other.transform);
 
                 // -- TUER LE JOUEUR
-                float distance = Vector3.Distance(other.transform.position, boss.transform.position);
+                float distance = Vector3.Distance(player.raylauncher.transform.position, boss.transform.GetChild(0).position);
 
-                if (distance < 6.5f)
+                if (distance < 8f)
                 {
                     // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
                     StartCoroutine(RalentissementJoueur());
                 }
 
-                if (distance < 3.5f)
+                if (distance < 5f)
                 {
                     // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
                     // -- ALORS ON TUE LE JOUEUR

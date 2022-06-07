@@ -35,12 +35,12 @@ public class LarbinVue : MonoBehaviour
             // -- Debug.DrawRay(robotLarbin.transform.position, other.transform.position - robotLarbin.transform.position, Color.green);
 
 
-            if (Physics.Raycast(robots.transform.position, other.transform.position - robots.transform.position, out hitJoueur, 40f, Wall))
+            if (Physics.Raycast(robots.transform.GetChild(0).position, player.raylauncher.transform.position - robots.transform.GetChild(0).position, out hitJoueur, 40f, Wall))
             {
                 // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
                 return;
             }
-            else if (Physics.Raycast(robots.transform.position, other.transform.position - robots.transform.position, out hitJoueur, 40f))
+            else if (Physics.Raycast(robots.transform.GetChild(0).position, player.raylauncher.transform.position - robots.transform.GetChild(0).position, out hitJoueur, 40f))
             {
                 // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
 
@@ -51,7 +51,7 @@ public class LarbinVue : MonoBehaviour
 
 
                 // -- RALENTISSEMENT
-                float distance = Vector3.Distance(other.transform.position, robots.transform.position);
+                float distance = Vector3.Distance(player.raylauncher.transform.position, robots.transform.GetChild(0).position);
 
                 if (distance < 4.5f) // old = 3.5f
                 {
@@ -68,6 +68,7 @@ public class LarbinVue : MonoBehaviour
         {
             robots.emissifMat.SetColor("_BaseColor", robots.danger); // ICI pour test
             player.imageContour.SetActive(true);
+            Boss.CallMe(other.transform);
 
 
             // -- Debug.Log("Je vois toujours");
@@ -77,7 +78,7 @@ public class LarbinVue : MonoBehaviour
 
 
                 // -- RALENTISSEMENT
-                float distance = Vector3.Distance(other.transform.position, robots.transform.position);
+                float distance = Vector3.Distance(player.raylauncher.transform.position, robots.transform.GetChild(0).position);
 
                 if (distance < 4.5f) // old = 3.5f
                 {

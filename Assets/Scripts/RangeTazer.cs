@@ -8,11 +8,13 @@ public class RangeTazer : MonoBehaviour
     public Rbts leRobot;
     public Player player;
     public bool tazing = false;
+    public bool actual;
 
 
     public void Start()
     {
         player = GetComponentInParent<Player>();
+        actual = false;
     }
 
     public void Update()
@@ -32,6 +34,7 @@ public class RangeTazer : MonoBehaviour
             if (!tazing)
             {
                 tazing = true;
+                actual = true;
                 // -- Lancer l'animation d'attaque du taser
                 player.anim.SetTrigger("attack");
 
@@ -60,7 +63,10 @@ public class RangeTazer : MonoBehaviour
     {
         if(other.gameObject.CompareTag("RobotLarbin"))
         {
-            leRobot = null;
+            if (!actual)
+            {
+                leRobot = null;
+            }
         }
     }
 
@@ -110,5 +116,8 @@ public class RangeTazer : MonoBehaviour
 
         leRobot.isFreeze = false;
         //leRobot.GetComponent<NavMeshAgent>().enabled = true;
+
+        actual = false;
+        leRobot = null;
     }
 }

@@ -84,20 +84,12 @@ public class Rbts : Interactable
 
     public void Update() // virtual
     {
-        #region Old Update
-        /*
-        // si robot pas immobiliser
         if (!isFreeze)
         {
-            if (monRobot.remainingDistance < 3)
-            RobotsMoove();
-        }
-        */
-        #endregion
-
-        if (!monRobot.pathPending && monRobot.remainingDistance < 2.5f)
-        {
-            RobotsMoove();
+            if (!monRobot.pathPending && monRobot.remainingDistance < 2.5f)
+            {
+                RobotsMoove();
+            }
         }
     }
     
@@ -108,21 +100,6 @@ public class Rbts : Interactable
             // -- Tant que la valeur de navP est inférieur au nombre de navPoints dans ma liste + si aucun objet détecté
             if (!isWaitingAtObject)
             {
-                #region Old moove
-                /*
-                if (monRobot.remainingDistance < 3)
-                {
-                    navP++;
-
-                    // -- Debug.Log("mon nav point actuel est le " + (navP -1) + "ème");
-
-                    if (navP == wayPoints.Length)
-                    {
-                        navP = 0;
-                    }
-                    monRobot.SetDestination(wayPoints[navP].transform.position);
-                }*/
-                #endregion
                 navP++;
 
                 // -- Debug.Log("mon nav point actuel est le " + (navP -1) + "ème");
