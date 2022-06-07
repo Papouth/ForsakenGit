@@ -82,7 +82,6 @@ public class Rbts : Interactable
         //Debug.Log("j'ai " + navP + " navpoints");
         gameObject.transform.position = monParentSecteur.transform.position;
     }
-    
 
     public virtual void Update()
     {
@@ -92,7 +91,6 @@ public class Rbts : Interactable
             RobotsMoove();
         }
     }
-
     
     public void RobotsMoove()
     {

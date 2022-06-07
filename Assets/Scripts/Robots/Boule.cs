@@ -22,8 +22,6 @@ public class Boule : Rbts
     public float timeBetweenTwoScan = 4f;
     private bool canScan = true;
     private float baseYRotation = 0;
-
-    private Animator animBoule;
     #endregion
 
 
@@ -36,8 +34,6 @@ public class Boule : Rbts
     public override void Start()
     {
         bouleVue = GetComponentInChildren<BouleVue>();
-        animBoule = GetComponent<Animator>();
-
 
         monRobot = GetComponent<NavMeshAgent>();
 
@@ -61,26 +57,6 @@ public class Boule : Rbts
     public override void GoToObjectDetected(Vector3 objectPosition)
     {
         // nothing
-    }
-
-    public override void Update()
-    {
-        //Roule();
-        base.Update();
-    }
-
-    public void Roule()
-    {
-        if (monRobot.isStopped)
-        {
-            // jouer anim de idle
-            animBoule.Play("idle");
-        }
-        else if (!monRobot.isStopped)
-        {
-            // jouer l'animation
-            animBoule.Play("roulade");
-        }
     }
 
     public void Scan()
