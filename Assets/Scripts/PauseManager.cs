@@ -40,7 +40,6 @@ public class PauseManager : MonoBehaviour
     public void Update()
     {
         Paused();
-        CursorParam();
     }
 
     public void Paused()
@@ -48,30 +47,25 @@ public class PauseManager : MonoBehaviour
         if (!isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.pauseKey))
         {
             background.SetActive(true);
-            pauseMenu.SetActive(true);            
-            // on met le jeu en pause
+            pauseMenu.SetActive(true);
+            // -- On met le jeu en pause
             Time.timeScale = 0;
-            
+
             isPaused = true;
+
+            CursorParam();
         }
         else if (isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.pauseKey))
         {
-            background.SetActive(false);
-            pauseMenu.SetActive(false);
-            // on remet le jeu
-            Time.timeScale = 1;
-            
-            isPaused = false;
+            // -- On remet le jeu
+            Resume();
         }
     }
 
     public void CursorParam()
     {
-        if (isPaused == true)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }       
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void Resume()
@@ -120,7 +114,7 @@ public class PauseManager : MonoBehaviour
     #endregion
 
     #region Quit
-        public void QuitPause()
+    public void QuitPause()
     {
         pauseMenu.SetActive(false);
         quitMenu.SetActive(true);

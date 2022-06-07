@@ -51,7 +51,6 @@ public class Rbts : Interactable
 
     public override void Interact(Transform player)
     {
-        //base.Interact(player);
         GoToObjectDetected(player.position);
     }
 

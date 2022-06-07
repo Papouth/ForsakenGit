@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public Slider slider;
     private Injection inject;
     private Rbts robotSounded;
+    public PauseManager pausemenu;
 
 
     public LayerMask interactableLayer; // -- GameObjet pouvant interargir
@@ -400,9 +401,6 @@ public class Player : MonoBehaviour
 
 
             anim.ResetTrigger("terminal");
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            //statesPlayer.canMoove = true;
             // On remet a 1 le depth de la camera du joueur
             visionJoueur.depth = 1;
         }
@@ -656,7 +654,7 @@ public class Player : MonoBehaviour
         }
 
         // si pas de cheat on et pas de terminal et pas caché et ne stop pas injection
-        if (!cheatBool && !statesPlayer.isInteractTerminal && !statesPlayer.isHiding && !statesPlayer.isStopingInjection)
+        if (!cheatBool && !statesPlayer.isInteractTerminal && !statesPlayer.isHiding && !statesPlayer.isStopingInjection && !pausemenu.isPaused)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

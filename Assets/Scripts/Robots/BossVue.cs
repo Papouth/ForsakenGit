@@ -27,47 +27,26 @@ public class BossVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             canSeePlayer = true;
+            player.imageContour.SetActive(true);
 
 
             RaycastHit hitJoueur;
             // -- Debug.DrawRay(robotBoss.transform.position, other.transform.position - robotBoss.transform.position, Color.green);
 
 
-            if (Physics.Raycast(boss.transform.GetChild(0).position, player.raylauncher.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f, Wall))
+            if (Physics.Raycast(boss.transform.GetChild(0).position, other.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f, Wall))
             {
                 // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
                 return;
             }
-            else if (Physics.Raycast(boss.transform.GetChild(0).position, player.raylauncher.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f))
+            else if (Physics.Raycast(boss.transform.GetChild(0).position, other.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f))
             {
                 // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
 
                 // -- Debug.Log("Je vois le joueur");
                 Boss.CallMe(other.transform);
-            }
-        }
-    }
 
-    public void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            RaycastHit hitJoueur;
-            // -- Debug.DrawRay(robotBoss.transform.position, other.transform.position - robotBoss.transform.position, Color.green);
-
-
-            if (Physics.Raycast(boss.transform.GetChild(0).position, player.raylauncher.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f, Wall))
-            {
-                // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
-                return;
-            }
-            else if (Physics.Raycast(boss.transform.GetChild(0).position, player.raylauncher.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f))
-            {
-                // -- Debug.Log("Je vois toujours");
-                Boss.CallMe(other.transform);
-
-                // -- TUER LE JOUEUR
-                float distance = Vector3.Distance(player.raylauncher.transform.position, boss.transform.GetChild(0).position);
+                float distance = Vector3.Distance(other.transform.position, boss.transform.position);
 
                 if (distance < 8f)
                 {
@@ -85,6 +64,33 @@ public class BossVue : MonoBehaviour
         }
     }
 
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            player.imageContour.SetActive(true);
+
+            // -- Debug.Log("Je vois toujours");
+            Boss.CallMe(other.transform);
+
+            // -- TUER LE JOUEUR
+            float distance = Vector3.Distance(other.transform.position, boss.transform.position);
+
+            if (distance < 8f)
+            {
+                // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                StartCoroutine(RalentissementJoueur());
+            }
+
+            if (distance < 4f)
+            {
+                // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                // -- ALORS ON TUE LE JOUEUR
+                player.Dead();
+            }
+        }
+    }
+
     public void OnTriggerExit(Collider other)
     {
         // -- Je ne touche plus le joueur
@@ -92,6 +98,7 @@ public class BossVue : MonoBehaviour
         {
             // -- Debug.Log("je ne touche plus le joueur");
             canSeePlayer = false;
+            player.imageContour.SetActive(false);
         }
     }
 
@@ -104,7 +111,7 @@ public class BossVue : MonoBehaviour
                 playerSlowedDown = true;
 
                 // -- Step 1: Slow the Player
-                player.vitesse = 0.075f;
+                player.vitesse = 0.055f;
 
 
                 // -- Step 2: Time when player is slowed down
@@ -125,7 +132,7 @@ public class BossVue : MonoBehaviour
                 playerSlowedDown = true;
 
                 // -- Step 1: Slow the Player
-                player.vitesse = 0.035f;
+                player.vitesse = 0.03f;
 
 
                 // -- Step 2: Time when player is slowed down
