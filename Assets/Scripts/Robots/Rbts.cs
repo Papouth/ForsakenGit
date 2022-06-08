@@ -42,6 +42,7 @@ public class Rbts : Interactable
 
         // le robot commence avec un niveau de menace en safe
         emissifMat.SetColor("_BaseColor", safe);
+        emissifMat.SetColor("_EmissiveColor", safe);
     }
 
     public override void Interact(bool value)

@@ -17,6 +17,8 @@ public class LarbinVue : MonoBehaviour
         robots = gameObject.GetComponentInParent<Rbts>();
         canSeePlayer = false;
         playerSlowedDown = false;
+        robots.emissifMat.SetColor("_BaseColor", robots.safe);
+        robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
     }
 
 
@@ -26,6 +28,7 @@ public class LarbinVue : MonoBehaviour
         {
             canSeePlayer = true;
             robots.emissifMat.SetColor("_BaseColor", robots.danger);
+            robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
             // -- Shake Camera
             player.imageContour.SetActive(true);
 
@@ -67,6 +70,7 @@ public class LarbinVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             robots.emissifMat.SetColor("_BaseColor", robots.danger); // ICI pour test
+            robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
             player.imageContour.SetActive(true);
             Boss.CallMe(other.transform);
 
@@ -95,6 +99,7 @@ public class LarbinVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             robots.emissifMat.SetColor("_BaseColor", robots.safe);
+            robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
             // -- Shake Camera
             player.imageContour.SetActive(false);
 

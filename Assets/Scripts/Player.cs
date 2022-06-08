@@ -306,6 +306,7 @@ public class Player : MonoBehaviour
                     {
                         robotSounded = colliderHit.GetComponent<Rbts>();
                         robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.safe);
+                        robotSounded.emissifMat.SetColor("_EmissiveColor", robotSounded.safe);
                     }
                     return;
                 }
@@ -319,6 +320,7 @@ public class Player : MonoBehaviour
                         {
                             robotSounded = colliderHit.GetComponent<Rbts>();
                             robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.danger);
+                            robotSounded.emissifMat.SetColor("_EmissiveColor", robotSounded.danger);
                         }
 
                         interact.Interact(transform);
@@ -328,7 +330,6 @@ public class Player : MonoBehaviour
 
             if (hitColliders.Length == 0)
             {
-                //robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.safe); // -> pas valable car "robotSounded" n'existe pas / n'est pas renseigné ici
                 imageContour.SetActive(false);
             }
         }
@@ -624,6 +625,7 @@ public class Player : MonoBehaviour
                 {
                     robotSounded = colliderHit.GetComponent<Rbts>();
                     robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.safe);
+                    robotSounded.emissifMat.SetColor("_EmissiveColor", robotSounded.safe);
                     imageContour.SetActive(false);
                 }
             }
