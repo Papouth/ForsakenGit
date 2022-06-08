@@ -26,14 +26,6 @@ public class LarbinVue : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            canSeePlayer = true;
-            robots.emissifMat.SetColor("_BaseColor", robots.danger);
-            robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
-            // -- Shake Camera
-            player.imageContour.SetActive(true);
-
-
-
             RaycastHit hitJoueur;
             // -- Debug.DrawRay(robotLarbin.transform.position, other.transform.position - robotLarbin.transform.position, Color.green);
 
@@ -45,6 +37,13 @@ public class LarbinVue : MonoBehaviour
             }
             else if (Physics.Raycast(robots.transform.GetChild(0).position, player.raylauncher.transform.position - robots.transform.GetChild(0).position, out hitJoueur, 40f))
             {
+                canSeePlayer = true;
+                robots.emissifMat.SetColor("_BaseColor", robots.danger);
+                robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
+
+                player.imageContour.SetActive(true);
+
+
                 // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
 
                 // -- Debug.Log("Je vois le joueur");

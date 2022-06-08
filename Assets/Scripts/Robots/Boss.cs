@@ -26,11 +26,13 @@ public class Boss : Rbts
     public override void Interact(Transform player)
     {
         CallMe(player);
+        GoToObjectDetected(player.position);
     }
 
     public static void CallMe(Transform player)
     {
-        bossAgent.SetDestination(player.position);
+        bossAgent.SetDestination(player.transform.position);
+
 
         // -- Quand on reçoit alertes on se dirige dessus
     }

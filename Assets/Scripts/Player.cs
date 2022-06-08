@@ -72,9 +72,6 @@ public class Player : MonoBehaviour
     public float rotationSpeedY = 90f; // -- Gère ma vitesse de rotation H/B
     [Range(0f, 0.1f)]
     public float vitesse = 0.1f; // -- Au dessus de 0.1f, le joueur peut traverser le mur
-    public float shake = 0f;
-    public float shakeAmount = 0.7f;
-    public float decreaseFactor = 1f;
 
 
     public Animator anim;
@@ -315,7 +312,7 @@ public class Player : MonoBehaviour
                     Interactable interact = hitRobot.transform.GetComponent<Interactable>();
                     if (interact)
                     {
-                        //Debug.Log("j'ai entendu un bruit");
+                            //Debug.Log("j'ai entendu un bruit");
                         if (colliderHit.CompareTag("RobotLarbin"))
                         {
                             robotSounded = colliderHit.GetComponent<Rbts>();
