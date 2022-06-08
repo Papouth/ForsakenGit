@@ -14,7 +14,6 @@ public abstract class Interactable : MonoBehaviour
     [SerializeField]
     public bool isOnlyStockable = false; // -- Est ce que l'objet est uniquement stockable
 
-
   
 
     public virtual void Interact(bool value)

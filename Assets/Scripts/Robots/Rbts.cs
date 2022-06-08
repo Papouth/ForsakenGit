@@ -18,7 +18,6 @@ public class Rbts : Interactable
     public Color32 safe;
     public Color32 danger;
 
-
     private bool isWaitingAtObject = false;
     public int navP = 0;
 
