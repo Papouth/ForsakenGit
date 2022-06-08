@@ -51,7 +51,6 @@ public class LarbinVue : MonoBehaviour
                 // -- Je lance l'alerte à mon robot BOSS
                 Boss.CallMe(other.transform);
 
-
                 // -- RALENTISSEMENT
                 float distance = Vector3.Distance(player.raylauncher.transform.position, robots.transform.GetChild(0).position);
 
@@ -72,7 +71,6 @@ public class LarbinVue : MonoBehaviour
             robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
             player.imageContour.SetActive(true);
             Boss.CallMe(other.transform);
-
 
             // -- Debug.Log("Je vois toujours");
             if (!robots.isFreeze)

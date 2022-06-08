@@ -32,8 +32,6 @@ public class Boss : Rbts
     public static void CallMe(Transform player)
     {
         bossAgent.SetDestination(player.transform.position);
-
-
         // -- Quand on reçoit alertes on se dirige dessus
     }
 }
