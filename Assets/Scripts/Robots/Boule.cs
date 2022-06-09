@@ -13,6 +13,7 @@ public class Boule : Rbts
     private Vector3 scaleBase; // -- Reset
     public GameObject[] zoneDetectionBoule;
     public GameObject tete;
+    public GameObject lightHead;
 
     public Coroutine scanCoroutine;
     public float timeBetweenStopAndRotate = 0.1f;
@@ -37,6 +38,8 @@ public class Boule : Rbts
 
         monRobot = GetComponent<NavMeshAgent>();
 
+        lightHead.SetActive(false);
+
         // -- Prend mes wayPoints à partir de mon Parent De Secteur
         wayPoints = monParentSecteur.GetComponentsInChildren<Transform>();
 
@@ -56,7 +59,7 @@ public class Boule : Rbts
 
     public override void GoToObjectDetected(Vector3 objectPosition)
     {
-        // nothing
+        
     }
 
     public void Scan()
@@ -85,6 +88,8 @@ public class Boule : Rbts
         for (int i = 0; i < zoneDetectionBoule.Length; i++)
         {
             zoneDetectionBoule[i].transform.localScale = scaleChange;
+
+            lightHead.SetActive(true);
         }
 
 
@@ -108,6 +113,8 @@ public class Boule : Rbts
         for (int i = 0; i < zoneDetectionBoule.Length; i++)
         {
             zoneDetectionBoule[i].transform.localScale = scaleBase;
+
+            lightHead.SetActive(false);
         }
         monRobot.isStopped = false;
         scanCoroutine = null;

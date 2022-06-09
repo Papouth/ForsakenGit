@@ -26,38 +26,41 @@ public class LarbinVue : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            RaycastHit hitJoueur;
-            // -- Debug.DrawRay(robotLarbin.transform.position, other.transform.position - robotLarbin.transform.position, Color.green);
-
-
-            if (Physics.Raycast(robots.transform.GetChild(0).position, player.raylauncher.transform.position - robots.transform.GetChild(0).position, out hitJoueur, 40f, Wall))
+            if (!StatesPlayer.statesPlayer.isHiding)
             {
-                // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
-                return;
-            }
-            else if (Physics.Raycast(robots.transform.GetChild(0).position, player.raylauncher.transform.position - robots.transform.GetChild(0).position, out hitJoueur, 40f))
-            {
-                canSeePlayer = true;
-                robots.emissifMat.SetColor("_BaseColor", robots.danger);
-                robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
-
-                player.imageContour.SetActive(true);
+                RaycastHit hitJoueur;
+                // -- Debug.DrawRay(robotLarbin.transform.position, other.transform.position - robotLarbin.transform.position, Color.green);
 
 
-                // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
-
-                // -- Debug.Log("Je vois le joueur");
-                robots.monRobot.SetDestination(other.transform.position);
-                // -- Je lance l'alerte à mon robot BOSS
-                Boss.CallMe(other.transform);
-
-                // -- RALENTISSEMENT
-                float distance = Vector3.Distance(player.raylauncher.transform.position, robots.transform.GetChild(0).position);
-
-                if (distance < 4.5f) // old = 3.5f
+                if (Physics.Raycast(robots.transform.GetChild(0).position, player.raylauncher.transform.position - robots.transform.GetChild(0).position, out hitJoueur, 40f, Wall))
                 {
-                    // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
-                    StartCoroutine(RalentissementJoueur());
+                    // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
+                    return;
+                }
+                else if (Physics.Raycast(robots.transform.GetChild(0).position, player.raylauncher.transform.position - robots.transform.GetChild(0).position, out hitJoueur, 40f))
+                {
+                    canSeePlayer = true;
+                    robots.emissifMat.SetColor("_BaseColor", robots.danger);
+                    robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
+
+                    player.imageContour.SetActive(true);
+
+
+                    // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
+
+                    // -- Debug.Log("Je vois le joueur");
+                    robots.monRobot.SetDestination(other.transform.position);
+                    // -- Je lance l'alerte à mon robot BOSS
+                    Boss.CallMe(other.transform);
+
+                    // -- RALENTISSEMENT
+                    float distance = Vector3.Distance(player.raylauncher.transform.position, robots.transform.GetChild(0).position);
+
+                    if (distance < 4.5f) // old = 3.5f
+                    {
+                        // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                        StartCoroutine(RalentissementJoueur());
+                    }
                 }
             }
         }
@@ -67,24 +70,27 @@ public class LarbinVue : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            robots.emissifMat.SetColor("_BaseColor", robots.danger); // ICI pour test
-            robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
-            player.imageContour.SetActive(true);
-            Boss.CallMe(other.transform);
-
-            // -- Debug.Log("Je vois toujours");
-            if (!robots.isFreeze)
+            if (!StatesPlayer.statesPlayer.isHiding)
             {
-                robots.monRobot.SetDestination(other.transform.position);
+                robots.emissifMat.SetColor("_BaseColor", robots.danger); // ICI pour test
+                robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
+                player.imageContour.SetActive(true);
+                Boss.CallMe(other.transform);
 
-
-                // -- RALENTISSEMENT
-                float distance = Vector3.Distance(player.raylauncher.transform.position, robots.transform.GetChild(0).position);
-
-                if (distance < 4.5f) // old = 3.5f
+                // -- Debug.Log("Je vois toujours");
+                if (!robots.isFreeze)
                 {
-                    // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
-                    StartCoroutine(RalentissementJoueur());
+                    robots.monRobot.SetDestination(other.transform.position);
+
+
+                    // -- RALENTISSEMENT
+                    float distance = Vector3.Distance(player.raylauncher.transform.position, robots.transform.GetChild(0).position);
+
+                    if (distance < 4.5f) // old = 3.5f
+                    {
+                        // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                        StartCoroutine(RalentissementJoueur());
+                    }
                 }
             }
         }

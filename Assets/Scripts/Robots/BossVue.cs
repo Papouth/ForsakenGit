@@ -26,39 +26,42 @@ public class BossVue : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            canSeePlayer = true;
-            player.imageContour.SetActive(true);
-
-
-            RaycastHit hitJoueur;
-            // -- Debug.DrawRay(robotBoss.transform.position, other.transform.position - robotBoss.transform.position, Color.green);
-
-
-            if (Physics.Raycast(boss.transform.GetChild(0).position, other.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f, Wall))
+            if (!StatesPlayer.statesPlayer.isHiding)
             {
-                // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
-                return;
-            }
-            else if (Physics.Raycast(boss.transform.GetChild(0).position, other.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f))
-            {
-                // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
+                canSeePlayer = true;
+                player.imageContour.SetActive(true);
 
-                // -- Debug.Log("Je vois le joueur");
-                Boss.CallMe(other.transform);
 
-                float distance = Vector3.Distance(other.transform.position, boss.transform.position);
+                RaycastHit hitJoueur;
+                // -- Debug.DrawRay(robotBoss.transform.position, other.transform.position - robotBoss.transform.position, Color.green);
 
-                if (distance < 8f)
+
+                if (Physics.Raycast(boss.transform.GetChild(0).position, other.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f, Wall))
                 {
-                    // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
-                    StartCoroutine(RalentissementJoueur());
+                    // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
+                    return;
                 }
-
-                if (distance < 5f)
+                else if (Physics.Raycast(boss.transform.GetChild(0).position, other.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f))
                 {
-                    // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
-                    // -- ALORS ON TUE LE JOUEUR
-                    player.Dead();
+                    // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
+
+                    // -- Debug.Log("Je vois le joueur");
+                    Boss.CallMe(other.transform);
+
+                    float distance = Vector3.Distance(other.transform.position, boss.transform.position);
+
+                    if (distance < 8f)
+                    {
+                        // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                        StartCoroutine(RalentissementJoueur());
+                    }
+
+                    if (distance < 5f)
+                    {
+                        // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                        // -- ALORS ON TUE LE JOUEUR
+                        player.Dead();
+                    }
                 }
             }
         }
@@ -68,25 +71,28 @@ public class BossVue : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            player.imageContour.SetActive(true);
-
-            // -- Debug.Log("Je vois toujours");
-            Boss.CallMe(other.transform);
-
-            // -- TUER LE JOUEUR
-            float distance = Vector3.Distance(other.transform.position, boss.transform.position);
-
-            if (distance < 8f)
+            if (!StatesPlayer.statesPlayer.isHiding)
             {
-                // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
-                StartCoroutine(RalentissementJoueur());
-            }
+                player.imageContour.SetActive(true);
 
-            if (distance < 4f)
-            {
-                // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
-                // -- ALORS ON TUE LE JOUEUR
-                player.Dead();
+                // -- Debug.Log("Je vois toujours");
+                Boss.CallMe(other.transform);
+
+                // -- TUER LE JOUEUR
+                float distance = Vector3.Distance(other.transform.position, boss.transform.position);
+
+                if (distance < 8f)
+                {
+                    // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                    StartCoroutine(RalentissementJoueur());
+                }
+
+                if (distance < 4f)
+                {
+                    // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                    // -- ALORS ON TUE LE JOUEUR
+                    player.Dead();
+                }
             }
         }
     }
