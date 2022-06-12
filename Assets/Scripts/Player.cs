@@ -338,7 +338,7 @@ public class Player : MonoBehaviour
     public void PlayerInteract()
     {
         // -- Si j'appuie sur ma touche d'interaction et que je n'ai pas en main le tazer
-        if (Input.GetKeyDown(keysAssign.interactionKey) && !statesPlayer.isHoldingTazer) // ENLEVER LA RESTRICTION DU TASER
+        if (Input.GetKeyDown(keysAssign.interactionKey)/* && !statesPlayer.isHoldingTazer*/) // ENLEVER LA RESTRICTION DU TASER
         {
             // Si je n'ai pas d'objet lançable
             if (currentInteractable && !statesPlayer.isHoldingThrowableItem)
