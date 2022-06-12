@@ -13,6 +13,7 @@ public class HidingPlace : Interactable
     public Transform playerTp;
     private Vector3 lastPos;
     public bool playerHide = false; // permet de dire au robot qu'il ne peux pas entendre ni voir le joueur
+    private bool escPressed;
 
 
 
@@ -22,24 +23,46 @@ public class HidingPlace : Interactable
         hideColls = GetComponentsInChildren<BoxCollider>();
         personnage = GameObject.Find("Personnage");
         player = personnage.GetComponent<Player>();
+
+        escPressed = false;
     }
 
     public override void Interact(bool value)
     {
-        StatesPlayer.statesPlayer.isHiding = value; // -- Si mon joueur interargi avec le collider
-        Hide();
+        if (!escPressed)
+        {
+            StatesPlayer.statesPlayer.isHiding = value; // -- Si mon joueur interargi avec le collider
+            Hide();
+        }
+        else if (escPressed)
+        {
+            StatesPlayer.statesPlayer.isHiding = !value; // -- On met la valeur opposé pour ne pas avoir a réappuyer une seconde fois sur la touche d'interaction
+            Hide();
+            escPressed = false;
+        }
+
     }
 
     public void Hide()
     {
-        if (StatesPlayer.statesPlayer.isHiding == true && playerHide == false)
+        if (StatesPlayer.statesPlayer.isHiding && !playerHide)
         {
             StartCoroutine(HideAnimation());
         }
-
-        // -- Si ne fonctionne pas à cause du collider alors, on mettra un Input spécialement pour permettre au joueur de sortir de sa cachette
-        if (Input.GetKey(KeysAssignation.keysAssign.interactionKey) && playerHide == true)
+        
+        if (Input.GetKey(KeysAssignation.keysAssign.interactionKey) && playerHide)
         {
+            StartCoroutine(UnHide());
+        }
+    }
+
+    public void Exitplace()
+    {
+        // -- Permet d'appuyer sur échap pour quitter sa cachette
+        if (Input.GetKey(KeysAssignation.keysAssign.escapeKey) && playerHide)
+        {
+            escPressed = true;
+            StatesPlayer.statesPlayer.isHiding = false;
             StartCoroutine(UnHide());
         }
     }
@@ -47,8 +70,9 @@ public class HidingPlace : Interactable
     public void Update()
     {
         IsHiding();
-    }
 
+        Exitplace();
+    }
 
     public void IsHiding()
     {

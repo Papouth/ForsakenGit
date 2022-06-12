@@ -17,6 +17,8 @@ public class KeysAssignation : MonoBehaviour
     public KeyCode leanRightKey;
     public KeyCode pauseKey;
 
+    public KeyCode test2;
+
 
 
     public void Awake()
