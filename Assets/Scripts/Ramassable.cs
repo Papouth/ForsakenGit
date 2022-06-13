@@ -16,6 +16,7 @@ public class Ramassable : Interactable
 
     public Collider colObjet;
     public Rigidbody rb;
+    private SphereCollider sphereCol;
 
     public bool isGrounded = false; // -- Si l'objet touche le sol, un mur ou un objet
     public bool haveBeenDrop = false; // -- A été laché
@@ -28,6 +29,7 @@ public class Ramassable : Interactable
         // -- Les objets ne doivent absolument pas avoir la variable en vrai, jusqu'à temps qu'on les prennent
         isGrounded = false;
         colObjet = GetComponent<Collider>();
+        sphereCol = GetComponent<SphereCollider>();
     }
 
     public void OnCollisionEnter(Collision other)
@@ -169,6 +171,7 @@ public class Ramassable : Interactable
 
             // -- Je désactive le collider de mon objet quand je l'ai en main
             colObjet.enabled = false;
+            sphereCol.enabled = false;
 
 
             if (StatesPlayer.statesPlayer.rightHand)
@@ -194,6 +197,7 @@ public class Ramassable : Interactable
 
         // -- Remettre le collider de mon objet lançable
         colObjet.enabled = true;
+        sphereCol.enabled = true;
 
         // -- Coroutine tt les 2 secs
         StartCoroutine(RigidbodySleep());

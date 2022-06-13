@@ -385,7 +385,6 @@ public class Player : MonoBehaviour
         // -- Si on a un panel d'ouvert alors on affiche la souris, et si le panel est fermé alors on recache la souris
         if (statesPlayer.isInteractTerminal)
         {
-            Debug.Log("j'interragis avec le terminal");
             // -- Mettre les caméras
             surveillance.cameraMedic.enabled = true;
             surveillance.cameraHub.enabled = true;
