@@ -25,7 +25,7 @@ public class RangeTazer : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        // -- Si j'appuie sur clic gauche +  que j'ai assez de charges + que j'ai le tazer en main
+        // -- Si j'appuie sur clic gauche +  que j'ai assez de charges + que j'ai le tazer en main + que je collider avec le robot de patrouille
         if (other.gameObject.CompareTag("RobotLarbin") && Input.GetMouseButtonDown(0) && Inventaire.inventaire.currentPilesCapacity > 0 && StatesPlayer.statesPlayer.isHoldingTazer)
         {
             leRobot = other.GetComponent<Rbts>();
@@ -41,7 +41,6 @@ public class RangeTazer : MonoBehaviour
                 // -- Perte d'une charge automatiquement pour chaque tir de tazer
 
                 // -- On immobilise le robot en question
-                //leRobot = other.GetComponent<Rbts>();
 
                 StartCoroutine(Freeze());
             }
@@ -72,20 +71,24 @@ public class RangeTazer : MonoBehaviour
 
     public void Taze()
     {
-        // -- Pas de robot + j'appuie sur clic gauche + j'ai assez de charges + j'ai le tazer en main
-        if (Input.GetMouseButtonDown(0) && Inventaire.inventaire.currentPilesCapacity > 0 && StatesPlayer.statesPlayer.isHoldingTazer)
+        // -- Si je n'interargis pas avec un terminal alors, je peux tirer
+        if (!StatesPlayer.statesPlayer.isInteractTerminal)
         {
-            player.anim.SetTrigger("attack");
+            // -- Pas de robot + j'appuie sur clic gauche + j'ai assez de charges + j'ai le tazer en main
+            if (Input.GetMouseButtonDown(0) && Inventaire.inventaire.currentPilesCapacity > 0 && StatesPlayer.statesPlayer.isHoldingTazer)
+            {
+                player.anim.SetTrigger("attack");
 
-            // A chaque tir de mon tazer, je perd une charge
-            Inventaire.inventaire.currentPilesCapacity -= 1;
-        }
+                // A chaque tir de mon tazer, je perd une charge
+                Inventaire.inventaire.currentPilesCapacity -= 1;
+            }
 
-        // -- Si j'appuie sur clic gauche + je N'AI PAS assez de charges + j'ai mon tazer en main
-        else if (Input.GetMouseButtonDown(0) && Inventaire.inventaire.currentPilesCapacity <= 0 && StatesPlayer.statesPlayer.isHoldingTazer)
-        {
-            // -- Son qui fait comprendre que plus de charges restantes
-            player.anim.SetTrigger("attack");
+            // -- Si j'appuie sur clic gauche + je N'AI PAS assez de charges + j'ai mon tazer en main
+            else if (Input.GetMouseButtonDown(0) && Inventaire.inventaire.currentPilesCapacity <= 0 && StatesPlayer.statesPlayer.isHoldingTazer)
+            {
+                // -- Son qui fait comprendre que plus de charges restantes
+                player.anim.SetTrigger("attack");
+            }
         }
     }
 
@@ -94,7 +97,7 @@ public class RangeTazer : MonoBehaviour
         // -> Arrêter l'anim de marche du robot
         leRobot.GetComponent<Animator>().enabled = false;
 
-        // on active le spark 
+        // -- On active le spark 
         leRobot.sparks.SetActive(true);
 
         leRobot.isFreeze = true;
@@ -115,7 +118,6 @@ public class RangeTazer : MonoBehaviour
         leRobot.sparks.SetActive(false);
 
         leRobot.isFreeze = false;
-        //leRobot.GetComponent<NavMeshAgent>().enabled = true;
 
         actual = false;
         leRobot = null;
