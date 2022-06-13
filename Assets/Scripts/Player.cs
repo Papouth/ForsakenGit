@@ -366,6 +366,18 @@ public class Player : MonoBehaviour
                 tryInteract = true;
             }
         }
+        else if (Input.GetKeyDown(keysAssign.escapeKey) && !surveillance.onCam)
+        {
+            if (currentInteractable && statesPlayer.isInteractTerminal || statesPlayer.isHiding)
+            {
+                currentInteractable.Interact(false);
+                currentInteractable = null;
+
+
+                // bouton return en false
+                returnToCam.SetActive(false);
+            }
+        }
     }
 
     public void TerminalInteraction()
@@ -373,6 +385,7 @@ public class Player : MonoBehaviour
         // -- Si on a un panel d'ouvert alors on affiche la souris, et si le panel est fermé alors on recache la souris
         if (statesPlayer.isInteractTerminal)
         {
+            Debug.Log("j'interragis avec le terminal");
             // -- Mettre les caméras
             surveillance.cameraMedic.enabled = true;
             surveillance.cameraHub.enabled = true;
@@ -384,8 +397,8 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            // -- Si currentInteractable est un terminal, alors si on appuie sur échap ça permet de quitter            
-            if (Input.GetKey(keysAssign.escapeKey))
+            // -- Si on est sur les caméras permet de retourner au menu des caméras         
+            if (Input.GetKey(keysAssign.escapeKey) && surveillance.onCam)
             {
                 anim.enabled = true;
                 surveillance.ReturnToCamButton();
