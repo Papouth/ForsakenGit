@@ -23,11 +23,14 @@ public class CamChanger : MonoBehaviour
     [Tooltip("Le panel d'interaction du terminal")]
     public GameObject panelTerminal;
 
+    public bool onCam;
+
 
 
     public void Start()
     {
         returnToCamBttn.SetActive(false);
+        onCam = false;
     }
 
     public void ChangeButton()
@@ -45,6 +48,7 @@ public class CamChanger : MonoBehaviour
     {
         // faire disparaitre le boutton returnToCam
         returnToCamBttn.SetActive(false);
+        onCam = false;
 
         // faire apparaitre le panel TerminalInterface
         panelTerminal.SetActive(true);
@@ -89,6 +93,7 @@ public class CamChanger : MonoBehaviour
 
         // faire apparaitre le bouton returnToCam
         returnToCamBttn.SetActive(true);
+        onCam = true;
     }
 
     public void CamBoss()
@@ -110,6 +115,7 @@ public class CamChanger : MonoBehaviour
 
         // faire apparaitre le bouton returnToCam
         returnToCamBttn.SetActive(true);
+        onCam = true;
     }
     #endregion
 
@@ -132,5 +138,6 @@ public class CamChanger : MonoBehaviour
 
         // faire disparaitre le bouton returnToCam
         returnToCamBttn.SetActive(false);
+        onCam = false;
     }
 }
