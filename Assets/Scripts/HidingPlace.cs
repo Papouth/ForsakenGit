@@ -84,7 +84,7 @@ public class HidingPlace : Interactable
 
     public IEnumerator HideAnimation()
     {
-        player.anim.Play("casier");
+        player.anim.Play("ouvrirCasier");
 
         yield return new WaitForSeconds(1.2f);
 

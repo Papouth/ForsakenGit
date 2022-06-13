@@ -7,6 +7,8 @@ TagManager:
   - RobotLarbin
   - Tazer
   - Boss
+  - cuve
+  - casier
   layers:
   - Default
   - TransparentFX
