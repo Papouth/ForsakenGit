@@ -36,7 +36,7 @@ public class HidingPlace : Interactable
         }
         else if (escPressed)
         {
-            StatesPlayer.statesPlayer.isHiding = !value; // -- On met la valeur opposé pour ne pas avoir a réappuyer une seconde fois sur la touche d'interaction
+            StatesPlayer.statesPlayer.isHiding = value; // -- On met la valeur opposé pour ne pas avoir a réappuyer une seconde fois sur la touche d'interaction
             Hide();
             escPressed = false;
         }
