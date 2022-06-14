@@ -47,7 +47,7 @@ public class PauseManager : MonoBehaviour
 
     public void Paused()
     {
-        if (!isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.pauseKey))
+        if (!isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.pauseKey) || Input.GetKeyDown(KeysAssignation.keysAssign.escapeKey))
         {
             background.SetActive(true);
             pauseMenu.SetActive(true);
@@ -58,7 +58,7 @@ public class PauseManager : MonoBehaviour
 
             CursorParam();
         }
-        else if (isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.pauseKey))
+        else if (isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.pauseKey) || Input.GetKeyDown(KeysAssignation.keysAssign.escapeKey))
         {
             // -- On remet le jeu
             Resume();
