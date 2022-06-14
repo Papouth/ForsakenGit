@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     public GameObject hidingText;
     public GameObject imageContour;
 
+    public Slider sensiSlider;
 
     public float speedPivot = 100f;
     public float maxAnglePivot = 15f;
@@ -112,7 +113,7 @@ public class Player : MonoBehaviour
 
         CheatMenu();
 
-        MouseSensibility();
+        MouseSensitivity();
     }
 
     private void FixedUpdate()
@@ -147,6 +148,9 @@ public class Player : MonoBehaviour
     public void SecondInitialisation()
     {
         persoSpeed = 1f;
+        sensiSlider.value = persoSpeed;
+        sensiSlider.maxValue = speedmax;
+        sensiSlider.minValue = speedmin;
 
         // récupérer l'animation
         anim = GetComponent<Animator>();
@@ -290,9 +294,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void MouseSensibility()
+    public void MouseSensitivity()
     {
-        
+        persoSpeed = sensiSlider.value;
     }
 
     public void PlayerSendSound()

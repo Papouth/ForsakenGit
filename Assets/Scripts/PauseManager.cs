@@ -18,6 +18,8 @@ public class PauseManager : MonoBehaviour
     public GameObject quitMenu;
     public GameObject creditsSelection;
 
+    public GameObject sensiSelection;
+
     public bool isPaused = false;
 
 
@@ -35,6 +37,7 @@ public class PauseManager : MonoBehaviour
         controlSelection.SetActive(false);
         creditsSelection.SetActive(false);
         background.SetActive(false);
+        sensiSelection.SetActive(false);
     }
 
     public void Update()
@@ -86,6 +89,7 @@ public class PauseManager : MonoBehaviour
         soundSelection.SetActive(false);
         controlSelection.SetActive(false);
         creditsSelection.SetActive(false);
+        sensiSelection.SetActive(false);
     }
     #endregion
 
@@ -93,6 +97,14 @@ public class PauseManager : MonoBehaviour
     public void Controls()
     {
         controlSelection.SetActive(true);
+        optionsSelection.SetActive(false);
+    }
+    #endregion
+
+    #region Sensi
+    public void Sensi()
+    {
+        sensiSelection.SetActive(true);
         optionsSelection.SetActive(false);
     }
     #endregion
