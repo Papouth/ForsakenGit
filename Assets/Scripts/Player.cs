@@ -70,6 +70,10 @@ public class Player : MonoBehaviour
     public float offsetX;
     public float rotationSpeedX = 20f; // -- Gère ma vitesse de rotation G/D
     public float rotationSpeedY = 90f; // -- Gère ma vitesse de rotation H/B
+    public float persoSpeed = 1f; // -- Souris sensibilité
+    private float speedmin =  0.1f;
+    private float speedmax =  2f;
+
     [Range(0f, 0.1f)]
     public float vitesse = 0.1f; // -- Au dessus de 0.1f, le joueur peut traverser le mur
 
@@ -107,6 +111,8 @@ public class Player : MonoBehaviour
         ShowTazer();
 
         CheatMenu();
+
+        MouseSensibility();
     }
 
     private void FixedUpdate()
@@ -140,6 +146,8 @@ public class Player : MonoBehaviour
 
     public void SecondInitialisation()
     {
+        persoSpeed = 1f;
+
         // récupérer l'animation
         anim = GetComponent<Animator>();
         imageContour.SetActive(false);
@@ -272,14 +280,19 @@ public class Player : MonoBehaviour
         if (statesPlayer.canLookAround)
         {
             float yAxis = Input.GetAxis("Mouse Y");
-            visionJoueur.transform.Rotate(Vector3.right * yAxis * rotationSpeedY * Time.deltaTime, Space.Self);
+            visionJoueur.transform.Rotate(Vector3.right * yAxis * rotationSpeedY * persoSpeed * Time.deltaTime, Space.Self);
 
             Quaternion localRotationBase = visionJoueur.transform.localRotation;
             localRotationBase.x = Mathf.Clamp(localRotationBase.x, -0.5f, 0.5f);
             visionJoueur.transform.localRotation = localRotationBase;
 
-            transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * rotationSpeedX * Time.deltaTime, Space.Self);
+            transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * rotationSpeedX * persoSpeed * Time.deltaTime, Space.Self);
         }
+    }
+
+    public void MouseSensibility()
+    {
+        
     }
 
     public void PlayerSendSound()
@@ -295,7 +308,7 @@ public class Player : MonoBehaviour
                 // -- J'envoi un raycast de mon joueur vers mes ennemis touché pour calculer la distance qui les séparent
                 RaycastHit hitRobot;
 
-                Debug.DrawRay(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, Color.blue);
+                //Debug.DrawRay(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, Color.blue);
                 if (Physics.Raycast(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, out hitRobot, 12f, Wall))
                 {
                     // -- Si il y a un mur alors robot n'entend pas et continue sa ronde
