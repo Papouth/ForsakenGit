@@ -35,9 +35,21 @@ public class Ramassable : Interactable
         colObjet = GetComponent<Collider>();
         sphereCol = GetComponent<SphereCollider>();
 
-        rend = GetComponent<Renderer>();
+        FindRenderer();
         normalShader = Shader.Find("HDRP/Lit");
         interactShader = Shader.Find("Shader Graphs/Outline");
+    }
+
+    public void FindRenderer()
+    {
+        if (transform.childCount > 0)
+        {
+            rend = transform.GetComponentInChildren<Renderer>();
+        }
+        else if (transform.childCount == 0)
+        {
+            rend = GetComponent<Renderer>();
+        }
     }
 
     public void OnCollisionEnter(Collision other)
