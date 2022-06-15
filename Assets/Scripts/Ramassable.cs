@@ -22,6 +22,10 @@ public class Ramassable : Interactable
     public bool haveBeenDrop = false; // -- A été laché
     public bool launchable = true; // -- Pour mes objets qui peuvent être lancé
 
+    public Renderer rend;
+    private Shader normalShader;
+    private Shader interactShader;
+
 
 
     public void Start()
@@ -30,6 +34,10 @@ public class Ramassable : Interactable
         isGrounded = false;
         colObjet = GetComponent<Collider>();
         sphereCol = GetComponent<SphereCollider>();
+
+        rend = GetComponent<Renderer>();
+        normalShader = Shader.Find("HDRP/Lit");
+        interactShader = Shader.Find("Shader Graphs/Outline");
     }
 
     public void OnCollisionEnter(Collision other)
@@ -173,6 +181,9 @@ public class Ramassable : Interactable
             colObjet.enabled = false;
             sphereCol.enabled = false;
 
+            // mettre l'objet sans le contour
+            rend.material.shader = normalShader;
+
 
             if (StatesPlayer.statesPlayer.rightHand)
             {
@@ -198,6 +209,9 @@ public class Ramassable : Interactable
         // -- Remettre le collider de mon objet lançable
         colObjet.enabled = true;
         sphereCol.enabled = true;
+
+        // mettre l'objet sans le contour
+        rend.material.shader = interactShader;
 
         // -- Coroutine tt les 2 secs
         StartCoroutine(RigidbodySleep());
