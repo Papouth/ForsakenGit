@@ -24,7 +24,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: marteau
-  m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 7989c82701706ec4bacaa259d48298f2, type: 3}
   m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT _EMISSIVE_COLOR_MAP _MASKMAP _NORMALMAP
     _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 1
@@ -50,6 +50,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 3cfba28c549e029459c9170304a90824, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BaseMat:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -64,6 +68,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _DetailMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissifMat:
+        m_Texture: {fileID: 2800000, guid: 9839d0f02ac3e634399a807bab41cc32, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveColorMap:
@@ -104,6 +112,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMat:
+        m_Texture: {fileID: 2800000, guid: 59718de298967564fbf1cd9088cc8520, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ObjectTexture:
+        m_Texture: {fileID: 2800000, guid: 3cfba28c549e029459c9170304a90824, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
@@ -275,7 +291,12 @@ Material:
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 0}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
+    - _Object: {r: 1, g: 1, b: 1, a: 0}
+    - _ObjectBaseMat: {r: 1, g: 1, b: 1, a: 0}
     - _ObjectColor: {r: 0, g: 0, b: 0, a: 0}
+    - _ObjectMaterial: {r: 1, g: 0, b: 0, a: 0}
+    - _ObjectTexture: {r: 1, g: 1, b: 1, a: 0}
+    - _ObjectTexture2D: {r: 1, g: 1, b: 1, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
