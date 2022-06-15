@@ -36,7 +36,7 @@ public class HidingPlace : Interactable
         }
         else if (escPressed)
         {
-            StatesPlayer.statesPlayer.isHiding = value; // -- On met la valeur opposé pour ne pas avoir a réappuyer une seconde fois sur la touche d'interaction
+            StatesPlayer.statesPlayer.isHiding = value; // -- On met la valeur opposé pour ne pas avoir a réappuyer une seconde fois sur la touche d'interaction | value = pour l'editor et !value = pour la build
             Hide();
             escPressed = false;
         }
@@ -96,7 +96,7 @@ public class HidingPlace : Interactable
 
 
         // -- Step3: On patiente 2 secondes, via une coroutine ( temps de l'animation )
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.2f);
 
         // On affiche le texte pour sortir
         player.hidingText.SetActive(true);

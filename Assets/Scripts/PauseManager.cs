@@ -18,6 +18,8 @@ public class PauseManager : MonoBehaviour
     public GameObject quitMenu;
     public GameObject creditsSelection;
 
+    public GameObject sensiSelection;
+
     public bool isPaused = false;
 
 
@@ -35,6 +37,7 @@ public class PauseManager : MonoBehaviour
         controlSelection.SetActive(false);
         creditsSelection.SetActive(false);
         background.SetActive(false);
+        sensiSelection.SetActive(false);
     }
 
     public void Update()
@@ -44,6 +47,23 @@ public class PauseManager : MonoBehaviour
 
     public void Paused()
     {
+        if (!isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.escapeKey) && StatesPlayer.statesPlayer.canMoove)
+        {
+            background.SetActive(true);
+            pauseMenu.SetActive(true);
+            // -- On met le jeu en pause
+            Time.timeScale = 0;
+
+            isPaused = true;
+
+            CursorParam();
+        }
+        else if (isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.escapeKey) && StatesPlayer.statesPlayer.canMoove)
+        {
+            // -- On remet le jeu
+            Resume();
+        }
+
         if (!isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.pauseKey))
         {
             background.SetActive(true);
@@ -86,6 +106,7 @@ public class PauseManager : MonoBehaviour
         soundSelection.SetActive(false);
         controlSelection.SetActive(false);
         creditsSelection.SetActive(false);
+        sensiSelection.SetActive(false);
     }
     #endregion
 
@@ -93,6 +114,14 @@ public class PauseManager : MonoBehaviour
     public void Controls()
     {
         controlSelection.SetActive(true);
+        optionsSelection.SetActive(false);
+    }
+    #endregion
+
+    #region Sensi
+    public void Sensi()
+    {
+        sensiSelection.SetActive(true);
         optionsSelection.SetActive(false);
     }
     #endregion
