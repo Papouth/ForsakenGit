@@ -47,7 +47,7 @@ public class PauseManager : MonoBehaviour
 
     public void Paused()
     {
-        if (!isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.pauseKey) || Input.GetKeyDown(KeysAssignation.keysAssign.escapeKey))
+        if (!isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.escapeKey) && StatesPlayer.statesPlayer.canMoove)
         {
             background.SetActive(true);
             pauseMenu.SetActive(true);
@@ -58,7 +58,24 @@ public class PauseManager : MonoBehaviour
 
             CursorParam();
         }
-        else if (isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.pauseKey) || Input.GetKeyDown(KeysAssignation.keysAssign.escapeKey))
+        else if (isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.escapeKey) && StatesPlayer.statesPlayer.canMoove)
+        {
+            // -- On remet le jeu
+            Resume();
+        }
+
+        if (!isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.pauseKey))
+        {
+            background.SetActive(true);
+            pauseMenu.SetActive(true);
+            // -- On met le jeu en pause
+            Time.timeScale = 0;
+
+            isPaused = true;
+
+            CursorParam();
+        }
+        else if (isPaused && Input.GetKeyDown(KeysAssignation.keysAssign.pauseKey))
         {
             // -- On remet le jeu
             Resume();
