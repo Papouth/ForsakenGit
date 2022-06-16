@@ -10,18 +10,24 @@ public class RangeTazer : MonoBehaviour
     public bool tazing = false;
     public bool actual;
 
+    public Renderer rend;
+    public Shader normalShader;
+
 
     public void Start()
     {
         player = GetComponentInParent<Player>();
         actual = false;
+        rend = transform.GetComponentInParent<Renderer>();
+        normalShader = Shader.Find("HDRP/Lit");
+
+        rend.material.shader = normalShader;
     }
 
     public void Update()
     {
         Taze();
     }
-
 
     public void OnTriggerStay(Collider other)
     {
@@ -56,7 +62,6 @@ public class RangeTazer : MonoBehaviour
             player.anim.ResetTrigger("attack");
         }
     }
-
     
     public void OnTriggerExit(Collider other)
     {

@@ -23,8 +23,8 @@ public class Ramassable : Interactable
     public bool launchable = true; // -- Pour mes objets qui peuvent être lancé
 
     public Renderer rend;
-    private Shader normalShader;
-    private Shader interactShader;
+    public Shader normalShader;
+    public Shader interactShader;
 
 
 
