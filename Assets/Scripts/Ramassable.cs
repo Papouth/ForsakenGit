@@ -187,6 +187,17 @@ public class Ramassable : Interactable
             transform.parent = StatesPlayer.statesPlayer.rightHand;
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity; // reset la rotation de l'objet -> donner un tag a chaque objet lançable et selon ça on met la rotation autrement + sa position
+
+            // -- S'il s'agit d'un marteau, prend la position en main ...
+
+            // -- S'il s'agit d'une clé a molette, prend la position en main ...
+
+            // -- S'il s'agit d'une tablette, prend la position en main ...
+
+            // -- S'il s'agit d'une boite, prend la position en main ...
+
+            // -- S'il s'agit d'un chalumeau, prend la position en main ...
+
             rb.isKinematic = true; // -- Le rigidbody de mon objet passe en kinematic pour qu'il ne bouge pas
 
             // -- Je désactive le collider de mon objet quand je l'ai en main

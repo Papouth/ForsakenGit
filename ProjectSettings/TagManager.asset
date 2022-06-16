@@ -9,6 +9,11 @@ TagManager:
   - Boss
   - cuve
   - casier
+  - Marteau
+  - "Cl\xE9"
+  - Tablette
+  - Chalumeau
+  - Boite
   layers:
   - Default
   - TransparentFX
