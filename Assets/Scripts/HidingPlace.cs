@@ -84,7 +84,14 @@ public class HidingPlace : Interactable
 
     public IEnumerator HideAnimation()
     {
-        player.anim.Play("ouvrirCasier");
+        //si l'objet a le tag cuve le player joue l'anim de la cuve
+        if(gameObject.CompareTag("cuve")){
+            player.anim.Play("cuveCryo");
+        }
+        //si non il joue l'anim du casier
+        else{
+            player.anim.Play("ouvrirCasier");
+        }
 
         yield return new WaitForSeconds(1.2f);
 
@@ -123,23 +130,27 @@ public class HidingPlace : Interactable
     public IEnumerator UnHide()
     {
         // -- Step1: Le joueur patiente 2 sec ( animation )
-        yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(2f);
 
         player.anim.enabled = true;
+        
 
-
-        // -- Inter Step: On désactive le collider du joueur
-        hideColl.enabled = true;
-        foreach (var collcomp in hideColls)
-        {
-            collcomp.enabled = true;
+        //si l'objet a le tag cuve le player joue l'anim sortie cuve cryo
+        if(gameObject.CompareTag("cuve")){
+            player.anim.Play("sortiCuveCryo");
+        }
+        //si non il joue l'anim sortie casier
+        else{
+            player.anim.Play("sortiCasier");//modifBryan
         }
 
         // On cache le texte pour sortir
         player.hidingText.SetActive(false);
 
         // -- Step2: Le joueur se re tp à sa dernière position enregistré
-        player.transform.position = lastPos;
+         //if(!gameObject.CompareTag("cuve")){modifBryan
+           // player.transform.position = lastPos;modifBryan
+        //}
 
         // -- Step3: On indique que le joueur n'est plus caché
         StatesPlayer.statesPlayer.isHiding = false;
@@ -147,5 +158,14 @@ public class HidingPlace : Interactable
 
         // -- Step4:  Le joueur peut de nouveau bouger 
         StatesPlayer.statesPlayer.canMoove = true;
+
+        yield return new WaitForSeconds(2);
+
+        // -- Inter Step: On désactive le collider du joueur
+        hideColl.enabled = true;
+        foreach (var collcomp in hideColls)
+        {
+            collcomp.enabled = true;
+        }
     }
 }
