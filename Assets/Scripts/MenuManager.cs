@@ -13,6 +13,7 @@ public class MenuManager : MonoBehaviour
     public GameObject controlSelection;
     public GameObject quitMenu;
     public GameObject creditsSelection;
+    public GameObject sensiSelection;
 
 
     public void Awake()
@@ -30,6 +31,7 @@ public class MenuManager : MonoBehaviour
         quitMenu.SetActive(false);
         controlSelection.SetActive(false);
         creditsSelection.SetActive(false);
+        sensiSelection.SetActive(false);
     }
 
     #region StartTheGame
@@ -53,6 +55,7 @@ public class MenuManager : MonoBehaviour
         soundSelection.SetActive(false);
         controlSelection.SetActive(false);
         creditsSelection.SetActive(false);
+        sensiSelection.SetActive(false);
     }
     #endregion
 
@@ -60,6 +63,14 @@ public class MenuManager : MonoBehaviour
     public void Controls()
     {
         controlSelection.SetActive(true);
+        optionsSelection.SetActive(false);
+    }
+    #endregion
+
+    #region
+    public void Sensi()
+    {
+        sensiSelection.SetActive(true);
         optionsSelection.SetActive(false);
     }
     #endregion
@@ -98,7 +109,6 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
     #endregion
-
 
     #region Other
     private IEnumerator TitleShow()
