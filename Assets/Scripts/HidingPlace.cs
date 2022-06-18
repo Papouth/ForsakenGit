@@ -16,7 +16,6 @@ public class HidingPlace : Interactable
     private bool escPressed;
 
 
-
     public void Awake()
     {
         hideColl = GetComponent<BoxCollider>();
@@ -85,11 +84,13 @@ public class HidingPlace : Interactable
     public IEnumerator HideAnimation()
     {
         //si l'objet a le tag cuve le player joue l'anim de la cuve
-        if(gameObject.CompareTag("cuve")){
+        if(gameObject.CompareTag("cuve"))
+        {
             player.anim.Play("cuveCryo");
         }
         //si non il joue l'anim du casier
-        else{
+        else
+        {
             player.anim.Play("ouvrirCasier");
         }
 
@@ -136,11 +137,13 @@ public class HidingPlace : Interactable
         
 
         //si l'objet a le tag cuve le player joue l'anim sortie cuve cryo
-        if(gameObject.CompareTag("cuve")){
+        if(gameObject.CompareTag("cuve"))
+        {
             player.anim.Play("sortiCuveCryo");
         }
         //si non il joue l'anim sortie casier
-        else{
+        else
+        {
             player.anim.Play("sortiCasier");//modifBryan
         }
 
@@ -157,7 +160,7 @@ public class HidingPlace : Interactable
         playerHide = false;
 
         // -- Step4:  Le joueur peut de nouveau bouger 
-        StatesPlayer.statesPlayer.canMoove = true;
+        StatesPlayer.statesPlayer.canMoove = true; // attendre le temps de l'animation avant de pouvoir de nouveau marcher, donc certainement le décaler après le waitforseconds
 
         yield return new WaitForSeconds(2);
 

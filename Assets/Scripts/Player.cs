@@ -406,6 +406,12 @@ public class Player : MonoBehaviour
             surveillance.cameraMedic.enabled = true;
             surveillance.cameraHub.enabled = true;
 
+            // -- Déplacer le joueur en face du terminal pour réaliser parfaitement l'animation
+            // transform.position = playerTp.position; // playerTp = le transform ou doit se mettre mon joueur (ne pas oublier de faire la rotation)
+            //transform.parent = StatesPlayer.statesPlayer.rightHand;
+            //transform.localPosition = Vector3.zero;
+            //transform.localRotation = Quaternion.identity;
+
 
             anim.SetTrigger("terminal");
 
