@@ -16,8 +16,7 @@ public class PauseManager : MonoBehaviour
     public GameObject soundSelection;
     public GameObject controlSelection;
     public GameObject quitMenu;
-    public GameObject creditsSelection;
-
+    //public GameObject creditsSelection;
     public GameObject sensiSelection;
 
     public bool isPaused = false;
@@ -35,7 +34,7 @@ public class PauseManager : MonoBehaviour
         soundSelection.SetActive(false);
         quitMenu.SetActive(false);
         controlSelection.SetActive(false);
-        creditsSelection.SetActive(false);
+        //creditsSelection.SetActive(false);
         background.SetActive(false);
         sensiSelection.SetActive(false);
     }
@@ -105,7 +104,7 @@ public class PauseManager : MonoBehaviour
         optionsSelection.SetActive(true);
         soundSelection.SetActive(false);
         controlSelection.SetActive(false);
-        creditsSelection.SetActive(false);
+        //creditsSelection.SetActive(false);
         sensiSelection.SetActive(false);
     }
     #endregion
@@ -126,13 +125,15 @@ public class PauseManager : MonoBehaviour
     }
     #endregion
 
+    /*
     #region Credits
     public void Credits()
     {
-        creditsSelection.SetActive(true);
+        //creditsSelection.SetActive(true);
         optionsSelection.SetActive(false);
     }
     #endregion
+    */
 
     #region Sound
     public void Sound()

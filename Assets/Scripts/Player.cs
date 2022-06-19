@@ -56,8 +56,10 @@ public class Player : MonoBehaviour
     public GameObject loadingScreen;
     public GameObject hidingText;
     public GameObject imageContour;
+    public GameObject sliderObjet;
 
     public Slider sensiSlider;
+    private Slider puissanceSlider;
 
     public float speedPivot = 100f;
     public float maxAnglePivot = 15f;
@@ -114,6 +116,8 @@ public class Player : MonoBehaviour
         CheatMenu();
 
         MouseSensitivity();
+
+        PuissanceSlider();
     }
 
     private void FixedUpdate()
@@ -129,6 +133,11 @@ public class Player : MonoBehaviour
         panelMort.SetActive(false);
         panelCheat.SetActive(false);
         hidingText.SetActive(false);
+
+        sliderObjet.SetActive(false);
+        puissanceSlider = sliderObjet.GetComponent<Slider>();
+        puissanceSlider.minValue = 0;
+        puissanceSlider.maxValue = tirMax;
 
         keysAssign = GetComponent<KeysAssignation>();
         statesPlayer = GetComponent<StatesPlayer>();
@@ -536,6 +545,9 @@ public class Player : MonoBehaviour
         {
             if (Input.GetMouseButton(0) && !statesPlayer.isHoldingTazer && !statesPlayer.isInteractTerminal)
             {
+                // -- J'affiche ma barre de puissance pour le lancer de mon objet 
+                sliderObjet.SetActive(true);
+
                 // -- Variable pour multiplier la puissance de lancer de mon objet 
                 tir += Time.deltaTime * playerStrenght;
                 if (tir >= tirMax)
@@ -552,8 +564,16 @@ public class Player : MonoBehaviour
                 currentInteractable = null;
                 tir = 0;
                 statesPlayer.isHoldingThrowableItem = false;
+
+                // -- Je cache ma barre de puissance
+                sliderObjet.SetActive(false);
             }
         }
+    }
+
+    public void PuissanceSlider()
+    {
+        puissanceSlider.value = tir; 
     }
 
     public void WaitForInteract()
