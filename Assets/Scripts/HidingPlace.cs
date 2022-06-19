@@ -39,7 +39,6 @@ public class HidingPlace : Interactable
             Hide();
             escPressed = false;
         }
-
     }
 
     public void Hide()
