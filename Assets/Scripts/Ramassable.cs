@@ -26,6 +26,8 @@ public class Ramassable : Interactable
     public Shader normalShader;
     public Shader interactShader;
 
+    private AudioSource colSound;
+
 
 
     public void Start()
@@ -34,6 +36,7 @@ public class Ramassable : Interactable
         isGrounded = false;
         colObjet = GetComponent<Collider>();
         sphereCol = GetComponent<SphereCollider>();
+        colSound = GetComponent<AudioSource>();
 
         FindRenderer();
         normalShader = Shader.Find("HDRP/Lit");
@@ -95,6 +98,8 @@ public class Ramassable : Interactable
 
         if (isGrounded)
         {
+            colSound.Play(0);
+
             // -- A chaque fois que l'objet touche le sol il fait un OverlapShere, et si dans la zone se trouve un ennemi, il le détecte
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius, Ennemi);
 
