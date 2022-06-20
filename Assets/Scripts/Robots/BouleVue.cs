@@ -59,6 +59,7 @@ public class BouleVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             player.imageContour.SetActive(true);
+            detectSound.Play(0);
 
             // -- Debug.Log("Je vois toujours");
             boule.monRobot.SetDestination(other.transform.position);

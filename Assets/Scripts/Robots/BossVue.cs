@@ -78,6 +78,7 @@ public class BossVue : MonoBehaviour
             if (!StatesPlayer.statesPlayer.isHiding)
             {
                 player.imageContour.SetActive(true);
+                detectSound.Play(0);
 
                 // -- Debug.Log("Je vois toujours");
                 Boss.CallMe(other.transform);

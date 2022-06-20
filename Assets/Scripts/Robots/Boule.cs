@@ -23,6 +23,8 @@ public class Boule : Rbts
     public float timeBetweenTwoScan = 4f;
     private bool canScan = true;
     private float baseYRotation = 0;
+
+    private AudioSource scanSound;
     #endregion
 
 
@@ -35,8 +37,8 @@ public class Boule : Rbts
     public override void Start()
     {
         bouleVue = GetComponentInChildren<BouleVue>();
-
         monRobot = GetComponent<NavMeshAgent>();
+        scanSound = lightHead.GetComponent<AudioSource>();
 
         lightHead.SetActive(false);
 
@@ -90,6 +92,7 @@ public class Boule : Rbts
             zoneDetectionBoule[i].transform.localScale = scaleChange;
 
             lightHead.SetActive(true);
+            scanSound.Play(0);
         }
 
 
@@ -115,6 +118,7 @@ public class Boule : Rbts
             zoneDetectionBoule[i].transform.localScale = scaleBase;
 
             lightHead.SetActive(false);
+            scanSound.Stop();
         }
         monRobot.isStopped = false;
         scanCoroutine = null;
