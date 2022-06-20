@@ -29,6 +29,9 @@ public class HidingPlace : Interactable
 
     public override void Interact(bool value)
     {
+        StatesPlayer.statesPlayer.isHiding = value; // -- Si mon joueur interargi avec le collider
+        Hide();
+
         if (!escPressed)
         {
             StatesPlayer.statesPlayer.isHiding = value; // -- Si mon joueur interargi avec le collider
