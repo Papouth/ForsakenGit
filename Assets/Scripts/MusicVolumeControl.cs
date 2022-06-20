@@ -28,13 +28,13 @@ public class MusicVolumeControl : MonoBehaviour
 
     private void OnDisable()
     {
-        // -- Je sauvegarde les paramètres de mon volume
+        // -- Je sauvegarde les paramètres de mon volume de musique
         PlayerPrefs.SetFloat(volumeParam, musicSlider.value);
     }
 
     public void Start()
     {
-        // -- Je charge les paramètres de mon volume
+        // -- Je charge les paramètres de mon volume de musique
         musicSlider.value = PlayerPrefs.GetFloat(volumeParam, musicSlider.value);
     }
 }

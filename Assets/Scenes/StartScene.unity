@@ -355,6 +355,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1105046929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4138270933514041373, guid: da71f82de535990428834aef0a880de0, type: 3}
+  m_PrefabInstance: {fileID: 2474713320298797773}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1105046931 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4138270933514041375, guid: da71f82de535990428834aef0a880de0, type: 3}
+  m_PrefabInstance: {fileID: 2474713320298797773}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105046929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1105046932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105046929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654ee64031a32584da157aff21fe7dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectsMixer: {fileID: 24100000, guid: d99d8d578931baa4bb94deeb2b9f5336, type: 2}
+  effectsSlider: {fileID: 1105046931}
+  volumeParam: EffectsVolume
 --- !u!1 &1238926508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1338,6 +1369,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 347900762}
+    - target: {fileID: 4138270933514041375, guid: da71f82de535990428834aef0a880de0, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138270933514041375, guid: da71f82de535990428834aef0a880de0, type: 3}
+      propertyPath: m_MaxValue
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138270933514041375, guid: da71f82de535990428834aef0a880de0, type: 3}
+      propertyPath: m_MinValue
+      value: -40
+      objectReference: {fileID: 0}
     - target: {fileID: 4138270933631145219, guid: da71f82de535990428834aef0a880de0, type: 3}
       propertyPath: m_Name
       value: BackgroundMenu NEW

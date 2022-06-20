@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class PauseManager : MonoBehaviour
 {
     public Player player;
@@ -20,7 +19,6 @@ public class PauseManager : MonoBehaviour
     public GameObject sensiSelection;
 
     public bool isPaused = false;
-
 
 
     public void Start()
