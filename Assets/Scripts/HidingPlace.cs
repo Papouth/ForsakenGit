@@ -14,6 +14,7 @@ public class HidingPlace : Interactable
     private Vector3 lastPos;
     public bool playerHide = false; // permet de dire au robot qu'il ne peux pas entendre ni voir le joueur
     private bool escPressed;
+    public Animator animPorteCuve;//Bryan
 
 
     public void Awake()
@@ -89,6 +90,7 @@ public class HidingPlace : Interactable
         if(gameObject.CompareTag("cuve"))
         {
             player.anim.Play("cuveCryo");
+            animPorteCuve.SetTrigger("Trigger");//Bryan
         }
         //si non il joue l'anim du casier
         else
@@ -142,6 +144,7 @@ public class HidingPlace : Interactable
         if(gameObject.CompareTag("cuve"))
         {
             player.anim.Play("sortiCuveCryo");
+            animPorteCuve.SetTrigger("Trigger");//Bryan
         }
         //si non il joue l'anim sortie casier
         else
