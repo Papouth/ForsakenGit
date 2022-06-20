@@ -10,12 +10,16 @@ public class BouleVue : MonoBehaviour
     public LayerMask Wall;
     public Player player;
 
+    private AudioSource detectSound;
+
 
 
     private void Start()
     {
         boule = gameObject.GetComponentInParent<Boule>();
         canSeePlayer = false;
+
+        detectSound = GetComponent<AudioSource>();
     }
 
     public void OnTriggerEnter(Collider other)
@@ -36,6 +40,8 @@ public class BouleVue : MonoBehaviour
             }
             else if (Physics.Raycast(boule.transform.position, other.transform.position - boule.transform.position, out hitJoueur, 15f))
             {
+                detectSound.Play(0);
+
                 // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
 
                 // -- Debug.Log("Je vois le joueur");

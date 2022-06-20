@@ -11,6 +11,8 @@ public class LarbinVue : MonoBehaviour
     public Player player;
     public bool playerSlowedDown;
 
+    private AudioSource detectSound;
+
 
     private void Start()
     {
@@ -19,6 +21,7 @@ public class LarbinVue : MonoBehaviour
         playerSlowedDown = false;
         robots.emissifMat.SetColor("_BaseColor", robots.safe);
         robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
+        detectSound = GetComponent<AudioSource>();
     }
 
 
@@ -40,6 +43,9 @@ public class LarbinVue : MonoBehaviour
                 else if (Physics.Raycast(robots.transform.GetChild(0).position, player.raylauncher.transform.position - robots.transform.GetChild(0).position, out hitJoueur, 40f))
                 {
                     canSeePlayer = true;
+
+                    detectSound.Play(0);
+
                     robots.emissifMat.SetColor("_BaseColor", robots.danger);
                     robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
 
@@ -72,6 +78,8 @@ public class LarbinVue : MonoBehaviour
         {
             if (!StatesPlayer.statesPlayer.isHiding)
             {
+                detectSound.Play(0);
+
                 robots.emissifMat.SetColor("_BaseColor", robots.danger); // ICI pour test
                 robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
                 player.imageContour.SetActive(true);

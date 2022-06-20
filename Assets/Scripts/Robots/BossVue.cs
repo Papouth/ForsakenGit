@@ -12,6 +12,7 @@ public class BossVue : MonoBehaviour
 
     public bool playerSlowedDown = false;
 
+    private AudioSource detectSound;
 
 
     private void Start()
@@ -19,6 +20,7 @@ public class BossVue : MonoBehaviour
         boss = gameObject.GetComponentInParent<Boss>();
         canSeePlayer = false;
         playerSlowedDown = false;
+        detectSound = GetComponent<AudioSource>();
     }
 
 
@@ -47,6 +49,8 @@ public class BossVue : MonoBehaviour
 
                     // -- Debug.Log("Je vois le joueur");
                     Boss.CallMe(other.transform);
+
+                    detectSound.Play(0);
 
                     float distance = Vector3.Distance(other.transform.position, boss.transform.position);
 
