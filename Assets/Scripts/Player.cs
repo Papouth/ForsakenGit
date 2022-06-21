@@ -473,7 +473,7 @@ public class Player : MonoBehaviour
 
     public void Weapons()
     {
-        if (Input.GetKeyDown(keysAssign.handKey))
+        if (Input.GetKeyDown(keysAssign.handKey) || Input.GetAxis("Mouse ScrollWheel") > 0)
         {
             // Mains
             statesPlayer.isHoldingTazer = false;
@@ -490,7 +490,7 @@ public class Player : MonoBehaviour
             statesPlayer.canPickItem = true;
         }
 
-        if (Input.GetKeyDown(keysAssign.tazerKey) && statesPlayer.tazerInInventory)
+        if (Input.GetKeyDown(keysAssign.tazerKey) || Input.GetAxis("Mouse ScrollWheel") < 0 && statesPlayer.tazerInInventory)
         {
             // Tazer
             statesPlayer.isHoldingTazer = true;
@@ -521,7 +521,7 @@ public class Player : MonoBehaviour
             else
             {
                 weapons[i].gameObject.SetActive(false);
-            }
+            } 
         }
     }
 
@@ -531,11 +531,13 @@ public class Player : MonoBehaviour
         {
             ChangeWeapons(1);
             uiTazer.SetActive(true);
+            sliderObjet.SetActive(false);
         }
         else if (statesPlayer.isHoldingTazer == false)
         {
             ChangeWeapons(0);
             uiTazer.SetActive(false);
+            //sliderObjet.SetActive(true);
         }
     }
 
@@ -693,6 +695,7 @@ public class Player : MonoBehaviour
     {
         // display txt vs etes mort
         panelMort.SetActive(true);
+        sliderObjet.SetActive(false);
         Time.timeScale = 0;
     }
 
