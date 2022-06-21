@@ -80,7 +80,7 @@ public class LarbinVue : MonoBehaviour
             {
                 detectSound.Play(0);
 
-                robots.emissifMat.SetColor("_BaseColor", robots.danger); // ICI pour test
+                robots.emissifMat.SetColor("_BaseColor", robots.danger);
                 robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
                 player.imageContour.SetActive(true);
                 Boss.CallMe(other.transform);
@@ -108,6 +108,20 @@ public class LarbinVue : MonoBehaviour
     {
         // -- Je ne touche plus le joueur
         if (other.CompareTag("Player"))
+        {
+            robots.emissifMat.SetColor("_BaseColor", robots.safe);
+            robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
+            // -- Shake Camera
+            player.imageContour.SetActive(false);
+
+            // -- Debug.Log("je ne touche plus le joueur");
+            canSeePlayer = false;
+        }
+    }
+
+    public void Update()
+    {
+        if (StatesPlayer.statesPlayer.isHiding)
         {
             robots.emissifMat.SetColor("_BaseColor", robots.safe);
             robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
