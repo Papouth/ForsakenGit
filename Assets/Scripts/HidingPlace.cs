@@ -15,6 +15,7 @@ public class HidingPlace : Interactable
     public bool playerHide = false; // permet de dire au robot qu'il ne peux pas entendre ni voir le joueur
     private bool escPressed;
     public Animator animPorteCuve;//Bryan
+    public Animator animCasierPorte;//Bryan
 
 
     public void Awake()
@@ -96,6 +97,7 @@ public class HidingPlace : Interactable
         else
         {
             player.anim.Play("ouvrirCasier");
+            animCasierPorte.SetTrigger("CasierInteract");//Bryan
         }
 
         yield return new WaitForSeconds(1.2f);
@@ -150,6 +152,7 @@ public class HidingPlace : Interactable
         else
         {
             player.anim.Play("sortiCasier");//modifBryan
+            animCasierPorte.SetTrigger("CasierInteract");//Bryan
         }
 
         // On cache le texte pour sortir
