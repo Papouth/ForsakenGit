@@ -160,7 +160,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _ANISOTROPY: 0
-    - _AORemapMax: 1
+    - _AORemapMax: 0.64666146
     - _AORemapMin: 0
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
@@ -231,7 +231,7 @@ Material:
     - _MaterialID: 1
     - _Metallic: 0
     - _MetallicRemapMax: 1
-    - _MetallicRemapMin: 0
+    - _MetallicRemapMin: 0.50922316
     - _Mode: 0
     - _NormalMapSpace: 0
     - _NormalScale: 1
@@ -298,10 +298,10 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BASE_COLOR: {r: 0.72156864, g: 0.5529412, b: 0.5647059, a: 0.13669065}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _COAT_COLOR: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.44339618, g: 0.44339618, b: 0.44339618, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EMISSION_COLOR: {r: 1, g: 1, b: 1, a: 1}
