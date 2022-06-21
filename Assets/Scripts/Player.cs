@@ -547,6 +547,7 @@ public class Player : MonoBehaviour
         if (statesPlayer.isHoldingThrowableItem)
         {
             anim.SetBool("Ramasser", true);
+            anim.ResetTrigger("Lancer");
             if (statesPlayer.rightHand.GetChild(0).CompareTag("Boite"))
             {
                 
@@ -586,6 +587,7 @@ public class Player : MonoBehaviour
                     tir = tirMax;
                 }
                 statesPlayer.isHoldingThrowableItem = false;
+                anim.SetTrigger("Lancer");
             }
             if (Input.GetMouseButtonUp(0) && !statesPlayer.isHoldingTazer && !statesPlayer.isInteractTerminal)
             {
@@ -598,6 +600,7 @@ public class Player : MonoBehaviour
 
                 // -- Je cache ma barre de puissance
                 sliderObjet.SetActive(false);
+                anim.SetBool("Ramasser", false);
             }
         }
     }
