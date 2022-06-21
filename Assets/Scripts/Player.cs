@@ -531,11 +531,13 @@ public class Player : MonoBehaviour
         {
             ChangeWeapons(1);
             uiTazer.SetActive(true);
+            sliderObjet.SetActive(false);
         }
         else if (statesPlayer.isHoldingTazer == false)
         {
             ChangeWeapons(0);
             uiTazer.SetActive(false);
+            //sliderObjet.SetActive(true);
         }
     }
 
@@ -693,7 +695,7 @@ public class Player : MonoBehaviour
     {
         // display txt vs etes mort
         panelMort.SetActive(true);
-        puissanceSlider.enabled = false;
+        sliderObjet.SetActive(false);
         Time.timeScale = 0;
     }
 

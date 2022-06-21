@@ -23,7 +23,7 @@ public class PickUpTazer : Ramassable
             if (!StatesPlayer.statesPlayer.tazerInInventory)
             {
                 // Si pas ramassé, on "ramasse" celui au sol en le détruisant
-                Destroy(this.gameObject);
+                Destroy(gameObject);
 
                 // On active ensuite dans state player tazer inventory = true (tazer récupéré)
                 StatesPlayer.statesPlayer.tazerInInventory = true;

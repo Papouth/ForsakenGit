@@ -98,7 +98,10 @@ public class Ramassable : Interactable
 
         if (isGrounded)
         {
-            colSound.Play(0);
+            if(!gameObject.CompareTag("Tazer"))
+            {
+                colSound.Play(0);
+            }
 
             // -- A chaque fois que l'objet touche le sol il fait un OverlapShere, et si dans la zone se trouve un ennemi, il le détecte
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius, Ennemi);
@@ -171,7 +174,7 @@ public class Ramassable : Interactable
         }
         else
         {
-            Poser();
+            Poser(); // erreur ici !!!!!!!!!!!
         }
     }
 
@@ -230,7 +233,7 @@ public class Ramassable : Interactable
     void Poser()
     {
         // -- Lorsque je pose mon objet, je le détache du parent ( main ), j'enlève mon isKinematic pour le soumettre de nouveau à la gravité, et je passe ma variable de drop en vraie
-        transform.parent = null;
+        transform.parent = null; // erreur ici relier avec le script pickup tazer
         rb.isKinematic = false;
         haveBeenDrop = true;
 
