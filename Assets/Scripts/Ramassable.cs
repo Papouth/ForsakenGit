@@ -194,17 +194,33 @@ public class Ramassable : Interactable
             // -- Je place mon objet dans ma main droite
             transform.parent = StatesPlayer.statesPlayer.rightHand;
             transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.identity; // reset la rotation de l'objet -> donner un tag a chaque objet lançable et selon ça on met la rotation autrement + sa position
+            transform.localRotation = Quaternion.identity; // reset la rotation de l'objet
 
-            // -- S'il s'agit d'un marteau, prend la position en main ...
 
-            // -- S'il s'agit d'une clé a molette, prend la position en main ...
-
-            // -- S'il s'agit d'une tablette, prend la position en main ...
-
-            // -- S'il s'agit d'une boite, prend la position en main ...
-
-            // -- S'il s'agit d'un chalumeau, prend la position en main ...
+            if (gameObject.CompareTag("Tablette"))
+            {
+                // -- S'il s'agit d'une tablette, prend la position en main ...
+                transform.localPosition = new Vector3(-0.00015f, 0.00545f, -0.00164f);
+                transform.localRotation = Quaternion.Euler(-64.358f, -194.943f, -39.939f);
+            }
+            else if (gameObject.CompareTag("Clé"))
+            {
+                // -- S'il s'agit d'une clé a molette, prend la position en main ...
+                transform.localPosition = new Vector3(-0.00075f, 0.00069f, 0.00061f);
+                transform.localRotation = Quaternion.Euler(179.945f, 32.11099f, 29.951f);
+            }
+            else if (gameObject.CompareTag("Marteau"))
+            {
+                // -- S'il s'agit d'un marteau, prend la position en main ...
+                transform.localPosition = new Vector3(-0.00067f, 0.00052f, 0.0005f);
+                transform.localRotation = Quaternion.Euler(182.324f, 58.664f, 22.164f);
+            }
+            else if (gameObject.CompareTag("Chalumeau"))
+            {
+                // -- S'il s'agit d'un chalumeau, prend la position en main ...
+                transform.localPosition = new Vector3(-0.000784f, 0.000621f, 0.000504f);
+                transform.localRotation = Quaternion.Euler(-44.429f, -67.592f, 88.24f);
+            }
 
             rb.isKinematic = true; // -- Le rigidbody de mon objet passe en kinematic pour qu'il ne bouge pas
 

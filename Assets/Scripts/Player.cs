@@ -548,26 +548,6 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("Ramasser", true);
             anim.ResetTrigger("Lancer");
-            if (statesPlayer.rightHand.GetChild(0).CompareTag("Boite"))
-            {
-                
-            }
-            else if (statesPlayer.rightHand.GetChild(0).CompareTag("Clé"))
-            {
-
-            }
-            else if (statesPlayer.rightHand.GetChild(0).CompareTag("Marteau"))
-            {
-
-            }
-            else if (statesPlayer.rightHand.GetChild(0).CompareTag("Chalumeau"))
-            {
-
-            }
-            else if (statesPlayer.rightHand.GetChild(0).CompareTag("Tablette"))
-            {
-
-            }
         }
     }
 
