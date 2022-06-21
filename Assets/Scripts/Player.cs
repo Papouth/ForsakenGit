@@ -105,19 +105,21 @@ public class Player : MonoBehaviour
 
         TerminalInteraction();
 
-        InjectionInteraction();
-
         PlayerThrowObject();
 
         Weapons();
 
         ShowTazer();
 
+        PuissanceSlider();
+
+        HoldThrowable();
+
+        InjectionInteraction();
+
         CheatMenu();
 
         MouseSensitivity();
-
-        PuissanceSlider();
     }
 
     private void FixedUpdate()
@@ -537,7 +539,34 @@ public class Player : MonoBehaviour
         {
             ChangeWeapons(0);
             uiTazer.SetActive(false);
-            //sliderObjet.SetActive(true);
+        }
+    }
+
+    public void HoldThrowable()
+    {
+        if (statesPlayer.isHoldingThrowableItem)
+        {
+            anim.SetBool("Ramasser", true);
+            if (statesPlayer.rightHand.GetChild(0).CompareTag("Boite"))
+            {
+                
+            }
+            else if (statesPlayer.rightHand.GetChild(0).CompareTag("Clé"))
+            {
+
+            }
+            else if (statesPlayer.rightHand.GetChild(0).CompareTag("Marteau"))
+            {
+
+            }
+            else if (statesPlayer.rightHand.GetChild(0).CompareTag("Chalumeau"))
+            {
+
+            }
+            else if (statesPlayer.rightHand.GetChild(0).CompareTag("Tablette"))
+            {
+
+            }
         }
     }
 
