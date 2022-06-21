@@ -87,6 +87,7 @@ public class HidingPlace : Interactable
 
     public IEnumerator HideAnimation()
     {
+        /*
         //si l'objet a le tag cuve le player joue l'anim de la cuve
         if(gameObject.CompareTag("cuve"))
         {
@@ -101,19 +102,30 @@ public class HidingPlace : Interactable
         }
 
         yield return new WaitForSeconds(1.2f);
-
+        */
         // -- Step1: On l'empeche de bouger
         StatesPlayer.statesPlayer.canMoove = false;
 
         // -- Step2: On save la position du joueur
         lastPos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+        
+        if(gameObject.CompareTag("cuve"))
+        {
+            player.anim.Play("cuveCryo");
+            animPorteCuve.SetTrigger("Trigger");//Bryan
+
+            yield return new WaitForSeconds(2.4f);
+        }
+        //si non il joue l'anim du casier
+        else
+        {
+            animCasierPorte.SetTrigger("CasierInteract");//Bryan
+            player.anim.Play("ouvrirCasier");
+        }
 
 
         // -- Step3: On patiente 2 secondes, via une coroutine ( temps de l'animation )
-        yield return new WaitForSeconds(2.2f);
-
-        // On affiche le texte pour sortir
-        player.hidingText.SetActive(true);
+        yield return new WaitForSeconds(1.8f);
 
         player.anim.enabled = false;
 
@@ -125,12 +137,14 @@ public class HidingPlace : Interactable
             collcomp.enabled = false;
         }
 
-
         // -- Step4: On TP le joueur sur le point de tp à l'intérieur de la cachette
         player.transform.position = playerTp.position;
 
         // -- Step5: On indique que le joueur est bien caché
         playerHide = true;
+
+        // On affiche le texte pour sortir
+        player.hidingText.SetActive(true);
     }
 
 
