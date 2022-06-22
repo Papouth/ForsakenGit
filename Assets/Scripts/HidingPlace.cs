@@ -105,18 +105,25 @@ public class HidingPlace : Interactable
             player.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
             animPorteCuve.SetTrigger("Trigger");//Bryan
 
-            yield return new WaitForSeconds(2.4f);
+            yield return new WaitForSeconds(3.2f);//2.4
         }
         //si non il joue l'anim du casier
         else
         {
             animCasierPorte.SetTrigger("CasierInteract");//Bryan
+            hideColl.enabled = false;
+            foreach (var collcomp in hideColls)
+            {
+                collcomp.enabled = false;
+            }
+            player.transform.localPosition = tpIn.position;
+            player.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             player.anim.Play("ouvrirCasier");
         }
 
 
         // -- Step3: On patiente 2 secondes, via une coroutine ( temps de l'animation )
-        yield return new WaitForSeconds(2f);//1.8
+        yield return new WaitForSeconds(1.8f);
 
         player.anim.enabled = false;
 
@@ -163,7 +170,7 @@ public class HidingPlace : Interactable
         {
             player.anim.Play("sortiCasier");//modifBryan
             player.transform.localPosition = tpOut.position;
-            player.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
+            player.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             animCasierPorte.SetTrigger("CasierInteract");//Bryan
         }
 
