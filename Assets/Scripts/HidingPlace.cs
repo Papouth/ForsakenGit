@@ -105,7 +105,7 @@ public class HidingPlace : Interactable
             player.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
             animPorteCuve.SetTrigger("Trigger");//Bryan
 
-            yield return new WaitForSeconds(3.2f);//2.4
+            yield return new WaitForSeconds(3.2f);
         }
         //si non il joue l'anim du casier
         else
@@ -138,6 +138,16 @@ public class HidingPlace : Interactable
 
         // -- Step4: On TP le joueur sur le point de tp à l'intérieur de la cachette
         player.transform.position = playerTp.position;
+
+        // -- On replace la vue du joueurpour être face à la vitre / aux grilles
+        if (gameObject.CompareTag("cuve"))
+        {
+            player.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
+        }
+        else
+        {
+            player.transform.rotation = Quaternion.Euler(0f, -25f, 0f);
+        }
 
         // -- Step5: On indique que le joueur est bien caché
         playerHide = true;
