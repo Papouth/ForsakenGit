@@ -5,11 +5,13 @@ using UnityEngine;
 public class BossAutoDoor : MonoBehaviour
 {
     private Door maPorte;
+    private AudioSource bossDoorSound;
 
 
     private void Start()
     {
         maPorte = GetComponent<Door>();
+        bossDoorSound = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -18,12 +20,9 @@ public class BossAutoDoor : MonoBehaviour
         {
             if (!maPorte.doorOpen)
             {
+                bossDoorSound.Play(0);
                 // -- Ma porte est fermée donc je l'ouvre
                 GetComponent<Animator>().SetBool("OpenBoss", true);
-            }
-            else if (maPorte.doorOpen)
-            {
-                // -- Ma porte est déjà ouverte
             }
         }
     }
@@ -34,12 +33,9 @@ public class BossAutoDoor : MonoBehaviour
         {
             if (!maPorte.doorOpen)
             {
+                bossDoorSound.Play(0);
                 // -- Ma porte est fermée donc je la referme derrière moi
                 GetComponent<Animator>().SetBool("OpenBoss", false);
-            }
-            else if (maPorte.doorOpen)
-            {
-                // -- Ma porte est déjà ouverte donc je la laisse ouverte
             }
         }
     }

@@ -38,12 +38,12 @@ public class BossVue : MonoBehaviour
                 // -- Debug.DrawRay(robotBoss.transform.position, other.transform.position - robotBoss.transform.position, Color.green);
 
 
-                if (Physics.Raycast(boss.transform.GetChild(0).position, other.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f, Wall))
+                if (Physics.Raycast(boss.transform.GetChild(0).position, player.raylauncher.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f, Wall)) // other.transform.position
                 {
                     // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
                     return;
                 }
-                else if (Physics.Raycast(boss.transform.GetChild(0).position, other.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f))
+                else if (Physics.Raycast(boss.transform.GetChild(0).position, player.raylauncher.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f)) // other.transform.position
                 {
                     // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
 
@@ -52,7 +52,7 @@ public class BossVue : MonoBehaviour
 
                     detectSound.Play(0);
 
-                    float distance = Vector3.Distance(other.transform.position, boss.transform.position);
+                    float distance = Vector3.Distance(player.raylauncher.transform.position, boss.transform.GetChild(0).position);
 
                     if (distance < 8f)
                     {
@@ -84,7 +84,7 @@ public class BossVue : MonoBehaviour
                 Boss.CallMe(other.transform);
 
                 // -- TUER LE JOUEUR
-                float distance = Vector3.Distance(other.transform.position, boss.transform.position);
+                float distance = Vector3.Distance(player.raylauncher.transform.position, boss.transform.GetChild(0).position);
 
                 if (distance < 8f)
                 {

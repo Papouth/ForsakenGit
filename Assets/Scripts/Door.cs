@@ -8,15 +8,22 @@ public class Door : MonoBehaviour
     public Terminal terminal;
     public bool doorOpen;
 
+    private AudioSource doorSound;
+
     private void Start()
     {
         doorOpen = false;
+        doorSound = GetComponent<AudioSource>();
     }
 
     public void OpenDoors()
     {
         if (terminal.isUsed)
         {
+            if (!doorOpen)
+            {
+                doorSound.Play(0);
+            }
             GetComponent<Animator>().SetBool("Open", true);
             doorOpen = true;
         }
