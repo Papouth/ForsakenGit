@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 1bde15739fc0d244b944d89744961d07
+guid: d1b22766cd0c4f74d9ef9e080bf03f38
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
-      74: -3954660691365363755
-    second: perso_animation_cuve_cryo_sortir
+      74: 1827226128182048838
+    second: Take 001
   externalObjects: {}
   materials:
     materialImportMode: 2
