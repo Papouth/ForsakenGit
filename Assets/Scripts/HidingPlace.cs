@@ -11,11 +11,14 @@ public class HidingPlace : Interactable
 
     [Tooltip("Là où sera tp le joueur")]
     public Transform playerTp;
-    private Vector3 lastPos;
+    //private Vector3 lastPos;
     public bool playerHide = false; // permet de dire au robot qu'il ne peux pas entendre ni voir le joueur
     private bool escPressed;
     public Animator animPorteCuve;//Bryan
     public Animator animCasierPorte;//Bryan
+
+    public Transform tpIn;
+    public Transform tpOut;
 
 
     public void Awake()
@@ -87,31 +90,19 @@ public class HidingPlace : Interactable
 
     public IEnumerator HideAnimation()
     {
-        /*
-        //si l'objet a le tag cuve le player joue l'anim de la cuve
-        if(gameObject.CompareTag("cuve"))
-        {
-            player.anim.Play("cuveCryo");
-            animPorteCuve.SetTrigger("Trigger");//Bryan
-        }
-        //si non il joue l'anim du casier
-        else
-        {
-            player.anim.Play("ouvrirCasier");
-            animCasierPorte.SetTrigger("CasierInteract");//Bryan
-        }
-
-        yield return new WaitForSeconds(1.2f);
-        */
         // -- Step1: On l'empeche de bouger
         StatesPlayer.statesPlayer.canMoove = false;
+        StatesPlayer.statesPlayer.canLookAround = false;
 
-        // -- Step2: On save la position du joueur
-        lastPos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
-        
-        if(gameObject.CompareTag("cuve"))
+
+        // -- Step2: On save la position du joueur -> Plus nécessaire grâce à l'animation
+        //lastPos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+
+        if (gameObject.CompareTag("cuve"))
         {
             player.anim.Play("cuveCryo");
+            player.transform.localPosition = tpIn.position;
+            player.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
             animPorteCuve.SetTrigger("Trigger");//Bryan
 
             yield return new WaitForSeconds(2.4f);
@@ -125,10 +116,11 @@ public class HidingPlace : Interactable
 
 
         // -- Step3: On patiente 2 secondes, via une coroutine ( temps de l'animation )
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(2f);//1.8
 
         player.anim.enabled = false;
 
+        StatesPlayer.statesPlayer.canLookAround = true;
 
         // -- Inter Step: On désactive le collider du joueur
         hideColl.enabled = false;
@@ -154,18 +146,24 @@ public class HidingPlace : Interactable
         //yield return new WaitForSeconds(2f);
 
         player.anim.enabled = true;
-        
+        StatesPlayer.statesPlayer.canLookAround = false;
+
 
         //si l'objet a le tag cuve le player joue l'anim sortie cuve cryo
-        if(gameObject.CompareTag("cuve"))
+        if (gameObject.CompareTag("cuve"))
         {
             player.anim.Play("sortiCuveCryo");
+            player.transform.localPosition = tpOut.position;
+            player.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
+
             animPorteCuve.SetTrigger("Trigger");//Bryan
         }
         //si non il joue l'anim sortie casier
         else
         {
             player.anim.Play("sortiCasier");//modifBryan
+            player.transform.localPosition = tpOut.position;
+            player.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
             animCasierPorte.SetTrigger("CasierInteract");//Bryan
         }
 
@@ -181,10 +179,13 @@ public class HidingPlace : Interactable
         StatesPlayer.statesPlayer.isHiding = false;
         playerHide = false;
 
-        // -- Step4:  Le joueur peut de nouveau bouger 
-        StatesPlayer.statesPlayer.canMoove = true; // attendre le temps de l'animation avant de pouvoir de nouveau marcher, donc certainement le décaler après le waitforseconds
+        yield return new WaitForSeconds(2f);
 
-        yield return new WaitForSeconds(2);
+
+        // -- Step4:  Le joueur peut de nouveau bouger 
+        StatesPlayer.statesPlayer.canMoove = true; // attendre le temps de l'animation avant de pouvoir de nouveau marcher
+        StatesPlayer.statesPlayer.canLookAround = true;
+
 
         // -- Inter Step: On désactive le collider du joueur
         hideColl.enabled = true;
