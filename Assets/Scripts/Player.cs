@@ -551,6 +551,7 @@ public class Player : MonoBehaviour
         if (statesPlayer.isHoldingThrowableItem)
         {
             anim.SetBool("Ramasser", true);
+            anim.ResetTrigger("Charger");
             anim.ResetTrigger("Lancer");
         }
     }
@@ -571,10 +572,11 @@ public class Player : MonoBehaviour
                     tir = tirMax;
                 }
                 statesPlayer.isHoldingThrowableItem = false;
-                anim.SetTrigger("Lancer");
+                anim.SetTrigger("Charger");
             }
             if (Input.GetMouseButtonUp(0) && !statesPlayer.isHoldingTazer && !statesPlayer.isInteractTerminal)
             {
+                anim.SetTrigger("Lancer");
                 // -- Player throw object -> anim
                 ActionManager.OnLaunchObject(visionJoueur.transform.forward * tir);
                 currentInteractable.Interact(false);
