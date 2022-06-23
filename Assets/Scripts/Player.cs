@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
     [Tooltip("Les armes du joueur")]
     public Transform[] weapons;
     public Transform raylauncher;
+    public Transform tpTerminal;
 
     public GameObject panelMort;
     public GameObject returnToCam;
@@ -418,11 +419,9 @@ public class Player : MonoBehaviour
             surveillance.cameraHub.enabled = true;
 
             // -- Déplacer le joueur en face du terminal pour réaliser parfaitement l'animation
-            // transform.position = playerTp.position; // playerTp = le transform ou doit se mettre mon joueur (ne pas oublier de faire la rotation)
-            //transform.parent = StatesPlayer.statesPlayer.rightHand;
-            //transform.localPosition = tpTerminal.position; // tpTerminal = GetChild(0) ou GetComponentInChild<Transform>();
-            //transform.rotation = Quaternion.Euler(0f, -90f, 0f);
-
+            tpTerminal = currentInteractable.transform.GetChild(0);
+            transform.position = tpTerminal.position;
+            transform.rotation = tpTerminal.rotation; 
 
             anim.SetTrigger("terminal");
 
@@ -456,6 +455,11 @@ public class Player : MonoBehaviour
         {
             if (slider.value < slider.maxValue)
             {
+                // -- Déplacer le joueur en face du terminal pour réaliser parfaitement l'animation
+                tpTerminal = currentInteractable.transform.GetChild(0);
+                transform.position = tpTerminal.position;
+                transform.rotation = tpTerminal.rotation;
+
                 anim.SetTrigger("terminal");
                 // -- valeur si on sort le jeu : slider.value += Time.time * 0.04f;
                 slider.value += Time.time * 0.18f; // vitesse pour le jury = 0.32f

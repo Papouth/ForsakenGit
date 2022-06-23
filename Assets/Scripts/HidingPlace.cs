@@ -101,7 +101,7 @@ public class HidingPlace : Interactable
         if (gameObject.CompareTag("cuve"))
         {
             player.anim.Play("cuveCryo");
-            player.transform.localPosition = tpIn.position;
+            player.transform.localPosition = tpIn.position; 
             player.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
             animPorteCuve.SetTrigger("Trigger");//Bryan
 
@@ -116,7 +116,7 @@ public class HidingPlace : Interactable
             {
                 collcomp.enabled = false;
             }
-            player.transform.localPosition = tpIn.position;
+            player.transform.position = tpIn.position; // localPosition
             player.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             player.anim.Play("ouvrirCasier");
         }
@@ -170,7 +170,7 @@ public class HidingPlace : Interactable
         if (gameObject.CompareTag("cuve"))
         {
             player.anim.Play("sortiCuveCryo");
-            player.transform.localPosition = tpOut.position;
+            player.transform.position = tpOut.position;
             player.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
 
             animPorteCuve.SetTrigger("Trigger");//Bryan
@@ -179,7 +179,7 @@ public class HidingPlace : Interactable
         else
         {
             player.anim.Play("sortiCasier");//modifBryan
-            player.transform.localPosition = tpOut.position;
+            player.transform.position = tpOut.position; // localPosition
             player.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             animCasierPorte.SetTrigger("CasierInteract");//Bryan
         }
