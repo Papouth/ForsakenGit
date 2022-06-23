@@ -9,16 +9,16 @@ public class HidingPlace : Interactable
     private Collider[] hideColls;
     private GameObject personnage;
 
+    public Transform tpIn; // 2
     [Tooltip("Là où sera tp le joueur")]
-    public Transform playerTp;
+    public Transform playerTp; //3
+    public Transform tpOut; // 4
+
     //private Vector3 lastPos;
     public bool playerHide = false; // permet de dire au robot qu'il ne peux pas entendre ni voir le joueur
     private bool escPressed;
     public Animator animPorteCuve;//Bryan
     public Animator animCasierPorte;//Bryan
-
-    public Transform tpIn;
-    public Transform tpOut;
 
 
     public void Awake()
@@ -95,32 +95,35 @@ public class HidingPlace : Interactable
         StatesPlayer.statesPlayer.canLookAround = false;
 
 
-        // -- Step2: On save la position du joueur -> Plus nécessaire grâce à l'animation
-        //lastPos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
-
         if (gameObject.CompareTag("cuve"))
         {
             player.anim.Play("cuveCryo");
+
             player.transform.localPosition = tpIn.position; 
             player.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-            animPorteCuve.SetTrigger("Trigger");//Bryan
+
+            animPorteCuve.SetTrigger("Trigger");
 
             yield return new WaitForSeconds(3.2f);
         }
-        //si non il joue l'anim du casier
+        // -- Sinon il joue l'anim du casier
         else
         {
-            animCasierPorte.SetTrigger("CasierInteract");//Bryan
+            animCasierPorte.SetTrigger("CasierInteract");
+
             hideColl.enabled = false;
             foreach (var collcomp in hideColls)
             {
                 collcomp.enabled = false;
             }
-            player.transform.position = tpIn.position; // localPosition
-            player.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+
+            // -- Tp du joueur devant le casier 
+            tpIn = transform.GetChild(2);
+            player.transform.position = tpIn.position;
+            player.transform.rotation = tpIn.rotation;
+
             player.anim.Play("ouvrirCasier");
         }
-
 
         // -- Step3: On patiente 2 secondes, via une coroutine ( temps de l'animation )
         yield return new WaitForSeconds(1.8f);
@@ -136,17 +139,18 @@ public class HidingPlace : Interactable
             collcomp.enabled = false;
         }
 
-        // -- Step4: On TP le joueur sur le point de tp à l'intérieur de la cachette
-        player.transform.position = playerTp.position;
-
         // -- On replace la vue du joueurpour être face à la vitre / aux grilles
         if (gameObject.CompareTag("cuve"))
         {
+            player.transform.position = playerTp.position;
             player.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
         }
         else
         {
-            player.transform.rotation = Quaternion.Euler(0f, -25f, 0f);
+            // -- Tp du joueur à l'intérieur du casier avec une bonne orientation
+            playerTp = transform.GetChild(3);
+            player.transform.position = playerTp.position;
+            player.transform.rotation = playerTp.rotation;
         }
 
         // -- Step5: On indique que le joueur est bien caché
@@ -159,38 +163,35 @@ public class HidingPlace : Interactable
 
     public IEnumerator UnHide()
     {
-        // -- Step1: Le joueur patiente 2 sec ( animation )
-        //yield return new WaitForSeconds(2f);
-
         player.anim.enabled = true;
         StatesPlayer.statesPlayer.canLookAround = false;
 
 
-        //si l'objet a le tag cuve le player joue l'anim sortie cuve cryo
+        // -- Si l'objet a le tag cuve, le player joue l'anim sortie cuve cryo
         if (gameObject.CompareTag("cuve"))
         {
             player.anim.Play("sortiCuveCryo");
+
             player.transform.position = tpOut.position;
             player.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
 
-            animPorteCuve.SetTrigger("Trigger");//Bryan
+            animPorteCuve.SetTrigger("Trigger");
         }
-        //si non il joue l'anim sortie casier
+        // -- Sinon il joue l'anim sortie casier
         else
         {
-            player.anim.Play("sortiCasier");//modifBryan
-            player.transform.position = tpOut.position; // localPosition
-            player.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            animCasierPorte.SetTrigger("CasierInteract");//Bryan
+            player.anim.Play("sortiCasier");
+
+            // -- Tp du joueur à l'extérieur du casier avec une bonne orientation
+            tpOut = transform.GetChild(4);
+            player.transform.position = tpOut.position;
+            player.transform.rotation = tpOut.rotation;
+
+            animCasierPorte.SetTrigger("CasierInteract");
         }
 
-        // On cache le texte pour sortir
+        // -- On cache le texte pour sortir
         player.hidingText.SetActive(false);
-
-        // -- Step2: Le joueur se re tp à sa dernière position enregistré
-         //if(!gameObject.CompareTag("cuve")){modifBryan
-           // player.transform.position = lastPos;modifBryan
-        //}
 
         // -- Step3: On indique que le joueur n'est plus caché
         StatesPlayer.statesPlayer.isHiding = false;
@@ -199,8 +200,8 @@ public class HidingPlace : Interactable
         yield return new WaitForSeconds(2f);
 
 
-        // -- Step4:  Le joueur peut de nouveau bouger 
-        StatesPlayer.statesPlayer.canMoove = true; // attendre le temps de l'animation avant de pouvoir de nouveau marcher
+        // -- Step4:  Le joueur attend le temps de l'animation avant de pouvoir de nouveau marcher et bouger
+        StatesPlayer.statesPlayer.canMoove = true;
         StatesPlayer.statesPlayer.canLookAround = true;
 
 
