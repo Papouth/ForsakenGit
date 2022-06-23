@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
     private float speedmin =  0.1f;
     private float speedmax =  2f;
 
-    [Range(0f, 0.1f)]
+    [Range(0f, 0.15f)]
     public float vitesse = 0.1f; // -- Au dessus de 0.1f, le joueur peut traverser le mur
 
 
@@ -233,7 +233,7 @@ public class Player : MonoBehaviour
         if (statesPlayer.isCrouch)
         {
             anim.enabled = false;
-            vitesse = 0.1f; // vitesse de mon joueur
+            vitesse = 0.125f; // vitesse de mon joueur | 0.1
             isCrouched = false; // check si est accroupis
 
             caps.height = 4;

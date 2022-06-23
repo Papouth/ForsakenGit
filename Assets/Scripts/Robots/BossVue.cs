@@ -130,7 +130,7 @@ public class BossVue : MonoBehaviour
 
 
                 // -- Step 3: Speed Player Reset
-                player.vitesse = 0.1f;
+                player.vitesse = 0.11f; // 0.1
 
 
                 // -- Step 4: Time Before Player can be Re Slowed down
