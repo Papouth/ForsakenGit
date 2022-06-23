@@ -161,7 +161,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _ANISOTROPY: 1
-    - _AORemapMax: 1
+    - _AORemapMax: 0.99999994
     - _AORemapMin: 0
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
@@ -308,8 +308,8 @@ Material:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EMISSION_COLOR: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissiveColor: {r: 10, g: 0.2964128, b: 0, a: 10}
-    - _EmissiveColorLDR: {r: 1, g: 0.1885246, b: 0, a: 1}
+    - _EmissiveColor: {r: 10, g: 0.048247814, b: 0, a: 10}
+    - _EmissiveColorLDR: {r: 1, g: 0.059297003, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _REFLECTIONS_COLOR: {r: 1, g: 1, b: 1, a: 1}
