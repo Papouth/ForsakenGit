@@ -420,8 +420,8 @@ public class Player : MonoBehaviour
             // -- Déplacer le joueur en face du terminal pour réaliser parfaitement l'animation
             // transform.position = playerTp.position; // playerTp = le transform ou doit se mettre mon joueur (ne pas oublier de faire la rotation)
             //transform.parent = StatesPlayer.statesPlayer.rightHand;
-            //transform.localPosition = Vector3.zero;
-            //transform.localRotation = Quaternion.identity;
+            //transform.localPosition = tpTerminal.position; // tpTerminal = GetChild(0) ou GetComponentInChild<Transform>();
+            //transform.rotation = Quaternion.Euler(0f, -90f, 0f);
 
 
             anim.SetTrigger("terminal");
