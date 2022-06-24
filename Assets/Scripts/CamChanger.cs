@@ -25,8 +25,13 @@ public class CamChanger : MonoBehaviour
     public GameObject camBttn;
     public GameObject returnBttn;
 
-    public GameObject cam01Bttn;
-    public GameObject cam02Bttn;
+    public GameObject camMedicBttn;
+    public GameObject camHubBttn;
+    public GameObject camSportBttn;
+    public GameObject camLabBttn;
+    public GameObject camEntréePrimBttn;
+    public GameObject camSortiePrimBttn;
+
     [Tooltip("bouton à part du panel du terminal")]
     public GameObject returnToCamBttn;
     [Tooltip("Le panel d'interaction du terminal")]
@@ -47,8 +52,8 @@ public class CamChanger : MonoBehaviour
         doorBttn.SetActive(false);
         dataBttn.SetActive(false);
         camBttn.SetActive(false);
-        cam01Bttn.SetActive(true);
-        cam02Bttn.SetActive(true);
+        camMedicBttn.SetActive(true);
+        camHubBttn.SetActive(true);
 
         returnBttn.SetActive(true);
     }
@@ -66,8 +71,8 @@ public class CamChanger : MonoBehaviour
         doorBttn.SetActive(true);
         dataBttn.SetActive(true);
         camBttn.SetActive(true);
-        cam01Bttn.SetActive(false);
-        cam02Bttn.SetActive(false);
+        camMedicBttn.SetActive(false);
+        camHubBttn.SetActive(false);
 
         returnBttn.SetActive(false);
 
