@@ -10,6 +10,15 @@ public class CamChanger : MonoBehaviour
     public Camera cameraMedic;
     [Tooltip("Hub")]
     public Camera cameraHub;
+    [Tooltip("Sport")]
+    public Camera cameraSport;
+    [Tooltip("Lab")]
+    public Camera cameraLab;
+    [Tooltip("PrimEntrée")]
+    public Camera cameraPrimEntrée;
+    [Tooltip("PrimSortie")]
+    public Camera cameraPrimSortie;
+
 
     public GameObject doorBttn;
     public GameObject dataBttn;
@@ -63,9 +72,9 @@ public class CamChanger : MonoBehaviour
         returnBttn.SetActive(false);
 
         #region reset des caméras
-        // reset cam boss a -2
+        // reset cam hub a -2
         cameraHub.depth = -2;
-        // reset cam porte a -3
+        // reset cam medic a -3
         cameraMedic.depth = -3;
 
         // reset cam principale
@@ -74,16 +83,16 @@ public class CamChanger : MonoBehaviour
     }
 
     #region  Différentes Caméra
-    public void CamPorte()
+    public void CamMedic()
     {
         // on enlève la cam principale
         cam.depth = -5;
 
 
-        // reset cam boss a -2
+        // reset cam hub a -2
         cameraHub.depth = -2;
 
-        // switch sur vue cam porte 
+        // switch sur vue cam medic
         cameraMedic.depth = 0;
 
 
@@ -96,16 +105,16 @@ public class CamChanger : MonoBehaviour
         onCam = true;
     }
 
-    public void CamBoss()
+    public void CamHub()
     {
         // on enlève la cam principale
         cam.depth = -5;
 
 
-        // reset cam porte a -3
+        // reset cam medic a -3
         cameraMedic.depth = -3;
 
-        // switch sur vue cam boss
+        // switch sur vue cam hub
         cameraHub.depth = 0;
 
 
@@ -123,9 +132,9 @@ public class CamChanger : MonoBehaviour
     public void ReturnToCamButton()
     {
         #region reset des caméras
-        // reset cam boss a -2
+        // reset cam hub a -2
         cameraHub.depth = -2;
-        // reset cam porte a -3
+        // reset cam medic a -3
         cameraMedic.depth = -3;
 
         // reset cam principale
