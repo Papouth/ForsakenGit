@@ -57,6 +57,13 @@ public class CamChanger : MonoBehaviour
         onCamLab =  false;
         onCamEntréePrim = false;
         onCamSortiePrim = false;
+
+        camMedicBttn.SetActive(false);
+        camHubBttn.SetActive(false);
+        camSportBttn.SetActive(false);
+        camLabBttn.SetActive(false);
+        camEntréePrimBttn.SetActive(false);
+        camSortiePrimBttn.SetActive(false);
     }
 
     public void ChangeButton()
