@@ -415,8 +415,8 @@ public class Player : MonoBehaviour
         if (statesPlayer.isInteractTerminal)
         {
             // -- Mettre les caméras
-            surveillance.cameraMedic.enabled = true;
-            surveillance.cameraHub.enabled = true;
+            OptiCam();
+            
 
             // -- Déplacer le joueur en face du terminal pour réaliser parfaitement l'animation
             tpTerminal = currentInteractable.transform.GetChild(0);
@@ -744,6 +744,82 @@ public class Player : MonoBehaviour
             Cursor.visible = true;
             statesPlayer.canMoove = false;
             statesPlayer.canLookAround = false;
+        }
+    }
+
+    public void OptiCam()
+    {
+        if (surveillance.onCamHub)
+        {
+            // true
+            surveillance.cameraHub.enabled = true;
+
+            // false
+            surveillance.cameraMedic.enabled = false;
+            surveillance.cameraSport.enabled = false;
+            surveillance.cameraLab.enabled = false;
+            surveillance.cameraPrimEntrée.enabled = false;
+            surveillance.cameraPrimSortie.enabled = false;
+        }
+        else if (surveillance.onCamMedic)
+        {
+            // true
+            surveillance.cameraMedic.enabled = true;
+
+            // false
+            surveillance.cameraHub.enabled = false;
+            surveillance.cameraSport.enabled = false;
+            surveillance.cameraLab.enabled = false;
+            surveillance.cameraPrimEntrée.enabled = false;
+            surveillance.cameraPrimSortie.enabled = false;
+        }
+        else if (surveillance.onCamSport)
+        {
+            // true
+            surveillance.cameraSport.enabled = true;
+
+            // false
+            surveillance.cameraMedic.enabled = false;
+            surveillance.cameraHub.enabled = false;
+            surveillance.cameraLab.enabled = false;
+            surveillance.cameraPrimEntrée.enabled = false;
+            surveillance.cameraPrimSortie.enabled = false;
+        }
+        else if (surveillance.onCamLab)
+        {
+            // true
+            surveillance.cameraLab.enabled = true;
+
+            // false
+            surveillance.cameraMedic.enabled = false;
+            surveillance.cameraHub.enabled = false;
+            surveillance.cameraSport.enabled = false;
+            surveillance.cameraPrimEntrée.enabled = false;
+            surveillance.cameraPrimSortie.enabled = false;
+        }
+        else if (surveillance.onCamEntréePrim)
+        {
+            // true
+            surveillance.cameraPrimEntrée.enabled = true;
+
+            // false
+            surveillance.cameraMedic.enabled = false;
+            surveillance.cameraHub.enabled = false;
+            surveillance.cameraSport.enabled = false;
+            surveillance.cameraLab.enabled = false;
+            surveillance.cameraPrimSortie.enabled = false;
+        }
+        else if (surveillance.onCamSortiePrim)
+        {
+            // true
+            surveillance.cameraPrimSortie.enabled = true;
+
+            // false
+            surveillance.cameraMedic.enabled = false;
+            surveillance.cameraHub.enabled = false;
+            surveillance.cameraSport.enabled = false;
+            surveillance.cameraLab.enabled = false;
+            surveillance.cameraPrimEntrée.enabled = false;
         }
     }
 
