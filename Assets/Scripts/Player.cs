@@ -439,8 +439,7 @@ public class Player : MonoBehaviour
         else
         {
             // -- Retirer les caméras
-            surveillance.cameraMedic.enabled = false;
-            surveillance.cameraHub.enabled = false;
+            DeleteCam();
 
 
             anim.ResetTrigger("terminal");
@@ -821,6 +820,16 @@ public class Player : MonoBehaviour
             surveillance.cameraLab.enabled = false;
             surveillance.cameraPrimEntrée.enabled = false;
         }
+    }
+
+    public void DeleteCam()
+    {
+        surveillance.cameraMedic.enabled = false;
+        surveillance.cameraHub.enabled = false;
+        surveillance.cameraSport.enabled = false;
+        surveillance.cameraLab.enabled = false;
+        surveillance.cameraPrimEntrée.enabled = false;
+        surveillance.cameraPrimSortie.enabled = false;
     }
 
     private void OnDrawGizmos()
