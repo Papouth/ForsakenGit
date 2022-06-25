@@ -7,8 +7,8 @@ public class RangeTazer : MonoBehaviour
 {
     public Rbts leRobot;
     public Player player;
-    public bool tazing = false;
-    public bool actual;
+    public bool tazing;
+    //public bool actual; // test
 
     public Renderer rend;
     public Shader normalShader;
@@ -17,7 +17,8 @@ public class RangeTazer : MonoBehaviour
     public void Start()
     {
         player = GetComponentInParent<Player>();
-        actual = false;
+        tazing = false;
+        //actual = false;
         rend = transform.GetComponentInParent<Renderer>();
         normalShader = Shader.Find("HDRP/Lit");
 
@@ -40,7 +41,7 @@ public class RangeTazer : MonoBehaviour
             if (!tazing)
             {
                 tazing = true;
-                actual = true;
+                //actual = true;
                 // -- Lancer l'animation d'attaque du taser
                 player.anim.SetTrigger("attack");
 
@@ -65,7 +66,7 @@ public class RangeTazer : MonoBehaviour
     {
         if(other.gameObject.CompareTag("RobotLarbin"))
         {
-            if (!actual)
+            if (/*!actual*/!tazing)
             {
                 leRobot = null;
             }
@@ -109,12 +110,10 @@ public class RangeTazer : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        // test
         leRobot.transform.position = new Vector3(leRobot.transform.position.x, leRobot.transform.position.y - 0.5f, leRobot.transform.position.z);
         leRobot.GetComponent<NavMeshAgent>().enabled = true;
 
-
-        tazing = false;
+        //tazing = false;
 
         // -> Remettre l'anim de marche du robot
         leRobot.GetComponent<Animator>().enabled = true;
@@ -124,7 +123,8 @@ public class RangeTazer : MonoBehaviour
 
         leRobot.isFreeze = false;
 
-        actual = false;
+        tazing = false;
+        //actual = false;
         leRobot = null;
     }
 }

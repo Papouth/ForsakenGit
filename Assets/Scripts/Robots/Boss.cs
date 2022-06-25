@@ -15,6 +15,7 @@ public class Boss : Rbts
 
         // -- Prend mes wayPoints à partir de mon Parent De Secteur
         wayPoints = monParentSecteur.GetComponentsInChildren<Transform>();
+        walkSound = GetComponent<AudioSource>();
 
         robots = gameObject.GetComponent<Rbts>();
         bossAgent = robots.monRobot;

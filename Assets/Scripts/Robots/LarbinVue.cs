@@ -93,11 +93,7 @@ public class LarbinVue : MonoBehaviour
                     Boss.CallMe(other.transform);
 
 
-                    // --------------------------------
-
-
                     robots.monRobot.SetDestination(other.transform.position);
-
 
                     // -- RALENTISSEMENT
                     float distance = Vector3.Distance(player.raylauncher.transform.position, robots.transform.GetChild(0).position);
@@ -107,25 +103,6 @@ public class LarbinVue : MonoBehaviour
                         // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
                         StartCoroutine(RalentissementJoueur());
                     }
-                    #region a delete
-                    /*
-                    // -- Debug.Log("Je vois toujours");
-                    if (!robots.isFreeze)
-                    {
-                        robots.monRobot.SetDestination(other.transform.position);
-
-
-                        // -- RALENTISSEMENT
-                        float distance = Vector3.Distance(player.raylauncher.transform.position, robots.transform.GetChild(0).position);
-
-                        if (distance < 4.5f) // old = 3.5f
-                        {
-                            // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
-                            StartCoroutine(RalentissementJoueur());
-                        }
-                    }
-                    */
-                    #endregion
                 }
             }
         }
@@ -167,10 +144,10 @@ public class LarbinVue : MonoBehaviour
         {
             rayonLaser.SetActive(true);
             robots.sparks.SetActive(false);
-
         }
-    }
 
+        LarbinDetectPlayer();
+    }
 
     public void Stun()
     {
@@ -245,12 +222,23 @@ public class LarbinVue : MonoBehaviour
         }
     }
 
-    public void LarbinGoToPlayer()
+    public void LarbinDetectPlayer()
     {
         if (canSeePlayer)
         {
-            // -- Debug.Log("je te suis");
-            robots.monRobot.SetDestination(transform.position);
+            detectSound.Play(0);
+
+            robots.emissifMat.SetColor("_BaseColor", robots.danger);
+            robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
+            player.imageContour.SetActive(true);
+        }
+        else if (!canSeePlayer)
+        {
+            detectSound.Stop();
+
+            robots.emissifMat.SetColor("_BaseColor", robots.safe);
+            robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
+            player.imageContour.SetActive(false);
         }
     }
 }

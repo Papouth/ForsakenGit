@@ -6,12 +6,10 @@ public class BouleVue : MonoBehaviour
 {
     public Boule boule;
     public bool canSeePlayer;
-
     public LayerMask Wall;
     public Player player;
 
     private AudioSource detectSound;
-
 
 
     private void Start()
@@ -76,15 +74,6 @@ public class BouleVue : MonoBehaviour
 
             // -- Debug.Log("je ne touche plus le joueur");
             canSeePlayer = false;
-        }
-    }
-
-    public void LarbinGoToPlayer()
-    {
-        if (canSeePlayer)
-        {
-            // -- Debug.Log("je te suis");
-            boule.monRobot.SetDestination(transform.position);
         }
     }
 }
