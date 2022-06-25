@@ -14,6 +14,7 @@ public class Rbts : Interactable
     [Tooltip("Mes WayPoints enfants du ParentSecteur")]
     public Transform[] wayPoints;
     public GameObject sparks;
+
     public Material emissifMat;
     public Color32 safe;
     public Color32 danger;
@@ -81,7 +82,7 @@ public class Rbts : Interactable
         gameObject.transform.position = monParentSecteur.transform.position;
     }
 
-    public void Update() // virtual
+    public void Update()
     {
         if (!isFreeze)
         {

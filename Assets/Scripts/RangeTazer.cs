@@ -44,8 +44,6 @@ public class RangeTazer : MonoBehaviour
                 // -- Lancer l'animation d'attaque du taser
                 player.anim.SetTrigger("attack");
 
-                // -- Perte d'une charge automatiquement pour chaque tir de tazer
-
                 // -- On immobilise le robot en question
 
                 StartCoroutine(Freeze());
@@ -111,6 +109,8 @@ public class RangeTazer : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
+        // test
+        leRobot.transform.position = new Vector3(leRobot.transform.position.x, leRobot.transform.position.y - 0.5f, leRobot.transform.position.z);
         leRobot.GetComponent<NavMeshAgent>().enabled = true;
 
 
