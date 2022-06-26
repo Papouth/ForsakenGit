@@ -109,7 +109,6 @@ public class Ramassable : Interactable
 
             foreach (var colliderHit in hitColliders)
             {
-
                 RaycastHit hitRobot;
 
                 // -- Debug.DrawRay(transform.position, colliderHit.transform.position - transform.position, Color.green);
