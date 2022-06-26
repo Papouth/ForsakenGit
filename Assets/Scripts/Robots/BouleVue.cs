@@ -5,7 +5,7 @@ using UnityEngine;
 public class BouleVue : MonoBehaviour
 {
     public Boule boule;
-    public bool canSeePlayer;
+    public bool canSeePlayer2;
     public LayerMask zone;
     public Player player;
 
@@ -15,7 +15,7 @@ public class BouleVue : MonoBehaviour
     private void Start()
     {
         boule = gameObject.GetComponentInParent<Boule>();
-        canSeePlayer = false;
+        canSeePlayer2 = false;
 
         detectSound = GetComponent<AudioSource>();
     }
@@ -36,7 +36,7 @@ public class BouleVue : MonoBehaviour
                 }
                 else if (hitJoueur.collider.CompareTag("Player"))
                 {
-                    canSeePlayer = true;
+                    canSeePlayer2 = true;
                     player.imageContour.SetActive(true);
 
                     detectSound.Play(0);
@@ -89,7 +89,7 @@ public class BouleVue : MonoBehaviour
             player.imageContour.SetActive(false);
 
             // -- Debug.Log("je ne touche plus le joueur");
-            canSeePlayer = false;
+            canSeePlayer2 = false;
         }
     }
 }

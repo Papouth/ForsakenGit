@@ -5,7 +5,7 @@ using UnityEngine;
 public class LarbinVue : MonoBehaviour
 {
     public Rbts robots;
-    public bool canSeePlayer;
+    private bool canSeePlayer;
 
     public LayerMask zone;
     public Player player;
@@ -18,7 +18,7 @@ public class LarbinVue : MonoBehaviour
     private void Start()
     {
         robots = gameObject.GetComponentInParent<Rbts>();
-        canSeePlayer = false;
+        //canSeePlayer = false; //test
         playerSlowedDown = false;
         robots.emissifMat.SetColor("_BaseColor", robots.safe);
         robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
@@ -59,7 +59,6 @@ public class LarbinVue : MonoBehaviour
 
                         // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
 
-                        // -- Debug.Log("Je vois le joueur");
                         robots.monRobot.SetDestination(other.transform.position);
                         // -- Je lance l'alerte à mon robot BOSS
                         Boss.CallMe(other.transform);
@@ -127,6 +126,8 @@ public class LarbinVue : MonoBehaviour
         // -- Je ne touche plus le joueur
         if (other.CompareTag("Player"))
         {
+            Debug.Log("bug viens de exit collider");
+
             //Debug.Log("joueur QUITTE collider");
 
             robots.emissifMat.SetColor("_BaseColor", robots.safe);
@@ -135,21 +136,26 @@ public class LarbinVue : MonoBehaviour
             player.imageContour.SetActive(false);
 
             // -- Debug.Log("je ne touche plus le joueur");
-            canSeePlayer = false;
+            //canSeePlayer = false; // test
+
         }
     }
 
     public void Update()
     {
+        Debug.Log(canSeePlayer);
+
         if (StatesPlayer.statesPlayer.isHiding)
         {
+            Debug.Log("bug viens de se cacher");
+
             robots.emissifMat.SetColor("_BaseColor", robots.safe);
             robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
             // -- Shake Camera
             player.imageContour.SetActive(false);
 
             // -- Debug.Log("je ne touche plus le joueur");
-            canSeePlayer = false;
+            //canSeePlayer = false; // test
         }
 
         if (robots.isFreeze)
@@ -172,7 +178,7 @@ public class LarbinVue : MonoBehaviour
         robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
 
         player.imageContour.SetActive(false);
-        canSeePlayer = false;
+        //canSeePlayer = false; // test
         playerSlowedDown = false;
         rayonLaser.SetActive(false);
 

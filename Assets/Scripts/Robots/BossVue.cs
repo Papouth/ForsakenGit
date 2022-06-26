@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossVue : MonoBehaviour
 {
-    public bool canSeePlayer;
+    public bool canSeePlayer3;
 
     public LayerMask zone;
     public Player player;
@@ -18,7 +18,7 @@ public class BossVue : MonoBehaviour
     private void Start()
     {
         boss = gameObject.GetComponentInParent<Boss>();
-        canSeePlayer = false;
+        canSeePlayer3 = false;
         playerSlowedDown = false;
         detectSound = GetComponent<AudioSource>();
     }
@@ -45,7 +45,7 @@ public class BossVue : MonoBehaviour
                 {
                     // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
 
-                    canSeePlayer = true;
+                    canSeePlayer3 = true;
                     player.imageContour.SetActive(true);
 
                     // -- Debug.Log("Je vois le joueur");
@@ -91,7 +91,7 @@ public class BossVue : MonoBehaviour
                 {
                     // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
 
-                    canSeePlayer = true;
+                    canSeePlayer3 = true;
                     player.imageContour.SetActive(true);
 
                     // -- Debug.Log("Je vois le joueur");
@@ -124,7 +124,7 @@ public class BossVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // -- Debug.Log("je ne touche plus le joueur");
-            canSeePlayer = false;
+            canSeePlayer3 = false;
             player.imageContour.SetActive(false);
         }
     }

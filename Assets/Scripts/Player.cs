@@ -337,7 +337,7 @@ public class Player : MonoBehaviour
                     Interactable interact = hitRobot.transform.GetComponent<Interactable>();
                     if (interact)
                     {
-                        Debug.Log("j'ai entendu un bruit");
+                        //Debug.Log("j'ai entendu un bruit");
                         if (colliderHit.CompareTag("RobotLarbin"))
                         {
                             robotSounded = colliderHit.GetComponent<Rbts>();
