@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 
     public LayerMask interactableLayer; // -- GameObjet pouvant interargir
     public LayerMask Ennemi;
-    public LayerMask Wall;
+    //public LayerMask Wall; // layer 7
 
 
     public Interactable lastInteractable = null; // -- Dernier GameObjet avec lequel je pouvais interargir
@@ -326,26 +326,30 @@ public class Player : MonoBehaviour
                 RaycastHit hitRobot;
 
                 //Debug.DrawRay(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, Color.blue);
-                if (Physics.Raycast(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, out hitRobot, 12f, Wall))
+                if (Physics.Raycast(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, out hitRobot, 12f))
                 {
-                    // -- Si il y a un mur alors robot n'entend pas et continue sa ronde
-                    // ne détecte que les murs ici car le layermask est Wall
-                    return;
-                }
-                else if(Physics.Raycast(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, out hitRobot, 12f))
-                {
-                    Interactable interact = hitRobot.transform.GetComponent<Interactable>();
-                    if (interact)
+                    if (hitRobot.collider.gameObject.layer == 7)
                     {
-                            //Debug.Log("j'ai entendu un bruit");
-                        if (colliderHit.CompareTag("RobotLarbin"))
+                        Debug.Log("son ne passe pas a travers les murs");
+                        // -- Si il y a un mur alors robot n'entend pas et continue sa ronde
+                        return;
+                    }
+                    else if (hitRobot.collider.CompareTag("Player"))
+                    {
+                        Debug.Log("oui");
+                        Interactable interact = hitRobot.transform.GetComponent<Interactable>();
+                        if (interact)
                         {
-                            robotSounded = colliderHit.GetComponent<Rbts>();
-                            robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.danger);
-                            robotSounded.emissifMat.SetColor("_EmissiveColor", robotSounded.danger);
-                        }
+                            //Debug.Log("j'ai entendu un bruit");
+                            if (colliderHit.CompareTag("RobotLarbin"))
+                            {
+                                robotSounded = colliderHit.GetComponent<Rbts>();
+                                robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.danger);
+                                robotSounded.emissifMat.SetColor("_EmissiveColor", robotSounded.danger);
+                            }
 
-                        interact.Interact(transform);
+                            interact.Interact(transform);
+                        }
                     }
                 }
             }

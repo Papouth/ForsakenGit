@@ -24,30 +24,32 @@ public class BouleVue : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            canSeePlayer = true;
-            player.imageContour.SetActive(true);
-
-
             RaycastHit hitJoueur;
             // -- Debug.DrawRay(robotBoule.transform.position, other.transform.position - robotBoule.transform.position, Color.green);
 
             if (Physics.Raycast(boule.transform.position, other.transform.position - boule.transform.position, out hitJoueur, 15f, ~zone))
             {
-                // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
-                return;
-            }
-            else if (Physics.Raycast(boule.transform.position, other.transform.position - boule.transform.position, out hitJoueur, 15f))
-            {
-                detectSound.Play(0);
+                if (hitJoueur.collider.gameObject.layer == 7)
+                {
+                    // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
+                    return;
+                }
+                else if (hitJoueur.collider.CompareTag("Player"))
+                {
+                    canSeePlayer = true;
+                    player.imageContour.SetActive(true);
 
-                // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
+                    detectSound.Play(0);
 
-                // -- Debug.Log("Je vois le joueur");
-                boule.monRobot.SetDestination(other.transform.position);
-                boule.Scan();
+                    // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
 
-                // -- Je lance l'alerte à mon robot BOSS
-                Boss.CallMe(other.transform);
+                    // -- Debug.Log("Je vois le joueur");
+                    boule.monRobot.SetDestination(other.transform.position);
+                    boule.Scan();
+
+                    // -- Je lance l'alerte à mon robot BOSS
+                    Boss.CallMe(other.transform);
+                }
             }
         }
     }
@@ -56,12 +58,26 @@ public class BouleVue : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            player.imageContour.SetActive(true);
-            detectSound.Play(0);
+            RaycastHit hitJoueur;
+            // -- Debug.DrawRay(robotBoule.transform.position, other.transform.position - robotBoule.transform.position, Color.green);
 
-            // -- Debug.Log("Je vois toujours");
-            boule.monRobot.SetDestination(other.transform.position);
-            Boss.CallMe(other.transform);
+            if (Physics.Raycast(boule.transform.position, other.transform.position - boule.transform.position, out hitJoueur, 15f, ~zone))
+            {
+                if (hitJoueur.collider.gameObject.layer == 7)
+                {
+                    // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
+                    return;
+                }
+                else if (hitJoueur.collider.CompareTag("Player"))
+                {
+                    player.imageContour.SetActive(true);
+                    detectSound.Play(0);
+
+                    // -- Debug.Log("Je vois toujours");
+                    boule.monRobot.SetDestination(other.transform.position);
+                    Boss.CallMe(other.transform);
+                }
+            }
         }
     }
 
