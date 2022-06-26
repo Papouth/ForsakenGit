@@ -30,4 +30,5 @@ public class StatesPlayer : MonoBehaviour
     public bool tazerInInventory = false; // -- Si j'ai ramasser mon tazer
     public bool canPickItem = false; // -- Si je peux ramasser un objet
     public bool isHoldingThrowableItem = false; // -- Si j'ai un objet lançable en main
+    public bool isDead = false; // -- Savoir si le joueur est mort
 }

@@ -159,6 +159,7 @@ public class Player : MonoBehaviour
 
     public void SecondInitialisation()
     {
+        statesPlayer.isDead = false;
         persoSpeed = 1f;
         sensiSlider.value = persoSpeed;
         sensiSlider.maxValue = speedmax;
@@ -710,7 +711,7 @@ public class Player : MonoBehaviour
     #region Other
     public void Dead()
     {
-        // display txt vs etes mort
+        statesPlayer.isDead = true;
         panelMort.SetActive(true);
         sliderObjet.SetActive(false);
         Time.timeScale = 0;

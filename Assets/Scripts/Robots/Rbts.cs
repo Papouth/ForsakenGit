@@ -32,7 +32,7 @@ public class Rbts : Interactable
     public virtual void Start()
     {
         monRobot = gameObject.GetComponent<NavMeshAgent>();
-
+        
         // -- Prend mes wayPoints à partir de mon Parent De Secteur
         wayPoints = monParentSecteur.GetComponentsInChildren<Transform>();
 
@@ -106,6 +106,11 @@ public class Rbts : Interactable
         {
             walkSound.Stop();
             soundOn = false;
+        }
+
+        if (StatesPlayer.statesPlayer.isDead)
+        {
+            walkSound.Stop();
         }
     }
     
