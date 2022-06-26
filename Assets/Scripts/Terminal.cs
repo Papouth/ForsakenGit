@@ -5,6 +5,13 @@ using UnityEngine;
 public class Terminal : Interactable
 {
     public bool isUsed = false;
+    private AudioSource dataAudio;
+
+
+    public void Start()
+    {
+        dataAudio = GetComponent<AudioSource>();
+    }
 
     public override void Interact(bool value)
     {
@@ -15,5 +22,13 @@ public class Terminal : Interactable
         StatesPlayer.statesPlayer.canMoove = !value; // -- Si mon joueur peut ou non bouger
         StatesPlayer.statesPlayer.canLookAround = !value; // -- Si mon joueur peut regarder autour de lui ou non
         isUsed = value;
+    }
+
+    public void PlayData()
+    {
+        if (isUsed)
+        {
+            dataAudio.Play(0);
+        }
     }
 }

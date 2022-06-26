@@ -39,6 +39,8 @@ public class Boule : Rbts
         bouleVue = GetComponentInChildren<BouleVue>();
         monRobot = GetComponent<NavMeshAgent>();
         scanSound = lightHead.GetComponent<AudioSource>();
+        walkSound = GetComponent<AudioSource>();
+
 
         lightHead.SetActive(false);
 

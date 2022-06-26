@@ -23,6 +23,8 @@ public class Rbts : Interactable
     public int navP = 0;
 
     public bool isFreeze = false;
+    public bool soundOn;
+    public AudioSource walkSound;
     #endregion
 
 
@@ -33,6 +35,9 @@ public class Rbts : Interactable
 
         // -- Prend mes wayPoints à partir de mon Parent De Secteur
         wayPoints = monParentSecteur.GetComponentsInChildren<Transform>();
+
+        walkSound = GetComponent<AudioSource>();
+        soundOn = true;
 
         BetterIndex();
 
@@ -90,6 +95,17 @@ public class Rbts : Interactable
             {
                 RobotsMoove();
             }
+
+            if (!soundOn)
+            {
+                walkSound.Play(0);
+                soundOn = true;
+            }
+        }
+        else if (isFreeze)
+        {
+            walkSound.Stop();
+            soundOn = false;
         }
     }
     
