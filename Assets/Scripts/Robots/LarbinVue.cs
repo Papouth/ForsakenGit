@@ -5,7 +5,7 @@ using UnityEngine;
 public class LarbinVue : MonoBehaviour
 {
     public Rbts robots;
-    private bool canSeePlayer;
+    public bool canSeePlayer;
 
     public LayerMask zone;
     public Player player;
@@ -18,12 +18,14 @@ public class LarbinVue : MonoBehaviour
     private void Start()
     {
         robots = gameObject.GetComponentInParent<Rbts>();
-        //canSeePlayer = false; //test
+        canSeePlayer = false;
         playerSlowedDown = false;
         robots.emissifMat.SetColor("_BaseColor", robots.safe);
         robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
         detectSound = GetComponent<AudioSource>();
+        player.imageContour.SetActive(false);
         rayonLaser.SetActive(false);
+        detectSound.loop = true;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -40,7 +42,6 @@ public class LarbinVue : MonoBehaviour
                 {
                     if (hitJoueur.collider.gameObject.layer == 7)
                     {
-                        //Debug.Log(hitJoueur.collider.tag);
                         return;
                     }
                     else if (hitJoueur.collider.CompareTag("Player"))
@@ -49,12 +50,10 @@ public class LarbinVue : MonoBehaviour
 
                         detectSound.Play(0);
 
-                        //Debug.Log("joueur ENTRE collider");
-
                         robots.emissifMat.SetColor("_BaseColor", robots.danger);
                         robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
 
-                        player.imageContour.SetActive(true);
+                        player.isSee = true;
 
 
                         // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
@@ -66,7 +65,7 @@ public class LarbinVue : MonoBehaviour
                         // -- RALENTISSEMENT
                         float distance = Vector3.Distance(player.raylauncher.transform.position, robots.transform.GetChild(0).position);
 
-                        if (distance < 4.5f) // old = 3.5f
+                        if (distance < 4.5f)
                         {
                             // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
                             StartCoroutine(RalentissementJoueur());
@@ -90,18 +89,17 @@ public class LarbinVue : MonoBehaviour
                 {
                     if (hit.collider.gameObject.layer == 7)
                     {
-                        //Debug.Log(hit.collider.tag);
                         return;
                     }
                     else if (hit.collider.CompareTag("Player"))
                     {
                         canSeePlayer = true;
 
-                        detectSound.Play(0);
-
                         robots.emissifMat.SetColor("_BaseColor", robots.danger);
                         robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
-                        player.imageContour.SetActive(true);
+
+                        player.isSee = true;
+
                         Boss.CallMe(other.transform);
 
 
@@ -110,7 +108,7 @@ public class LarbinVue : MonoBehaviour
                         // -- RALENTISSEMENT
                         float distance = Vector3.Distance(player.raylauncher.transform.position, robots.transform.GetChild(0).position);
 
-                        if (distance < 4.5f) // old = 3.5f
+                        if (distance < 4.5f)
                         {
                             // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
                             StartCoroutine(RalentissementJoueur());
@@ -126,18 +124,13 @@ public class LarbinVue : MonoBehaviour
         // -- Je ne touche plus le joueur
         if (other.CompareTag("Player"))
         {
-            Debug.Log("bug viens de exit collider");
-
-            //Debug.Log("joueur QUITTE collider");
-
             robots.emissifMat.SetColor("_BaseColor", robots.safe);
             robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
-            // -- Shake Camera
-            player.imageContour.SetActive(false);
 
             // -- Debug.Log("je ne touche plus le joueur");
-            //canSeePlayer = false; // test
+            detectSound.Stop();
 
+            canSeePlayer = false;
         }
     }
 
@@ -151,11 +144,9 @@ public class LarbinVue : MonoBehaviour
 
             robots.emissifMat.SetColor("_BaseColor", robots.safe);
             robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
-            // -- Shake Camera
-            player.imageContour.SetActive(false);
 
             // -- Debug.Log("je ne touche plus le joueur");
-            //canSeePlayer = false; // test
+            canSeePlayer = false;
         }
 
         if (robots.isFreeze)
@@ -167,8 +158,6 @@ public class LarbinVue : MonoBehaviour
             rayonLaser.SetActive(true);
             robots.sparks.SetActive(false);
         }
-
-        LarbinDetectPlayer();
     }
 
     public void Stun()
@@ -177,8 +166,7 @@ public class LarbinVue : MonoBehaviour
         robots.emissifMat.SetColor("_BaseColor", robots.safe);
         robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
 
-        player.imageContour.SetActive(false);
-        //canSeePlayer = false; // test
+        canSeePlayer = false;
         playerSlowedDown = false;
         rayonLaser.SetActive(false);
 
@@ -241,28 +229,6 @@ public class LarbinVue : MonoBehaviour
 
                 playerSlowedDown = false;
             }
-        }
-    }
-
-    public void LarbinDetectPlayer()
-    {
-        if (canSeePlayer)
-        {
-            //Debug.Log("robot voit");
-            detectSound.Play(0);
-
-            robots.emissifMat.SetColor("_BaseColor", robots.danger);
-            robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
-            player.imageContour.SetActive(true);
-        }
-        else if (!canSeePlayer)
-        {
-            //Debug.Log("robot ne voit pas");
-            detectSound.Stop();
-
-            robots.emissifMat.SetColor("_BaseColor", robots.safe);
-            robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
-            player.imageContour.SetActive(false);
         }
     }
 }

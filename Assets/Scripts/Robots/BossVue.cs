@@ -21,6 +21,7 @@ public class BossVue : MonoBehaviour
         canSeePlayer3 = false;
         playerSlowedDown = false;
         detectSound = GetComponent<AudioSource>();
+        detectSound.loop = true;
     }
 
 
@@ -36,9 +37,6 @@ public class BossVue : MonoBehaviour
             {
                 if (hitJoueur.collider.gameObject.layer == 7)
                 {
-                    // si robot larbin devant lui possibilité qu'il ne voit pas le joueur
-
-                    //Debug.Log(hitJoueur.collider.tag);
                     return;
                 }
                 else if (hitJoueur.collider.CompareTag("Player"))
@@ -46,7 +44,7 @@ public class BossVue : MonoBehaviour
                     // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
 
                     canSeePlayer3 = true;
-                    player.imageContour.SetActive(true);
+                    player.isSee = true;
 
                     // -- Debug.Log("Je vois le joueur");
                     Boss.CallMe(other.transform);
@@ -92,12 +90,10 @@ public class BossVue : MonoBehaviour
                     // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
 
                     canSeePlayer3 = true;
-                    player.imageContour.SetActive(true);
+                    player.isSee = true;
 
                     // -- Debug.Log("Je vois le joueur");
                     Boss.CallMe(other.transform);
-
-                    detectSound.Play(0);
 
                     float distance = Vector3.Distance(player.raylauncher.transform.position, boss.transform.GetChild(0).position);
 
@@ -124,8 +120,8 @@ public class BossVue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // -- Debug.Log("je ne touche plus le joueur");
+            detectSound.Stop();
             canSeePlayer3 = false;
-            player.imageContour.SetActive(false);
         }
     }
 

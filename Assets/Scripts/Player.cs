@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     public bool tryInteract = false; // -- Si j'essaye de rentrer en interaction
     private bool isWalking = false;
     private bool cheatBool = false; // -- Si mon panel de cheat est ouvert
+    public bool isSee;
 
 
     private Vector2 vector2;
@@ -75,8 +76,8 @@ public class Player : MonoBehaviour
     public float rotationSpeedX = 20f; // -- Gère ma vitesse de rotation G/D
     public float rotationSpeedY = 90f; // -- Gère ma vitesse de rotation H/B
     public float persoSpeed = 1f; // -- Souris sensibilité
-    private float speedmin =  0.1f;
-    private float speedmax =  2f;
+    private float speedmin = 0.1f;
+    private float speedmax = 2f;
 
     [Range(0f, 0.15f)]
     public float vitesse = 0.1f; // -- Au dessus de 0.1f, le joueur peut traverser le mur
@@ -126,6 +127,19 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         WaitForInteract();
+    }
+
+    private void LateUpdate()
+    {
+        if (!isSee && imageContour.activeInHierarchy)
+        {
+
+        }
+        else
+        {
+            imageContour.SetActive(isSee);
+        }
+        isSee = false;
     }
 
 
@@ -412,12 +426,12 @@ public class Player : MonoBehaviour
         {
             // -- Mettre les caméras
             OptiCam();
-            
+
 
             // -- Déplacer le joueur en face du terminal pour réaliser parfaitement l'animation
             tpTerminal = currentInteractable.transform.GetChild(0);
             transform.position = tpTerminal.position;
-            transform.rotation = tpTerminal.rotation; 
+            transform.rotation = tpTerminal.rotation;
 
             anim.SetTrigger("terminal");
 
@@ -522,7 +536,7 @@ public class Player : MonoBehaviour
             else
             {
                 weapons[i].gameObject.SetActive(false);
-            } 
+            }
         }
     }
 
@@ -588,7 +602,7 @@ public class Player : MonoBehaviour
 
     public void PuissanceSlider()
     {
-        puissanceSlider.value = tir; 
+        puissanceSlider.value = tir;
     }
 
     public void WaitForInteract()

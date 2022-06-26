@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public Player player;
 
+
     #region RobotsManagement
     public void RobotOn()
     {

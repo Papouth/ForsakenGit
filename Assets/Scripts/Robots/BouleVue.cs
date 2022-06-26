@@ -18,6 +18,7 @@ public class BouleVue : MonoBehaviour
         canSeePlayer2 = false;
 
         detectSound = GetComponent<AudioSource>();
+        detectSound.loop = true;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -37,7 +38,7 @@ public class BouleVue : MonoBehaviour
                 else if (hitJoueur.collider.CompareTag("Player"))
                 {
                     canSeePlayer2 = true;
-                    player.imageContour.SetActive(true);
+                    player.isSee = true;
 
                     detectSound.Play(0);
 
@@ -70,8 +71,7 @@ public class BouleVue : MonoBehaviour
                 }
                 else if (hitJoueur.collider.CompareTag("Player"))
                 {
-                    player.imageContour.SetActive(true);
-                    detectSound.Play(0);
+                    player.isSee = true;
 
                     // -- Debug.Log("Je vois toujours");
                     boule.monRobot.SetDestination(other.transform.position);
@@ -86,8 +86,7 @@ public class BouleVue : MonoBehaviour
         // -- Je ne touche plus le joueur
         if (other.CompareTag("Player"))
         {
-            player.imageContour.SetActive(false);
-
+            detectSound.Stop();
             // -- Debug.Log("je ne touche plus le joueur");
             canSeePlayer2 = false;
         }
