@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -81,5 +82,10 @@ public class GameManager : MonoBehaviour
     public void Update()
     {
         batterietxt.text = Inventaire.inventaire.currentPilesCapacity.ToString();
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }
