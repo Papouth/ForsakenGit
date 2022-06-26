@@ -6,7 +6,7 @@ public class BouleVue : MonoBehaviour
 {
     public Boule boule;
     public bool canSeePlayer;
-    public LayerMask Wall;
+    public LayerMask zone;
     public Player player;
 
     private AudioSource detectSound;
@@ -31,7 +31,7 @@ public class BouleVue : MonoBehaviour
             RaycastHit hitJoueur;
             // -- Debug.DrawRay(robotBoule.transform.position, other.transform.position - robotBoule.transform.position, Color.green);
 
-            if (Physics.Raycast(boule.transform.position, other.transform.position - boule.transform.position, out hitJoueur, 15f, Wall))
+            if (Physics.Raycast(boule.transform.position, other.transform.position - boule.transform.position, out hitJoueur, 15f, ~zone))
             {
                 // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
                 return;

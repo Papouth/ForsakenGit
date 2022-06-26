@@ -329,15 +329,10 @@ public class Player : MonoBehaviour
                 if (Physics.Raycast(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, out hitRobot, 12f, Wall))
                 {
                     // -- Si il y a un mur alors robot n'entend pas et continue sa ronde
-                    if (colliderHit.CompareTag("RobotLarbin"))
-                    {
-                        robotSounded = colliderHit.GetComponent<Rbts>();
-                        robotSounded.emissifMat.SetColor("_BaseColor", robotSounded.safe);
-                        robotSounded.emissifMat.SetColor("_EmissiveColor", robotSounded.safe);
-                    }
+                    // ne détecte que les murs ici car le layermask est Wall
                     return;
                 }
-                else if (Physics.Raycast(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, out hitRobot, 12f))
+                else if(Physics.Raycast(raylauncher.transform.position, colliderHit.transform.GetChild(0).position - raylauncher.transform.position, out hitRobot, 12f))
                 {
                     Interactable interact = hitRobot.transform.GetComponent<Interactable>();
                     if (interact)

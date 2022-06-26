@@ -6,7 +6,7 @@ public class BossVue : MonoBehaviour
 {
     public bool canSeePlayer;
 
-    public LayerMask Wall;
+    public LayerMask zone;
     public Player player;
     public Boss boss;
 
@@ -38,7 +38,7 @@ public class BossVue : MonoBehaviour
                 // -- Debug.DrawRay(robotBoss.transform.position, other.transform.position - robotBoss.transform.position, Color.green);
 
 
-                if (Physics.Raycast(boss.transform.GetChild(0).position, player.raylauncher.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f, Wall)) // other.transform.position
+                if (Physics.Raycast(boss.transform.GetChild(0).position, player.raylauncher.transform.position - boss.transform.GetChild(0).position, out hitJoueur, 50f, ~zone)) // other.transform.position
                 {
                     // -- S'il y a un mur alors robot ne vois pas et continue sa ronde
                     return;
