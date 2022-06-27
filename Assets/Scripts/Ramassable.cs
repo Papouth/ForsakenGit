@@ -26,7 +26,9 @@ public class Ramassable : Interactable
     public Shader normalShader;
     public Shader interactShader;
 
-    private AudioSource colSound;
+    private AudioSource objetSound;
+    public AudioClip colSound;
+    public AudioClip pickup;
 
 
 
@@ -36,7 +38,7 @@ public class Ramassable : Interactable
         isGrounded = false;
         colObjet = GetComponent<Collider>();
         sphereCol = GetComponent<SphereCollider>();
-        colSound = GetComponent<AudioSource>();
+        objetSound = GetComponent<AudioSource>();
 
         FindRenderer();
         normalShader = Shader.Find("HDRP/Lit");
@@ -57,8 +59,6 @@ public class Ramassable : Interactable
 
     public void OnCollisionEnter(Collision other)
     {
-        // -- Quand on rentre en contact on émet le bruit du matériaux avec lequel on est rentré en collision [amélioration]
-
         isGrounded = true;
 
         if (Time.timeSinceLevelLoad < 3f)
@@ -100,7 +100,7 @@ public class Ramassable : Interactable
         {
             if(!gameObject.CompareTag("Tazer"))
             {
-                colSound.Play(0);
+                objetSound.PlayOneShot(colSound);
             }
 
             // -- A chaque fois que l'objet touche le sol il fait un OverlapShere, et si dans la zone se trouve un ennemi, il le détecte
@@ -173,7 +173,7 @@ public class Ramassable : Interactable
         }
         else
         {
-            Poser(); // erreur ici !!!!!!!!!!!
+            Poser();
         }
     }
 
@@ -190,6 +190,9 @@ public class Ramassable : Interactable
 
         if (!StatesPlayer.statesPlayer.isHoldingThrowableItem)
         {
+            // -- On lance le son de ramassage
+            objetSound.PlayOneShot(pickup);
+
             // -- Je place mon objet dans ma main droite
             transform.parent = StatesPlayer.statesPlayer.rightHand;
             transform.localPosition = Vector3.zero;
