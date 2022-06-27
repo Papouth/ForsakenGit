@@ -8,17 +8,18 @@ public class RangeTazer : MonoBehaviour
     public Rbts leRobot;
     public Player player;
     public bool tazing;
-    //public bool actual; // test
 
     public Renderer rend;
     public Shader normalShader;
+    private AudioSource taser;
 
 
     public void Start()
     {
+        taser = GetComponent<AudioSource>();
         player = GetComponentInParent<Player>();
         tazing = false;
-        //actual = false;
+
         rend = transform.GetComponentInParent<Renderer>();
         normalShader = Shader.Find("HDRP/Lit");
 
@@ -41,7 +42,6 @@ public class RangeTazer : MonoBehaviour
             if (!tazing)
             {
                 tazing = true;
-                //actual = true;
                 // -- Lancer l'animation d'attaque du taser
                 player.anim.SetTrigger("attack");
 
@@ -66,7 +66,7 @@ public class RangeTazer : MonoBehaviour
     {
         if(other.gameObject.CompareTag("RobotLarbin"))
         {
-            if (/*!actual*/!tazing)
+            if (!tazing)
             {
                 leRobot = null;
             }
@@ -82,6 +82,8 @@ public class RangeTazer : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && Inventaire.inventaire.currentPilesCapacity > 0 && StatesPlayer.statesPlayer.isHoldingTazer)
             {
                 player.anim.SetTrigger("attack");
+                // -- Bruit du taser
+                taser.Play();
 
                 // A chaque tir de mon tazer, je perd une charge
                 Inventaire.inventaire.currentPilesCapacity -= 1;
@@ -113,8 +115,6 @@ public class RangeTazer : MonoBehaviour
         leRobot.transform.position = new Vector3(leRobot.transform.position.x, leRobot.transform.position.y - 0.5f, leRobot.transform.position.z);
         leRobot.GetComponent<NavMeshAgent>().enabled = true;
 
-        //tazing = false;
-
         // -> Remettre l'anim de marche du robot
         leRobot.GetComponent<Animator>().enabled = true;
 
@@ -124,7 +124,6 @@ public class RangeTazer : MonoBehaviour
         leRobot.isFreeze = false;
 
         tazing = false;
-        //actual = false;
         leRobot = null;
     }
 }
