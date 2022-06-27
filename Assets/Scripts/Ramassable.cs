@@ -43,6 +43,8 @@ public class Ramassable : Interactable
         FindRenderer();
         normalShader = Shader.Find("HDRP/Lit");
         interactShader = Shader.Find("Shader Graphs/Outline");
+        colSound = Resources.Load("projet objet jeter") as AudioClip;
+        pickup = Resources.Load("pickup Objects") as AudioClip;
     }
 
     public void FindRenderer()

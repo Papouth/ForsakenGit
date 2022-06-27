@@ -9,6 +9,7 @@ public class PickUpTazer : Ramassable
     public UIManager ui;
     private AudioSource taserSound;
     private MeshRenderer rendTaser;
+    private AudioClip taserClip;
 
 
     public void Awake()
@@ -17,6 +18,7 @@ public class PickUpTazer : Ramassable
         taserSound = GetComponent<AudioSource>();
         rendTaser = GetComponent<MeshRenderer>();
         rendTaser.enabled = true;
+        taserClip = Resources.Load("pickup Objects") as AudioClip;
     }
 
     public override void Interact(bool value)
@@ -43,7 +45,7 @@ public class PickUpTazer : Ramassable
     {
         rendTaser.enabled = false;
         // -- On lance le son de ramassage
-        taserSound.Play(0);
+        taserSound.PlayOneShot(taserClip);
 
         yield return new WaitForSeconds(1);
 
