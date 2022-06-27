@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
     public GameObject hidingText;
     public GameObject imageContour;
     public GameObject sliderObjet;
+    public GameObject victoryPanel;
 
     public Slider sensiSlider;
     private Slider puissanceSlider;
@@ -169,6 +170,7 @@ public class Player : MonoBehaviour
         visionJoueur = GetComponentInChildren<Camera>();
         caps = GetComponent<CapsuleCollider>();
         inject = cuve.GetComponent<Injection>();
+        victoryPanel.SetActive(false);
     }
 
     public void SecondInitialisation()
@@ -471,18 +473,27 @@ public class Player : MonoBehaviour
 
                 anim.SetTrigger("terminal");
                 // -- valeur si on sort le jeu : slider.value += Time.time * 0.04f;
-                slider.value += Time.time * 0.18f; // vitesse pour le jury = 0.32f
+                slider.value += Time.time * 0.16f; // vitesse pour le jury = 0.32f
 
                 // -- Call le robot boss quand y'aura le son
             }
             else if (slider.value >= slider.maxValue)
             {
                 anim.ResetTrigger("terminal");
-                // Si temps écouler et que joueur n'a pas stopper l'injection -> anim de la cuve qui se vide du liquide
                 Destroy(inject);
                 Destroy(slider.gameObject);
                 statesPlayer.isStopingInjection = false;
+                // enlever le current interactable + le last
+                lastInteractable.ShowText(false);
+                lastInteractable = null;
+                currentInteractable = null;
+
+
+                // panel de victoire
+                victoryPanel.SetActive(true);
+                Time.timeScale = 0;
             }
+            // Si temps écouler et que joueur n'a pas stopper l'injection -> anim de la cuve qui se vide du liquide
         }
     }
 

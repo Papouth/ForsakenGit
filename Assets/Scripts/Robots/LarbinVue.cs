@@ -136,12 +136,10 @@ public class LarbinVue : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(canSeePlayer);
+        //Debug.Log(canSeePlayer);
 
         if (StatesPlayer.statesPlayer.isHiding)
         {
-            Debug.Log("bug viens de se cacher");
-
             robots.emissifMat.SetColor("_BaseColor", robots.safe);
             robots.emissifMat.SetColor("_EmissiveColor", robots.safe);
 
