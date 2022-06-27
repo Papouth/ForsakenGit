@@ -8,6 +8,7 @@ public class IADialogue : MonoBehaviour
     public bool IATrigger = false;
     public GameObject IA;
     public Animator AnimTable;
+    public AudioSource AudioIA;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +37,12 @@ public class IADialogue : MonoBehaviour
         {
             IA.SetActive(true);
             AnimTable.SetBool("TriggerTable", true);
+            AudioIA.Play();
+
+            Destroy(this.gameObject);
         }
 
     }
+
+
 }
