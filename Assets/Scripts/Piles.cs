@@ -12,6 +12,7 @@ public class Piles : Stockable
     private MeshRenderer rend;
     public AudioClip pileClip;
     public AudioMixerGroup effects;
+    public bool recup;
 
     public void Start()
     {
@@ -21,19 +22,27 @@ public class Piles : Stockable
         rend = GetComponent<MeshRenderer>();
         rend.enabled = true;
         pileClip = Resources.Load("pickup Objects") as AudioClip;
+        recup = false;
     }
 
     public override void Interact(bool value)
     {
         base.Interact(value);
 
-        StartCoroutine(PileSon());
-        
-        // -- Lorsque je récupère une pile, je la détruit dans ma scène et j'en rajoute une à mon nombre de piles
-        Inventaire.inventaire.nbrPiles++;
-        
-        // -- Rajouter dans mon inventaire 3 charges
-        Inventaire.inventaire.currentPilesCapacity += 3;
+        if (!recup)
+        {
+            recup = true;
+
+            //base.Interact(value);
+
+            StartCoroutine(PileSon());
+
+            // -- Lorsque je récupère une pile, je la détruit dans ma scène et j'en rajoute une à mon nombre de piles
+            Inventaire.inventaire.nbrPiles++;
+
+            // -- Rajouter dans mon inventaire 3 charges
+            Inventaire.inventaire.currentPilesCapacity += 3;
+        }
     }
 
     private IEnumerator PileSon()
@@ -45,5 +54,7 @@ public class Piles : Stockable
         yield return new WaitForSeconds(1);
 
         Destroy(gameObject);
+
+        ShowText(false);
     }
 }
