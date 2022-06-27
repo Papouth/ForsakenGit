@@ -1,17 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
+
+// -- Nécessite le composant AudioSource
+[RequireComponent(typeof(AudioSource))]
 public class Piles : Stockable
 {
     private AudioSource pileSound;
     private MeshRenderer rend;
+    public AudioClip pileClip;
+    public AudioMixerGroup effects;
 
     public void Start()
     {
         pileSound = GetComponent<AudioSource>();
+        pileSound.playOnAwake = false;
+        pileSound.outputAudioMixerGroup = effects;
         rend = GetComponent<MeshRenderer>();
         rend.enabled = true;
+        pileClip = Resources.Load("pickup Objects") as AudioClip;
     }
 
     public override void Interact(bool value)
@@ -31,7 +40,7 @@ public class Piles : Stockable
     {
         rend.enabled = false;
         // -- On lance le son de ramassage
-        pileSound.Play(0);
+        pileSound.PlayOneShot(pileClip);
 
         yield return new WaitForSeconds(1);
 
