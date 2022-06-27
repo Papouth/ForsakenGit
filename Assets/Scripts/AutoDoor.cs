@@ -21,6 +21,11 @@ public class AutoDoor : MonoBehaviour
         animDoor.SetBool("Open", true);
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        animDoor.SetBool("Open", true);
+    }
+
     private void OnTriggerExit(Collider other)
     {
         autoSound.PlayOneShot(closeDoor);
