@@ -87,7 +87,6 @@ public class Player : MonoBehaviour
 
     public Animator anim;
     private AudioSource playerSound;
-    public AudioClip pickup;
     public AudioClip marche;
     #endregion
 
@@ -405,7 +404,7 @@ public class Player : MonoBehaviour
     public void PlayerInteract()
     {
         // -- Si j'appuie sur ma touche d'interaction et que je n'ai pas en main le tazer
-        if (Input.GetKeyDown(keysAssign.interactionKey)) // !statesPlayer.isHoldingTazer
+        if (Input.GetKeyDown(keysAssign.interactionKey))
         {
             // Si je n'ai pas d'objet lançable
             if (currentInteractable && !statesPlayer.isHoldingThrowableItem)
@@ -503,7 +502,6 @@ public class Player : MonoBehaviour
 
                 // -- Call le robot boss quand y'aura le son
                 Boss.CallMe(transform);
-                // alarme / musique d'alerte
 
             }
             else if (slider.value >= slider.maxValue)
@@ -582,7 +580,7 @@ public class Player : MonoBehaviour
 
     public void ShowTazer()
     {
-        if (statesPlayer.isHoldingTazer == true)
+        if (statesPlayer.isHoldingTazer == true && statesPlayer.tazerInInventory)
         {
             ChangeWeapons(1);
             uiTazer.SetActive(true);
@@ -671,8 +669,6 @@ public class Player : MonoBehaviour
                         {
                             // -- Je peux interargir avec mon objet
                             instance.Interact(true);
-                            // -- Son d'interaction
-                            playerSound.PlayOneShot(pickup);
 
                             if (!instance.isOnlyStockable)
                             {
