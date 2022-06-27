@@ -24,7 +24,7 @@ public class IADialogue : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("player"))
+        if (other.CompareTag("Player"))
         {
             IATrigger = true;
         }

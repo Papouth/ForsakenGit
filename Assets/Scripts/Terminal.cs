@@ -8,26 +8,37 @@ public class Terminal : Interactable
     private AudioSource dataAudio;
     public IADialogue IAD; //Richard
     public float DesactiverTPS = 0; //Richard
-    public bool desactiverterminal = false;
-
+    public bool desactiverterminal = false; //Richard
+    public bool Desactiver = false; //Richard
 
     public void Start()
     {
         dataAudio = GetComponent<AudioSource>();
+
     }
 
     public void Update() //Richard
     {
-        if (IAD.TerminalActive)
+        if (IAD.TerminalActive == true)
         {
-            desactiverterminal = true;
-            DesactiverTPS = DesactiverTPS + Time.deltaTime;
+            Desactiver = true;
+            
         }
 
         if (DesactiverTPS >= 13)
         {
             DesactiverTPS = 13;
             IAD.TerminalActive = false;
+            Desactiver = false;
+        }
+
+        if(Desactiver == true)
+        {
+            DesactiverTPS = DesactiverTPS + Time.deltaTime;
+            desactiverterminal = true;
+        }
+        else
+        {
             desactiverterminal = false;
         }
     }
@@ -42,7 +53,7 @@ public class Terminal : Interactable
         StatesPlayer.statesPlayer.canLookAround = !value; // -- Si mon joueur peut regarder autour de lui ou non
         isUsed = value; */
 
-        if (!desactiverterminal) //Richard
+        if (desactiverterminal == false) //Richard
         {
             // -- Display ou non mon UI de terminal
             UIManager.uiManager?.DisplayTerminalMenu(value);
