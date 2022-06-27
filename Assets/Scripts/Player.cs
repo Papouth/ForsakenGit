@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     private bool isWalking = false;
     private bool cheatBool = false; // -- Si mon panel de cheat est ouvert
     public bool isSee;
+    public bool sonMarcheJoueur = false;
 
 
     private Vector2 vector2;
@@ -85,7 +86,9 @@ public class Player : MonoBehaviour
 
 
     public Animator anim;
-    private AudioSource pickupSound;
+    private AudioSource playerSound;
+    public AudioClip pickup;
+    public AudioClip marche;
     #endregion
 
 
@@ -172,7 +175,7 @@ public class Player : MonoBehaviour
         caps = GetComponent<CapsuleCollider>();
         inject = cuve.GetComponent<Injection>();
         victoryPanel.SetActive(false);
-        pickupSound = GetComponent<AudioSource>();
+        playerSound = GetComponent<AudioSource>();
     }
 
     public void SecondInitialisation()
@@ -232,19 +235,37 @@ public class Player : MonoBehaviour
             {
                 //anim de marche
                 isWalking = true;
-                //anim.Play("Idlemouvemantmain");
 
                 anim.SetBool("Move", true);
+
+                if (!isCrouched)
+                {
+                    if (sonMarcheJoueur == false)
+                    {
+                        sonMarcheJoueur = true;
+                        // -- On met le son de bruit de pas du joueur
+                        StartCoroutine(MarcheSon());
+                    }
+                }
             }
             else
             {
                 //anim d'idle
                 isWalking = false;
-                //anim.Play("Idle");
 
                 anim.SetBool("Move", false);
+                playerSound.Stop();
             }
         }
+    }
+
+    private IEnumerator MarcheSon()
+    {
+        playerSound.PlayOneShot(marche);
+
+        yield return new WaitForSeconds(4f);
+
+        sonMarcheJoueur = false;
     }
 
     public void Crouch()
@@ -260,6 +281,9 @@ public class Player : MonoBehaviour
         }
         else
         {
+            playerSound.Stop();
+            sonMarcheJoueur = false;
+
             anim.enabled = false;
             // Crouch
             isCrouched = true; // check si est accroupis
@@ -648,7 +672,7 @@ public class Player : MonoBehaviour
                             // -- Je peux interargir avec mon objet
                             instance.Interact(true);
                             // -- Son d'interaction
-                            pickupSound.Play(0);
+                            playerSound.PlayOneShot(pickup);
 
                             if (!instance.isOnlyStockable)
                             {
