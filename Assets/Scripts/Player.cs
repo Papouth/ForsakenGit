@@ -476,6 +476,9 @@ public class Player : MonoBehaviour
                 slider.value += Time.time * 0.16f; // vitesse pour le jury = 0.32f
 
                 // -- Call le robot boss quand y'aura le son
+                Boss.CallMe(transform);
+                // alarme / musique d'alerte
+
             }
             else if (slider.value >= slider.maxValue)
             {
