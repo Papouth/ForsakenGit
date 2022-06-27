@@ -6,7 +6,6 @@ public class Terminal : Interactable
 {
     public bool isUsed = false;
     private AudioSource dataAudio;
-    public bool Desactiver = false; //Richard
     public IADialogue IAD; //Richard
     public float DesactiverTPS = 0; //Richard
     public bool desactiverterminal = false;
@@ -15,31 +14,20 @@ public class Terminal : Interactable
     public void Start()
     {
         dataAudio = GetComponent<AudioSource>();
-       // IAD = GetComponent<IADialogue>(); //Richard 
     }
 
     public void Update() //Richard
     {
-        if(IAD.TerminalActive == true)
+        if (IAD.TerminalActive)
         {
-            Desactiver = true;
+            desactiverterminal = true;
             DesactiverTPS = DesactiverTPS + Time.deltaTime;
-
         }
 
-        if(DesactiverTPS >= 13)
+        if (DesactiverTPS >= 13)
         {
             DesactiverTPS = 13;
             IAD.TerminalActive = false;
-            Desactiver = false;
-        }
-
-        if(Desactiver == true)
-        {
-            desactiverterminal = true;
-        }
-        else
-        {
             desactiverterminal = false;
         }
     }
@@ -54,7 +42,7 @@ public class Terminal : Interactable
         StatesPlayer.statesPlayer.canLookAround = !value; // -- Si mon joueur peut regarder autour de lui ou non
         isUsed = value; */
 
-        if (desactiverterminal == false) //Richard
+        if (!desactiverterminal) //Richard
         {
             // -- Display ou non mon UI de terminal
             UIManager.uiManager?.DisplayTerminalMenu(value);

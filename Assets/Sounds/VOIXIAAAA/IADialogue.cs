@@ -10,14 +10,13 @@ public class IADialogue : MonoBehaviour
     public Animator AnimTable;
     public AudioSource AudioIA;
     public bool TerminalActive = false;
-    // Start is called before the first frame update
+
+
     void Start()
     {
         IA.SetActive(false);
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
         SpawnIA();
@@ -25,7 +24,7 @@ public class IADialogue : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("player"))
         {
             IATrigger = true;
         }
@@ -33,17 +32,14 @@ public class IADialogue : MonoBehaviour
 
     void SpawnIA()
     {
-        if (IATrigger == true)
+        if (IATrigger)
         {
             IA.SetActive(true);
             AnimTable.SetBool("TriggerTable", true);
-            AudioIA.Play();
+            AudioIA.Play(0);
             TerminalActive = true;
 
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-
     }
-
-
 }
