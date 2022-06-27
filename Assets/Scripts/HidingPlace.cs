@@ -19,6 +19,9 @@ public class HidingPlace : Interactable
     private bool escPressed;
     public Animator animPorteCuve;//Bryan
     public Animator animCasierPorte;//Bryan
+    private AudioSource cachetteSound;
+    public AudioClip ouverture;
+    public AudioClip fermeture;
 
 
     public void Awake()
@@ -27,6 +30,7 @@ public class HidingPlace : Interactable
         hideColls = GetComponentsInChildren<BoxCollider>();
         personnage = GameObject.Find("Personnage");
         player = personnage.GetComponent<Player>();
+        cachetteSound = GetComponent<AudioSource>();
 
         escPressed = false;
     }
@@ -98,6 +102,8 @@ public class HidingPlace : Interactable
         if (gameObject.CompareTag("cuve"))
         {
             player.anim.Play("cuveCryo");
+            cachetteSound.PlayOneShot(ouverture);
+
 
             player.transform.localPosition = tpIn.position; 
             player.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
@@ -171,6 +177,8 @@ public class HidingPlace : Interactable
         if (gameObject.CompareTag("cuve"))
         {
             player.anim.Play("sortiCuveCryo");
+            cachetteSound.PlayOneShot(fermeture);
+
 
             player.transform.position = tpOut.position;
             player.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
