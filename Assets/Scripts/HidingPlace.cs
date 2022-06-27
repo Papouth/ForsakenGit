@@ -116,6 +116,8 @@ public class HidingPlace : Interactable
         else
         {
             animCasierPorte.SetTrigger("CasierInteract");
+            cachetteSound.PlayOneShot(ouverture);
+
 
             hideColl.enabled = false;
             foreach (var collcomp in hideColls)
@@ -189,6 +191,8 @@ public class HidingPlace : Interactable
         else
         {
             player.anim.Play("sortiCasier");
+            cachetteSound.PlayOneShot(fermeture);
+
 
             // -- Tp du joueur à l'extérieur du casier avec une bonne orientation
             tpOut = transform.GetChild(4);
