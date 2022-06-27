@@ -23,7 +23,7 @@ public class Terminal : Interactable
         if(IAD.TerminalActive == true)
         {
             Desactiver = true;
-            DesactiverTPS = DesactiverTPS + Time.deltaTime;
+            
 
         }
 
@@ -36,6 +36,7 @@ public class Terminal : Interactable
 
         if(Desactiver == true)
         {
+            DesactiverTPS = DesactiverTPS + Time.deltaTime;
             desactiverterminal = true;
         }
         else
