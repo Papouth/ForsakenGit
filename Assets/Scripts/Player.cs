@@ -85,6 +85,7 @@ public class Player : MonoBehaviour
 
 
     public Animator anim;
+    private AudioSource pickupSound;
     #endregion
 
 
@@ -171,6 +172,7 @@ public class Player : MonoBehaviour
         caps = GetComponent<CapsuleCollider>();
         inject = cuve.GetComponent<Injection>();
         victoryPanel.SetActive(false);
+        pickupSound = GetComponent<AudioSource>();
     }
 
     public void SecondInitialisation()
@@ -645,6 +647,8 @@ public class Player : MonoBehaviour
                         {
                             // -- Je peux interargir avec mon objet
                             instance.Interact(true);
+                            // -- Son d'interaction
+                            pickupSound.Play(0);
 
                             if (!instance.isOnlyStockable)
                             {
