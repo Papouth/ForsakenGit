@@ -3,7 +3,22 @@ guid: 11447dab2dfeb2f4aa2f4d72234032cf
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ecran
+    second: {fileID: 2100000, guid: f0c5392721dbbe04fb3eb0ffc4fc87f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RobotMaterial
+    second: {fileID: 2100000, guid: b1fb9b7d90931334faf219604c320e93, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yeux
+    second: {fileID: 2100000, guid: ab0718c3b13d8a8419116fd49aed4bda, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
