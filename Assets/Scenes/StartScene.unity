@@ -4049,6 +4049,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1082762825}
+  - component: {fileID: 1082762826}
   m_Layer: 5
   m_Name: Cred
   m_TagString: Untagged
@@ -4077,6 +4078,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -430}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1082762826
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082762824}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c3ecf93a8e8464c43a3401c1a6b18617, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1087477326
 GameObject:
   m_ObjectHideFlags: 0
@@ -9032,7 +9053,7 @@ PrefabInstance:
       objectReference: {fileID: 347900762}
     - target: {fileID: 4138270934061350439, guid: da71f82de535990428834aef0a880de0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4138270934224556156, guid: da71f82de535990428834aef0a880de0, type: 3}
       propertyPath: m_IsActive
@@ -9159,6 +9180,20 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4138270934061350616, guid: da71f82de535990428834aef0a880de0, type: 3}
   m_PrefabInstance: {fileID: 2474713320298797773}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2474713320298797778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961851837302351082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 40, z: 0, w: 40}
+  m_Softness: {x: 0, y: 0}
 --- !u!1001 &5910635475977193944
 PrefabInstance:
   m_ObjectHideFlags: 0
