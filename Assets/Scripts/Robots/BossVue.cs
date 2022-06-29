@@ -87,7 +87,7 @@ public class BossVue : MonoBehaviour
                     Boss.CallMe(other.transform);
 
                     // -- RALENTISSEMENT
-                    float distance = Vector3.Distance(player.transform.position, boss.transform.GetChild(0).position);
+                    float distance = Vector3.Distance(player.transform.position, boss.transform.position); // GetChild(0)
 
                     if (distance < 8f)
                     {
@@ -163,7 +163,7 @@ public class BossVue : MonoBehaviour
                     Boss.CallMe(other.transform);
 
                     // -- RALENTISSEMENT
-                    float distance = Vector3.Distance(player.transform.position, boss.transform.GetChild(0).position);
+                    float distance = Vector3.Distance(player.transform.position, boss.transform.position); // GetChild(0)
 
                     if (distance < 8f)
                     {
