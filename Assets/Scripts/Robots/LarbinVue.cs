@@ -99,7 +99,7 @@ public class LarbinVue : MonoBehaviour
                         Boss.CallMe(other.transform);
 
                         // -- RALENTISSEMENT
-                        float distance = Vector3.Distance(player.transform.position, robots.transform.GetChild(0).position);
+                        float distance = Vector3.Distance(player.transform.position, robots.transform.position); // GetChild(0)
 
                         if (distance < 4.5f)
                         {
@@ -176,7 +176,7 @@ public class LarbinVue : MonoBehaviour
                         Boss.CallMe(other.transform);
 
                         // -- RALENTISSEMENT
-                        float distance = Vector3.Distance(player.transform.position, robots.transform.GetChild(0).position);
+                        float distance = Vector3.Distance(player.transform.position, robots.transform.position); // GetChild(0)
 
                         if (distance < 4.5f)
                         {
