@@ -498,7 +498,7 @@ public class Player : MonoBehaviour
 
                 anim.SetTrigger("terminal");
                 // -- valeur si on sort le jeu : slider.value += Time.time * 0.04f;
-                slider.value += Time.time * 0.10f; // vitesse pour le jury = 0.32f
+                slider.value += Time.time * 0.11f; // vitesse pour le jury = 0.32f
 
                 // -- Call le robot boss quand y'aura le son
                 Boss.CallMe(transform);
