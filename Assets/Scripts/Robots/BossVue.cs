@@ -67,6 +67,35 @@ public class BossVue : MonoBehaviour
                     }
                 }
             }
+
+            if (player.isCrouched)
+            {
+                if (other.gameObject.layer == 7)
+                {
+                    return;
+                }
+                else if (other.CompareTag("Player"))
+                {
+                    canSeePlayer3 = true;
+
+                    detectSound.Play(0);
+
+                    player.isSee = true;
+
+
+                    // -- Je lance l'alerte à mon robot BOSS
+                    Boss.CallMe(other.transform);
+
+                    // -- RALENTISSEMENT
+                    float distance = Vector3.Distance(player.transform.position, boss.transform.GetChild(0).position);
+
+                    if (distance < 4.5f)
+                    {
+                        // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                        StartCoroutine(RalentissementJoueur());
+                    }
+                }
+            }
         }
     }
 
@@ -108,6 +137,31 @@ public class BossVue : MonoBehaviour
                         // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
                         // -- ALORS ON TUE LE JOUEUR
                         player.Dead();
+                    }
+                }
+            }
+
+            if (player.isCrouched)
+            {
+                if (other.gameObject.layer == 7)
+                {
+                    return;
+                }
+                else if (other.CompareTag("Player"))
+                {
+                    canSeePlayer3 = true;
+                    player.isSee = true;
+
+                    // -- Je lance l'alerte à mon robot BOSS
+                    Boss.CallMe(other.transform);
+
+                    // -- RALENTISSEMENT
+                    float distance = Vector3.Distance(player.transform.position, boss.transform.GetChild(0).position);
+
+                    if (distance < 4.5f)
+                    {
+                        // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                        StartCoroutine(RalentissementJoueur());
                     }
                 }
             }

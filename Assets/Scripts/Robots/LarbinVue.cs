@@ -72,6 +72,42 @@ public class LarbinVue : MonoBehaviour
                         }
                     }
                 }
+
+
+                if (player.isCrouched)
+                {
+                    if (other.gameObject.layer == 7)
+                    {
+                        return;
+                    }
+                    else if (other.CompareTag("Player"))
+                    {
+                        canSeePlayer = true;
+
+                        detectSound.Play(0);
+
+                        robots.emissifMat.SetColor("_BaseColor", robots.danger);
+                        robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
+
+                        player.isSee = true;
+
+
+                        // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
+
+                        robots.monRobot.SetDestination(other.transform.position);
+                        // -- Je lance l'alerte à mon robot BOSS
+                        Boss.CallMe(other.transform);
+
+                        // -- RALENTISSEMENT
+                        float distance = Vector3.Distance(player.transform.position, robots.transform.GetChild(0).position);
+
+                        if (distance < 4.5f)
+                        {
+                            // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                            StartCoroutine(RalentissementJoueur());
+                        }
+                    }
+                }
             }
         }
     }
@@ -107,6 +143,40 @@ public class LarbinVue : MonoBehaviour
 
                         // -- RALENTISSEMENT
                         float distance = Vector3.Distance(player.raylauncher.transform.position, robots.transform.GetChild(0).position);
+
+                        if (distance < 4.5f)
+                        {
+                            // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                            StartCoroutine(RalentissementJoueur());
+                        }
+                    }
+                }
+
+
+                if (player.isCrouched)
+                {
+                    if (other.gameObject.layer == 7)
+                    {
+                        return;
+                    }
+                    else if (other.CompareTag("Player"))
+                    {
+                        canSeePlayer = true;
+
+                        robots.emissifMat.SetColor("_BaseColor", robots.danger);
+                        robots.emissifMat.SetColor("_EmissiveColor", robots.danger);
+
+                        player.isSee = true;
+
+
+                        // -- S'il n'y a pas de mur, alors le robot vois correctement le joueur et se dirige vers lui
+
+                        robots.monRobot.SetDestination(other.transform.position);
+                        // -- Je lance l'alerte à mon robot BOSS
+                        Boss.CallMe(other.transform);
+
+                        // -- RALENTISSEMENT
+                        float distance = Vector3.Distance(player.transform.position, robots.transform.GetChild(0).position);
 
                         if (distance < 4.5f)
                         {
