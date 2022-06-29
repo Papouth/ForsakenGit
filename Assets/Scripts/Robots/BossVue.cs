@@ -89,10 +89,17 @@ public class BossVue : MonoBehaviour
                     // -- RALENTISSEMENT
                     float distance = Vector3.Distance(player.transform.position, boss.transform.GetChild(0).position);
 
-                    if (distance < 4.5f)
+                    if (distance < 8f)
                     {
                         // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
                         StartCoroutine(RalentissementJoueur());
+                    }
+
+                    if (distance < 5f)
+                    {
+                        // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                        // -- ALORS ON TUE LE JOUEUR
+                        player.Dead();
                     }
                 }
             }
@@ -158,10 +165,17 @@ public class BossVue : MonoBehaviour
                     // -- RALENTISSEMENT
                     float distance = Vector3.Distance(player.transform.position, boss.transform.GetChild(0).position);
 
-                    if (distance < 4.5f)
+                    if (distance < 8f)
                     {
                         // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
                         StartCoroutine(RalentissementJoueur());
+                    }
+
+                    if (distance < 5f)
+                    {
+                        // -- Debug.Log("la distance entre le joueur et le robot = " + distance);
+                        // -- ALORS ON TUE LE JOUEUR
+                        player.Dead();
                     }
                 }
             }
